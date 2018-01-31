@@ -1,0 +1,4 @@
+<!--pages/event/event.wxml-->
+<view class="page">
+  <text style="text-align:center">暂无活动</text>
+</view>

@@ -1,0 +1,75 @@
+{
+  "pages": [
+    "example/index",
+    "example/button/button",
+    "example/list/list",
+    "example/input/input",
+    "example/slider/slider",
+    "example/uploader/uploader",
+    "example/article/article",
+    "example/badge/badge",
+    "example/flex/flex",
+    "example/footer/footer",
+    "example/gallery/gallery",
+    "example/grid/grid",
+    "example/icons/icons",
+    "example/loadmore/loadmore",
+    "example/panel/panel",
+    "example/preview/preview",
+    "example/progress/progress",
+    "example/actionsheet/actionsheet",
+    "example/dialog/dialog",
+    "example/msg/msg",
+    "example/msg/msg_success",
+    "example/msg/msg_fail",
+    "example/picker/picker",
+    "example/toast/toast",
+    "example/navbar/navbar",
+    "example/searchbar/searchbar",
+    "pages/customer/index/index",
+    "pages/customer/user/user",
+    "pages/customer/menu/menu",
+    "pages/customer/event/event",
+    "pages/customer/order/order",
+    "pages/customer/about/about"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "S&C “校园+” 订餐",
+    "navigationBarBackgroundColor": "#000000",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#dddddd",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/customer/index/index",
+        "iconPath": "pages/customer/images/home.png",
+        "selectedIconPath": "pages/customer/images/home.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/customer/menu/menu",
+        "iconPath": "pages/customer/images/icon_nav_form.png",
+        "selectedIconPath": "pages/customer/images/icon_nav_form.png",
+        "text": "菜单"
+      },
+      {
+        "pagePath": "pages/customer/user/user",
+        "iconPath": "pages/customer/images/user.png",
+        "selectedIconPath": "pages/customer/images/user.png",
+        "text": "用户"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

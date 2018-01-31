@@ -1,0 +1,73 @@
+<!--pages/user/user.wxml-->
+<view class="page">
+  <view class="page__hd" style="text-align:center;background:#FFFFF0;">
+    <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar"></image>
+    <view style="text-align:center">
+      <text>{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="page_bd">
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+        <view class="weui-cell__hd">
+          <view class="iconfont icon-form"></view>
+        </view>
+        <view class="weui-cell__bd">
+          我的订单
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <view wx:if="{{orderNum>0}}">
+            <text>待支付</text>
+            <view class="weui-badge weui-badge_dot" style="margin-left:5px;margin-right:5px;"></view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <view class="page_bd">
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" bindtap="onRegisterClicked" hover-class="weui-cell_active" url="">
+        <view class="weui-cell__hd">
+          <view class="iconfont icon-register"></view>
+        </view>
+        <view class="weui-cell__bd">
+          我要签到
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="../event/event">
+        <view class="weui-cell__hd">
+          <view class="iconfont icon-gifts"></view>
+        </view>
+        <view class="weui-cell__bd">
+          近期活动
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+        <view class="weui-cell__hd">
+          <view class="iconfont icon-favorite"></view>
+        </view>
+        <view class="weui-cell__bd">
+          我的收藏
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+        <view class="weui-cell__hd">
+          <view class="iconfont icon-service"></view>
+        </view>
+        <view class="weui-cell__bd">
+          关于我们
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+  </view>
+</view>

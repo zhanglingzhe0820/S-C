@@ -1,0 +1,62 @@
+<view class="page" style="background:url('../images/menuBackground.jpg')">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="search" auto-focus="true"/>
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+        <view class="page__bd page__bd_spacing">
+          <view class="page__bd page__bd_spacing"></view>
+          <view class="kind-list">
+            <block wx:for="{{showList}}" wx:for-item="item" wx:key="id">
+                <view class="kind-list__item">
+                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}">
+                        <view  class="weui-flex__item">
+                          <view style="text-align:left">
+                            <image class="kind-list__img" src="{{item.url}}" mode="aspectFill"></image>
+                          </view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view style="text-align:left">
+                        {{item.name}}
+                          </view>
+                        </view>
+                        <view class="weui-flex__item" style="text-align">
+                          <view class="small-font">
+                            {{item.price}}
+                          </view>
+                          <view class="small-font">
+                            {{already}}{{item.alreadyOrdered}}{{element}}
+                          </view>
+                          <view class="small-font">
+                            {{limit}}{{item.maxium}}{{element}}
+                          </view>
+                        </view>
+                        <view class="weui-flex__item-smallButton" style="text-align:center">
+                            <icon type="info">
+                              <button id="{{item.id}}btnDetail"></button>
+                            </icon>
+                            </view>
+                          <view class="weui-flex__item-smallButton" style="text-align:right">
+                            <icon type="success">
+                              <button id="{{item.id}}btnOrder"></button>
+                            </icon>
+                          </view>
+                    </view>
+                </view>
+            </block>
+            </view>
+        </view>
+    </view>
+</view>
