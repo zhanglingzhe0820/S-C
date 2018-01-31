@@ -1,0 +1,11 @@
+<!--pages/customer/menu/choose.wxml-->
+<view class="page" style="background:url('../images/menuBackground.jpg')">
+  <view class="page__hd">
+    <view class="title">选择食堂</view>
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{restaurant}}" style="line-height: 50px">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+  </view>
+</view>
