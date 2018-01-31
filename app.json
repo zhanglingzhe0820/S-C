@@ -31,7 +31,8 @@
     "pages/customer/menu/menu",
     "pages/customer/event/event",
     "pages/customer/order/order",
-    "pages/customer/about/about"
+    "pages/customer/about/about",
+    "pages/customer/menu/choose"
   ],
   "window": {
     "navigationBarTextStyle": "white",
