@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    num:1
   },
 
   /**
@@ -62,5 +62,23 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  bindMinus:function(){
+    this.setData(
+      {
+        num:this.data.num-1
+      }
+    )
+  },
+
+  bindPlus:function(){
+    var num=this.data.num;
+    num++;
+    this.setData(
+      {
+        num:num
+      }
+    )
   }
 })
