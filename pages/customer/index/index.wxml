@@ -7,9 +7,9 @@
     <view class="page__hd">
     </view>
     <view class="page__bd page__bd_spacing">
-        <button type="primary">堂食预订</button>
+        <button bindtap="startOrdering" type="primary">堂食预订</button>
         <view class="page__bd page__bd_spacing"></view>
-        <button type="primary" plain="true">外带预订</button>
+        <button bindtap="startOrdering" type="primary" plain="true">外带预订</button>
     </view>
     <view class="page__hd">
     </view>

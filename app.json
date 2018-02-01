@@ -28,11 +28,11 @@
     "example/searchbar/searchbar",
     "pages/customer/index/index",
     "pages/customer/user/user",
-    "pages/customer/menu/menu",
+    "pages/customer/restaurant/menu/menu",
+    "pages/customer/restaurant/choose/choose",
     "pages/customer/event/event",
     "pages/customer/order/order",
-    "pages/customer/about/about",
-    "pages/customer/menu/choose"
+    "pages/customer/about/about"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -53,10 +53,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/customer/menu/menu",
-        "iconPath": "pages/customer/images/icon_nav_form.png",
-        "selectedIconPath": "pages/customer/images/icon_nav_form.png",
-        "text": "菜单"
+        "pagePath": "pages/customer/order/order",
+        "iconPath": "pages/customer/images/icon_nav_widget.png",
+        "selectedIconPath": "pages/customer/images/icon_nav_widget.png",
+        "text": "餐盘"
       },
       {
         "pagePath": "pages/customer/user/user",

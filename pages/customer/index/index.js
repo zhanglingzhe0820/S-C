@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+/**
+ * 开始选购菜品
+ */
+  startOrdering:function(){
+    wx.navigateTo({
+      url: "../restaurant/choose/choose",
+    })
   }
 })

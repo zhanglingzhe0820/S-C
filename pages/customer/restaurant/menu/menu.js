@@ -4,9 +4,9 @@ Page({
       {
         id: 'form',
         name: '咖喱盖饭',
-        price:  '￥10.00',
+        price: '￥10.00',
         alreadyOrdered: '49',
-        url:"http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
+        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: '100',
         open: false,
       },
@@ -47,13 +47,14 @@ Page({
       }
     ],//传输过来的数据
     showList: [],//展现出的数据
-    already:"已预订",
-    limit:"限额",
-    element:"人",
+    already: "已预订",
+    limit: "限额",
+    element: "人",
     inputShowed: false,
     inputVal: ""
   },
-  onLoad:function(){
+  onLoad: function () {
+    //根据request获得食堂id并由此获得菜单
     this.setData({
       showList: this.data.list
     })
@@ -79,8 +80,8 @@ Page({
       inputVal: e.detail.value
     });
     var tempList = [];
-    for (var i = 0; i < this.data.list.length;i++){
-      if(this.data.list[i].name.indexOf(this.data.inputVal)!=-1){
+    for (var i = 0; i < this.data.list.length; i++) {
+      if (this.data.list[i].name.indexOf(this.data.inputVal) != -1) {
         tempList.push(this.data.list[i]);
       }
     }

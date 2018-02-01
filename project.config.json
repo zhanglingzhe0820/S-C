@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -36,7 +36,7 @@
 				{
 					"id": -1,
 					"name": "menu",
-					"pathName": "pages/customer/menu/menu",
+					"pathName": "pages/customer/restaurant/menu/menu",
 					"query": ""
 				},
 				{
@@ -48,7 +48,7 @@
 				{
 					"id": -1,
 					"name": "choose",
-					"pathName": "pages/customer/menu/choose",
+					"pathName": "pages/customer/restaurant/choose/choose",
 					"query": ""
 				}
 			]

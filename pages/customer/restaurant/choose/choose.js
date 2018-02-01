@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    restaurant: [],
-    index:0,
+    restaurant: []
   },
 
   /**
@@ -15,9 +14,19 @@ Page({
   onLoad: function (options) {
     this.setData(
       {
-        restaurant: ['致善楼一楼', '致善楼二楼', '至善楼三楼']
+        restaurant: [
+          {
+            name:'致善楼一楼',
+            time:'12.00-2.00'
+          }, {
+            name: '致善楼二楼',
+            time: '12.00-2.00'
+          },{
+            name: '致善楼三楼',
+            time: '12.00-2.00'
+          }]
       }
-    )
+    );
   },
 
   /**
@@ -67,5 +76,16 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  
+  /**
+   * 选择食堂
+   */
+  choose:function(e){
+    var uri="../menu/menu?restaurant="+e.target.id
+    console.log(uri)
+    wx.navigateTo({
+      url: uri
+    })
   }
 })
