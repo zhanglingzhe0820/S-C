@@ -4,45 +4,51 @@ Page({
       {
         id: 'form',
         name: '咖喱盖饭',
-        price: '￥10.00',
-        alreadyOrdered: '49',
+        price: 10.00,
+        alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: '100',
+        maxium: 100,
+        selected: false,
         open: false,
       },
       {
         id: 'widget',
         name: '青椒盖饭',
-        price: '￥10.00',
-        alreadyOrdered: '49',
+        price: 10.00,
+        alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: '100',
+        maxium: 100,
+        selected: false,
         open: false,
       },
       {
         id: 'feedback',
         name: '鸡蛋面',
-        price: '￥10.00',
-        alreadyOrdered: '49',
+        price: 10.00,
+        alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: '100',
+        maxium: 100,
+        selected: false,
         open: false,
       },
       {
         id: 'nav',
         name: '芝士焗生蚝',
-        price: '￥10.00',
-        alreadyOrdered: '49',
+        price: 10.00,
+        alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: '100',
+        maxium: 100,
+        selected: false,
         open: false,
       },
       {
         id: 'search',
-        price: '￥10.00',
-        alreadyOrdered: '49',
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         name: '大龙虾',
+        price: 10.00,
+        alreadyOrdered: 49,
+        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
+        maxium: 100,
+        selected: false,
         open: false,
       }
     ],//传输过来的数据
@@ -75,6 +81,7 @@ Page({
       inputVal: ""
     });
   },
+
   search: function (e) {
     this.setData({
       inputVal: e.detail.value
@@ -89,5 +96,43 @@ Page({
       showList: tempList
     })
     console.log(this.data.showList)
+  },
+
+  /**
+   * 选择（mock）
+   */
+  select: function (e) {
+    var foodPosition = this.findBtnPosition(e.target.id);
+    var selectChangeTarget = "showList[" + foodPosition + "].selected";
+    this.setData({
+      [selectChangeTarget]: true
+    })
+    //添加至餐盘
+  },
+
+  /**
+   * 取消选择（mock）
+   */
+  unselect: function (e) {
+    var foodPosition = this.findBtnPosition(e.target.id);
+    var selectChangeTarget = "showList[" + foodPosition + "].selected";
+    this.setData({
+      [selectChangeTarget]: false
+    })
+    //从餐盘删除
+  },
+
+  completeChoose:function(e){
+    wx.switchTab({
+      url: "../../cart/cart",
+    })
+  },
+
+  findBtnPosition: function (id) {
+    for (var i = 0; i < this.data.list.length; i++) {
+      if (this.data.list[i].id == id) {
+        return i;
+      }
+    }
   }
 });

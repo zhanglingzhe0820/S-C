@@ -34,7 +34,7 @@
               </view>
               <view class="weui-flex__item" style="text-align">
                 <view class="small-font">
-                  {{item.price}}
+                  ￥{{item.price}}
                 </view>
                 <view class="small-font">
                   {{already}}{{item.alreadyOrdered}}{{element}}
@@ -43,20 +43,17 @@
                   {{limit}}{{item.maxium}}{{element}}
                 </view>
               </view>
-              <view class="weui-flex__item-smallButton" style="text-align:right">
-                <icon type="success">
-                  <button id="{{item.id}}btnOrder"></button>
-                </icon>
-              </view>
-              <view class="weui-flex__item-smallButton" style="text-align:right">
-                <icon type="success">
-                  <button id="{{item.id}}btnOrder"></button>
-                </icon>
+              <view style="text-align:right">
+                <icon wx:if="{{item.selected}}" type="success" bindtap="unselect" id="{{item.id}}" size="30" />
+              <icon wx:else size="30" type="circle" bindtap="select" id="{{item.id}}" />
               </view>
             </view>
           </view>
         </block>
       </view>
+    </view>
+    <view>
+      <button class="bottomBtn" type="primary" bindtap="completeChoose">选餐完成</button>
     </view>
   </view>
 </view>
