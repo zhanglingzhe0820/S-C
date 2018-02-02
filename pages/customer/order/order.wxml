@@ -1,0 +1,55 @@
+<!--pages/customer/order/order.wxml-->
+<view class="page">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">取餐信息</view>
+      <view class="weui-panel__bd">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">顾客信息</view>
+          <view class="weui-cell__ft">{{userInfo.nickName}} {{userInfo.city}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">备注</view>
+          <view class="weui-cell__ft">
+            <input type="text" placeholder="点击以填写备注信息" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">价格信息</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">商品总价</view>
+        <view class="weui-cell__ft">￥9.50</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">订餐费</view>
+        <view class="weui-cell__ft">￥0.50</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">取餐时间</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell">
+        <view class="weui-cell__bd" style="text-align:center">{{hour}}:{{minute}}</view>
+      </view>
+      <view class="weui-cell">
+        <picker class="weui-cell__bd" style="text-align:center" mode="time" value="{{time}}" start="6:00" end="22:00" bindchange="chooseTime">
+          <button type="default">选择时间</button>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel weui-panel_access">
+    <view class="page__bd">
+    </view>
+    <view class="page__bd page__bd_spacing">
+      <button bindtap="submitOrder" type="primary">提交订单</button>
+      <view class="page__bd page__bd_spacing"></view>
+      <button bindtap="backToIndex" type="primary" plain="true">返回首页</button>
+    </view>
+  </view>
+</view>

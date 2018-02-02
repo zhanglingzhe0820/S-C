@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -55,6 +55,12 @@
 					"id": -1,
 					"name": "cart",
 					"pathName": "pages/customer/cart/cart",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/customer/order/order",
 					"query": ""
 				}
 			]
