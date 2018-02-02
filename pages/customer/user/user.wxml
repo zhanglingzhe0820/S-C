@@ -48,18 +48,18 @@
       </navigator>
     </view>
     <view class="weui-cells weui-cells_after-title">
-      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="toOrder" url="">
         <view class="weui-cell__hd">
-          <view class="iconfont icon-favorite"></view>
+          <view class="iconfont icon-cart"></view>
         </view>
         <view class="weui-cell__bd">
-          我的收藏
+          我的餐盘
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
     </view>
     <view class="weui-cells weui-cells_after-title">
-      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="../about/about">
         <view class="weui-cell__hd">
           <view class="iconfont icon-service"></view>
         </view>

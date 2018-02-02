@@ -53,8 +53,8 @@
 				},
 				{
 					"id": -1,
-					"name": "order",
-					"pathName": "pages/customer/order/order",
+					"name": "cart",
+					"pathName": "pages/customer/cart/cart",
 					"query": ""
 				}
 			]

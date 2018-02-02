@@ -82,5 +82,14 @@ Page({
       icon: 'success',
       duration: 3000
     });
+  },
+
+/**
+ * 前往菜单页面
+ */
+  toOrder:function(){
+    wx.switchTab({
+      url: "../cart/cart",
+    })
   }
 })

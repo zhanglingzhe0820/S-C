@@ -237,6 +237,10 @@ Page({
     })
     this.calculateAll();
   },
+  
+  submit:function(){
+
+  },
 
   calculateAll:function(){
     var allList = this.data.position;

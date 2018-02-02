@@ -31,7 +31,7 @@
     "pages/customer/restaurant/menu/menu",
     "pages/customer/restaurant/choose/choose",
     "pages/customer/event/event",
-    "pages/customer/order/order",
+    "pages/customer/cart/cart",
     "pages/customer/about/about"
   ],
   "window": {
@@ -53,9 +53,9 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/customer/order/order",
-        "iconPath": "pages/customer/images/icon_nav_widget.png",
-        "selectedIconPath": "pages/customer/images/icon_nav_widget.png",
+        "pagePath": "pages/customer/cart/cart",
+        "iconPath": "pages/customer/images/cart.png",
+        "selectedIconPath": "pages/customer/images/cart.png",
         "text": "餐盘"
       },
       {
