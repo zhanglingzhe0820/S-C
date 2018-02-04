@@ -2,53 +2,63 @@ Page({
   data: {
     list: [
       {
-        id: 'form',
+        restaurant: "致善楼一楼",
+        position: 'xx档口',
         name: '咖喱盖饭',
         price: 10.00,
         alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: 100,
         selected: false,
+        tempStoredId: "",
         open: false,
       },
       {
-        id: 'widget',
+        restaurant: "致善楼一楼",
+        position: 'xx档口',
         name: '青椒盖饭',
         price: 10.00,
         alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: 100,
         selected: false,
+        tempStoredId: "",
         open: false,
       },
       {
-        id: 'feedback',
+        restaurant: "致善楼一楼",
+        position: 'xx档口',
         name: '鸡蛋面',
         price: 10.00,
         alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: 100,
         selected: false,
+        tempStoredId: "",
         open: false,
       },
       {
-        id: 'nav',
+        restaurant: "致善楼一楼",
+        position: 'xx档口',
         name: '芝士焗生蚝',
         price: 10.00,
         alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: 100,
         selected: false,
+        tempStoredId: "",
         open: false,
       },
       {
-        id: 'search',
+        restaurant: "致善楼一楼",
+        position: 'xxx餐厅',
         name: '大龙虾',
         price: 10.00,
         alreadyOrdered: 49,
         url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
         maxium: 100,
         selected: false,
+        tempStoredId: "",
         open: false,
       }
     ],//传输过来的数据
@@ -99,38 +109,74 @@ Page({
   },
 
   /**
-   * 选择（mock）
+   * 选择
    */
   select: function (e) {
-    var foodPosition = this.findBtnPosition(e.target.id);
-    var selectChangeTarget = "showList[" + foodPosition + "].selected";
-    this.setData({
-      [selectChangeTarget]: true
+    var that = this;
+    wx.getStorageInfo({
+      success: function (res) {
+        var foodPosition = that.findBtnPosition(e.target.id);
+        var nextId;
+        var maxId = 0;
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("food") == 0) {
+            var id = parseInt(res.keys[i].substring(4), 10);
+            if (id > maxId) {
+              maxId = id;
+            }
+          }
+        }
+        nextId = maxId + 1;
+
+        //添加至餐盘
+        wx.setStorage({
+          key: "food" + nextId,
+          data: that.data.showList[foodPosition],
+          success: function () {
+            var selectChangeTarget = "showList[" + foodPosition + "].selected";
+            that.setData({
+              [selectChangeTarget]: true
+            });
+            var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
+            that.setData({
+              [tempDataChangeTarget]: "food" + nextId
+            });
+          }
+        });
+      },
     })
-    //添加至餐盘
   },
 
   /**
    * 取消选择（mock）
    */
   unselect: function (e) {
-    var foodPosition = this.findBtnPosition(e.target.id);
-    var selectChangeTarget = "showList[" + foodPosition + "].selected";
-    this.setData({
-      [selectChangeTarget]: false
-    })
     //从餐盘删除
+    var that = this;
+    var foodPosition = that.findBtnPosition(e.target.id);
+    var tempFoodId = this.data.showList[foodPosition].tempStoredId;
+    wx.removeStorage({
+      key: tempFoodId,
+      success: function (res) {
+        var selectChangeTarget = "showList[" + foodPosition + "].selected";
+        that.setData({
+          [selectChangeTarget]: false
+        })
+      },
+    })
   },
 
-  completeChoose:function(e){
+  completeChoose: function (e) {
     wx.switchTab({
       url: "../../cart/cart",
     })
   },
 
   findBtnPosition: function (id) {
+    var position = id.split("_")[0];
+    var name = id.split("_")[1];
     for (var i = 0; i < this.data.list.length; i++) {
-      if (this.data.list[i].id == id) {
+      if (this.data.list[i].position == position && this.data.list[i].name == name) {
         return i;
       }
     }

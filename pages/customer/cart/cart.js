@@ -6,57 +6,71 @@ Page({
    */
   data: {
     total: 0.00,
-    allSelected:true,
-    position: [
-      {
-        name: "xx档口",
-        food: [
-          {
-            foodName: "包子",
-            url: "../images/vcode.jpg",
-            num: 1,
-            canReduce: false,
-            price: 5.00,
-            selected: true
-          },
-          {
-            foodName: "玉米",
-            url: "../images/vcode.jpg",
-            num: 2,
-            canReduce: true,
-            price: 3.00,
-            selected: true
-          }
-        ]
-      },
-      {
-        name: "xx餐厅",
-        food: [
-          {
-            foodName: "包子",
-            url: "../images/vcode.jpg",
-            num: 1,
-            canReduce: false,
-            price: 5.00,
-            selected: true
-          }
-        ]
-      }
-    ]
+    allSelected: true,
+    position: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.calculateAll();
+    //从缓存加载购物车菜品
+    var that = this;
+    wx.getStorageInfo({
+      success: function (res) {
+        var position = [];
+        for (var i = 0; i < res.keys.length; i++) {
+          wx.getStorage({
+            key: res.keys[i],
+            success: function (subRes) {
+              var isInPosition = false;
+              var positionName = subRes.data.restaurant + "-" + subRes.data.position;
+              for (var j = 0; j < position.length; i++) {
+                if (position[j].name == positionName) {
+                  var foodItem = {
+                    foodName: subRes.data.name,
+                    url: subRes.data.url,
+                    num: 1,
+                    canReduce: false,
+                    price: subRes.data.price,
+                    selected: true
+                  };
+                  position[j].food.push(foodItem);
+                  isInPosition = true;
+                  break;
+                }
+              }
+              if (!isInPosition) {
+                var foodItem = {
+                  foodName: subRes.data.name,
+                  url: subRes.data.url,
+                  num: 1,
+                  canReduce: false,
+                  price: subRes.data.price,
+                  selected: true
+                };
+                var positionItem = {
+                  name: positionName,
+                  food: []
+                };
+                positionItem.food.push(foodItem);
+                position.push(positionItem);
+              }
+              that.setData({
+                position: position
+              })
+            },
+          })
+        }
+      },
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.calculateAll();
   },
 
   /**
@@ -184,19 +198,19 @@ Page({
     this.calculateAll();
   },
 
-  select:function(e){
+  select: function (e) {
     var foodPosition = this.findBtnPosition(e.target.id);
     var i = foodPosition[0];
     var j = foodPosition[1];
 
     var selectChangeTarget = "position[" + i + "].food[" + j + "].selected";
     this.setData({
-      [selectChangeTarget]:true
+      [selectChangeTarget]: true
     })
     this.calculateAll();
   },
 
-  unselect:function(e){
+  unselect: function (e) {
     var foodPosition = this.findBtnPosition(e.target.id);
     var i = foodPosition[0];
     var j = foodPosition[1];
@@ -208,22 +222,22 @@ Page({
     this.calculateAll();
   },
 
-  selectAll:function(){
-    var allList=this.data.position;
+  selectAll: function () {
+    var allList = this.data.position;
 
-    for (var i = 0; i < allList.length;i++){
-      for (var j = 0; j < allList[i].food.length;j++){
-        allList[i].food[j].selected=true;
+    for (var i = 0; i < allList.length; i++) {
+      for (var j = 0; j < allList[i].food.length; j++) {
+        allList[i].food[j].selected = true;
       }
     }
     this.setData({
-      allSelected:true,
-      position:allList
+      allSelected: true,
+      position: allList
     })
     this.calculateAll();
   },
 
-  unselectAll:function(){
+  unselectAll: function () {
     var allList = this.data.position;
 
     for (var i = 0; i < allList.length; i++) {
@@ -237,24 +251,24 @@ Page({
     })
     this.calculateAll();
   },
-  
-  submit:function(){
+
+  submit: function () {
 
   },
 
-  calculateAll:function(){
+  calculateAll: function () {
     var allList = this.data.position;
 
-    var all=0;
+    var all = 0;
     for (var i = 0; i < allList.length; i++) {
       for (var j = 0; j < allList[i].food.length; j++) {
-        if(allList[i].food[j].selected == true){
+        if (allList[i].food[j].selected == true) {
           all += allList[i].food[j].num * allList[i].food[j].price;
         }
       }
     }
     this.setData({
-      total:all
+      total: all
     })
   },
 

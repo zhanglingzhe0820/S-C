@@ -44,8 +44,8 @@
                 </view>
               </view>
               <view style="text-align:right">
-                <icon wx:if="{{item.selected}}" type="success" bindtap="unselect" id="{{item.id}}" size="30" />
-              <icon wx:else size="30" type="circle" bindtap="select" id="{{item.id}}" />
+                <icon wx:if="{{item.selected}}" type="success" bindtap="unselect" id="{{item.position}}_{{item.name}}" size="30" />
+              <icon wx:else size="30" type="circle" bindtap="select" id="{{item.position}}_{{item.name}}" />
               </view>
             </view>
           </view>
