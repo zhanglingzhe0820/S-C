@@ -22,11 +22,11 @@
     <view class="weui-panel__bd">
       <view class="weui-cell">
         <view class="weui-cell__bd">商品总价</view>
-        <view class="weui-cell__ft">￥9.50</view>
+        <view class="weui-cell__ft">￥{{commodityPrice}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">订餐费</view>
-        <view class="weui-cell__ft">￥0.50</view>
+        <view class="weui-cell__ft">￥{{orderPrice}}</view>
       </view>
     </view>
   </view>

@@ -20,14 +20,31 @@ Page({
       success: function (res) {
         var position = [];
         for (var i = 0; i < res.keys.length; i++) {
-          wx.getStorage({
-            key: res.keys[i],
-            success: function (subRes) {
-              var isInPosition = false;
-              var positionName = subRes.data.restaurant + "-" + subRes.data.position;
-              for (var j = 0; j < position.length; i++) {
-                if (position[j].name == positionName) {
+          if (res.keys[i].indexOf("food") == 0) {
+            wx.getStorage({
+              key: res.keys[i],
+              success: function (subRes) {
+                var isInPosition = false;
+                var positionName = subRes.data.restaurant + "-" + subRes.data.position;
+                for (var j = 0; j < position.length; j++) {
+                  if (position[j].name == positionName) {
+                    var foodItem = {
+                      foodKey: subRes.data.tempStoredId,
+                      foodName: subRes.data.name,
+                      url: subRes.data.url,
+                      num: 1,
+                      canReduce: false,
+                      price: subRes.data.price,
+                      selected: true
+                    };
+                    position[j].food.push(foodItem);
+                    isInPosition = true;
+                    break;
+                  }
+                }
+                if (!isInPosition) {
                   var foodItem = {
+                    foodKey: subRes.data.tempStoredId,
                     foodName: subRes.data.name,
                     url: subRes.data.url,
                     num: 1,
@@ -35,32 +52,19 @@ Page({
                     price: subRes.data.price,
                     selected: true
                   };
-                  position[j].food.push(foodItem);
-                  isInPosition = true;
-                  break;
+                  var positionItem = {
+                    name: positionName,
+                    food: []
+                  };
+                  positionItem.food.push(foodItem);
+                  position.push(positionItem);
                 }
-              }
-              if (!isInPosition) {
-                var foodItem = {
-                  foodName: subRes.data.name,
-                  url: subRes.data.url,
-                  num: 1,
-                  canReduce: false,
-                  price: subRes.data.price,
-                  selected: true
-                };
-                var positionItem = {
-                  name: positionName,
-                  food: []
-                };
-                positionItem.food.push(foodItem);
-                position.push(positionItem);
-              }
-              that.setData({
-                position: position
-              })
-            },
-          })
+                that.setData({
+                  position: position
+                })
+              },
+            })
+          }
         }
       },
     })
@@ -139,6 +143,8 @@ Page({
         [numChangeTarget]: num
       }
     )
+
+    this.calculateAll();
   },
 
   bindPlus: function (e) {
@@ -165,6 +171,7 @@ Page({
         [changeTarget]: num
       }
     )
+    this.calculateAll();
   },
 
   delete: function (e) {
@@ -172,29 +179,38 @@ Page({
     var i = foodPosition[0];
     var j = foodPosition[1];
 
-    //删除元素
-    var tempList = [];
-    for (var k = 0; k < this.data.position.length; k++) {
-      if (k != i) {
-        tempList.push(this.data.position[k]);
-      }
-      else {
-        var foodTempList = [];
-        for (var p = 0; p < this.data.position[i].food.length; p++) {
-          if (p != j) {
-            foodTempList.push(this.data.position[i].food[p]);
+    //从缓存删除
+    var that = this;
+    var deleteFoodKey = this.data.position[i].food[j].foodKey;
+    wx.removeStorage({
+      key: deleteFoodKey,
+      success: function (res) {
+        //删除元素
+        var tempList = [];
+        for (var k = 0; k < that.data.position.length; k++) {
+          if (k != i) {
+            tempList.push(that.data.position[k]);
+          }
+          else {
+            var foodTempList = [];
+            for (var p = 0; p < that.data.position[i].food.length; p++) {
+              if (p != j) {
+                foodTempList.push(that.data.position[i].food[p]);
+              }
+            }
+            if (foodTempList.length != 0) {
+              var subTempList = that.data.position[i];
+              subTempList.food = foodTempList;
+              tempList.push(subTempList);
+            }
           }
         }
-        if (foodTempList.length != 0) {
-          var subTempList = this.data.position[i];
-          subTempList.food = foodTempList;
-          tempList.push(subTempList);
-        }
-      }
-    }
-    this.setData({
-      position: tempList
+        that.setData({
+          position: tempList
+        })
+      },
     })
+
     this.calculateAll();
   },
 
@@ -253,7 +269,21 @@ Page({
   },
 
   submit: function () {
+    var allList = this.data.position;
 
+    for (var i = 0; i < allList.length; i++) {
+      for (var j = 0; j < allList[i].food.length; j++) {
+        if (allList[i].food[j].selected == true) {
+          wx.setStorageSync(
+            "selectedFood" + i + j,
+            allList[i].food[j],
+          )
+        }
+      }
+    }
+    wx.navigateTo({
+      url: "../order/order",
+    })
   },
 
   calculateAll: function () {

@@ -6,6 +6,8 @@ Page({
    */
   data: {
     userInfo: "",
+    commodityPrice: 9.50,
+    orderPrice: 0.5,
     hour: 11,
     minute: 20
   },
@@ -22,6 +24,25 @@ Page({
           userInfo: userInfo
         });
       }
+    })
+
+    wx.getStorageInfo({
+      success: function (res) {
+        var totalPrice = 0;
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("selected") == 0) {
+            wx.getStorage({
+              key: res.keys[i],
+              success: function (subRes) {
+                totalPrice += subRes.data.num * subRes.data.price;
+                that.setData({
+                  commodityPrice: totalPrice
+                })
+              }
+            })
+          }
+        }
+      },
     })
   },
 

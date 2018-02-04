@@ -69,8 +69,16 @@ Page({
     inputShowed: false,
     inputVal: ""
   },
-  onLoad: function () {
+  onLoad: function (options) {
     //根据request获得食堂id并由此获得菜单
+    var restaurantId = options.restaurant;
+
+    for (var i = 0; i < this.data.list.length; i++) {
+      var restaurantChangeTarget = "list[" + i + "].restaurant";
+      this.setData({
+        [restaurantChangeTarget]: restaurantId
+      })
+    }
     this.setData({
       showList: this.data.list
     })
@@ -128,21 +136,20 @@ Page({
         }
         nextId = maxId + 1;
 
-        //添加至餐盘
-        wx.setStorage({
-          key: "food" + nextId,
-          data: that.data.showList[foodPosition],
-          success: function () {
-            var selectChangeTarget = "showList[" + foodPosition + "].selected";
-            that.setData({
-              [selectChangeTarget]: true
-            });
-            var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
-            that.setData({
-              [tempDataChangeTarget]: "food" + nextId
-            });
-          }
+        var selectChangeTarget = "showList[" + foodPosition + "].selected";
+        that.setData({
+          [selectChangeTarget]: true
         });
+        var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
+        that.setData({
+          [tempDataChangeTarget]: "food" + nextId
+        });
+
+        //添加至餐盘
+        wx.setStorageSync(
+          "food" + nextId,
+          that.data.showList[foodPosition],
+        );
       },
     })
   },
