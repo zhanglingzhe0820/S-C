@@ -6,8 +6,8 @@ Page({
    */
   data: {
     userInfo: "",
-    commodityPrice: 9.50,
-    orderPrice: 0.5,
+    commodityPrice: 0.00,
+    orderPrice: 0.50,
     hour: 11,
     minute: 20
   },
@@ -111,15 +111,36 @@ Page({
    * 提交订单(mock)
    */
   submitOrder: function (e) {
-
+    //支付并保存订单
+    wx.showToast({
+      title: '提交成功',
+      icon: 'success',
+      duration: 1000
+    });
+    setTimeout(function () {
+      wx.switchTab({
+        url: "../orderPreview/orderPreview",
+      })
+    }, 1000);
   },
 
   /**
-   * 返回主界面
+   * 返回餐盘界面
    */
-  backToIndex: function (e) {
+  backToCart: function (e) {
     wx.switchTab({
-      url: "../index/index",
+      url: "../cart/cart",
+    })
+
+    wx.getStorageInfo({
+      success: function (res) {
+        var totalPrice = 0;
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("selected") == 0) {
+            wx.removeStorageSync(res.keys[i]);
+          }
+        }
+      },
     })
   }
 })

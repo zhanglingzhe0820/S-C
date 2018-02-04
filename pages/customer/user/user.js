@@ -84,12 +84,21 @@ Page({
     });
   },
 
-/**
- * 前往菜单页面
- */
-  toOrder:function(){
+  /**
+   * 前往餐盘页面
+   */
+  toOrder: function () {
     wx.switchTab({
       url: "../cart/cart",
+    })
+  },
+
+  /**
+   * 前往订单界面
+   */
+  toOrderPreview: function () {
+    wx.switchTab({
+      url: "../orderPreview/orderPreview",
     })
   }
 })

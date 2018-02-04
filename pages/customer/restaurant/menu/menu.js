@@ -83,6 +83,7 @@ Page({
       showList: this.data.list
     })
   },
+  
   showInput: function () {
     this.setData({
       inputShowed: true

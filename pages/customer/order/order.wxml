@@ -49,7 +49,7 @@
     <view class="page__bd page__bd_spacing">
       <button bindtap="submitOrder" type="primary">提交订单</button>
       <view class="page__bd page__bd_spacing"></view>
-      <button bindtap="backToIndex" type="primary" plain="true">返回首页</button>
+      <button bindtap="backToCart" type="primary" plain="true">返回餐盘</button>
     </view>
   </view>
 </view>

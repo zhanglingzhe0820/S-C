@@ -33,7 +33,8 @@
     "pages/customer/event/event",
     "pages/customer/cart/cart",
     "pages/customer/about/about",
-    "pages/customer/order/order"
+    "pages/customer/order/order",
+    "pages/customer/orderPreview/orderPreview"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -58,6 +59,12 @@
         "iconPath": "pages/customer/images/cart.png",
         "selectedIconPath": "pages/customer/images/cart.png",
         "text": "餐盘"
+      },
+      {
+        "pagePath": "pages/customer/orderPreview/orderPreview",
+        "iconPath": "pages/customer/images/form.png",
+        "selectedIconPath": "pages/customer/images/form.png",
+        "text": "订单"
       },
       {
         "pagePath": "pages/customer/user/user",

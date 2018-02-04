@@ -8,7 +8,7 @@
   </view>
   <view class="page_bd">
     <view class="weui-cells weui-cells_after-title">
-      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="" bindtap="toOrderPreview">
         <view class="weui-cell__hd">
           <view class="iconfont icon-form"></view>
         </view>
@@ -17,7 +17,7 @@
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access">
           <view wx:if="{{orderNum>0}}">
-            <text>待支付</text>
+            <text>待确认</text>
             <view class="weui-badge weui-badge_dot" style="margin-left:5px;margin-right:5px;"></view>
           </view>
         </view>

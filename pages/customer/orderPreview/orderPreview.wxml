@@ -1,0 +1,64 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center">我的订单</view>
+  </view>
+  <view class="page__bd">
+    <block wx:for="{{uncompleteOrder}}" wx:for-item="item" wx:for-index="id">
+      <view class="weui-form-preview" style="margin-bottom:20px;">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">订单金额</view>
+            <view class="weui-form-preview__value_in-hd">¥{{item.total}}</view>
+
+            <view class="weui-form-preview__label">订单状态</view>
+            <view class="weui-form-preview__value">待取餐</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">取餐时间</view>
+            <view class="weui-form-preview__value">{{item.hour}}:{{item.minute}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">备注</view>
+            <view class="weui-form-preview__value">{{item.comment}}</view>
+          </view>
+          <block wx:for="{{item.food}}" wx:for-item="food">
+            <view class="weui-form-preview__label">{{food.position}} {{food.name}}</view>
+            <view class="weui-form-preview__value">{{food.num}}*¥{{food.price}}</view>
+          </block>
+        </view>
+        <view class="weui-form-preview__ft">
+          <navigator bindtap="completeOrder" url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">取餐完成</navigator>
+        </view>
+      </view>
+    </block>
+
+    <block wx:for="{{completeOrder}}" wx:for-item="item" wx:for-index="id">
+      <view class="weui-form-preview" style="margin-bottom:20px;">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">订单金额</view>
+            <view class="weui-form-preview__value_in-hd">¥{{item.total}}</view>
+
+            <view class="weui-form-preview__label">订单状态</view>
+            <view class="weui-form-preview__value">已完成</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">备注</view>
+            <view class="weui-form-preview__value">{{item.comment}}</view>
+          </view>
+          <block wx:for="{{item.food}}" wx:for-item="food">
+            <view class="weui-form-preview__label">{{food.position}} {{food.name}}</view>
+            <view class="weui-form-preview__value">{{food.num}}*¥{{food.price}}</view>
+          </block>
+        </view>
+        <view class="weui-form-preview__ft">
+          <navigator bindtap="deleteOrder" url="" class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">删除</navigator>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
