@@ -71,7 +71,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.removeStorageSelected();
   },
 
   /**
@@ -132,6 +132,13 @@ Page({
       url: "../cart/cart",
     })
 
+    this.removeStorageSelected();
+  },
+
+/**
+ * 删除缓存
+ */
+  removeStorageSelected:function(){
     wx.getStorageInfo({
       success: function (res) {
         var totalPrice = 0;

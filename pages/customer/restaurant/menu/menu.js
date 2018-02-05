@@ -73,17 +73,46 @@ Page({
     //根据request获得食堂id并由此获得菜单
     var restaurantId = options.restaurant;
 
+    //设置食品的餐厅位置
     for (var i = 0; i < this.data.list.length; i++) {
       var restaurantChangeTarget = "list[" + i + "].restaurant";
       this.setData({
         [restaurantChangeTarget]: restaurantId
       })
     }
+    
     this.setData({
       showList: this.data.list
     })
+
+    //加载已经选择的商品
+    var that = this;
+    wx.getStorageInfo({
+      success: function (res) {
+        var position = [];
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("food") == 0) {
+            wx.getStorage({
+              key: res.keys[i],
+              success: function (subRes) {
+                for (var j = 0; j < that.data.list.length; j++) {
+                  if (subRes.data.restaurant == that.data.showList[j].restaurant && subRes.data.position == that.data.showList[j].position && subRes.data.name==that.data.showList[j].name) {
+                    var selectChangeTarget = "showList[" + j + "].selected";
+                    var tempIdChangeTarget = "showList[" + j + "].tempStoredId";
+                    that.setData({
+                      [selectChangeTarget]: true,
+                      [tempIdChangeTarget]: subRes.data.tempStoredId
+                    })
+                  }
+                }
+              },
+            })
+          }
+        }
+      },
+    })
   },
-  
+
   showInput: function () {
     this.setData({
       inputShowed: true
