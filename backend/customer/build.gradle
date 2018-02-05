@@ -1,0 +1,35 @@
+group 'njuTJ'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()//依赖Maven仓库
+    }
+    dependencies {
+        //使用1.4.2.RELEASE版本的Spring框架
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.4.0'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.4.0'
+    compile group: 'io.springfox', name: 'springfox-spi', version: '2.4.0'
+    runtime 'mysql:mysql-connector-java'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
