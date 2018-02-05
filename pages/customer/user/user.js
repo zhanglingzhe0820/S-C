@@ -6,7 +6,10 @@ Page({
    */
   data: {
     userInfo: "",
-    orderNum: 10
+    isAuthered: false,
+    isStudent: false,
+    orderNum: 10,
+    dialogIsHiden: true
   },
 
   /**
@@ -99,6 +102,34 @@ Page({
   toOrderPreview: function () {
     wx.switchTab({
       url: "../orderPreview/orderPreview",
+    })
+  },
+
+  closeDialog: function () {
+    this.setData({
+      dialogIsHiden: true
+    })
+  },
+
+  /**
+   * 认证学号(mock)
+   */
+  confirmDialog: function () {
+    //数据库交互认证学号
+    wx.showToast({
+      title: '认证成功',
+      icon: 'success',
+      duration: 1000
+    });
+
+    this.setData({
+      dialogIsHiden: true
+    })
+  },
+
+  showDialog: function () {
+    this.setData({
+      dialogIsHiden: false
     })
   }
 })

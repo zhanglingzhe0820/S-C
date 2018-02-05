@@ -34,7 +34,8 @@
     "pages/customer/cart/cart",
     "pages/customer/about/about",
     "pages/customer/order/order",
-    "pages/customer/orderPreview/orderPreview"
+    "pages/customer/orderPreview/orderPreview",
+    "pages/customer/authentication/authentication"
   ],
   "window": {
     "navigationBarTextStyle": "white",
