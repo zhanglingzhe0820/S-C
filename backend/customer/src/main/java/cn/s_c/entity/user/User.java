@@ -6,20 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "wechatId")
     private String wechatId;
-    @Column(name="isAuthened")
+    @Column(name = "isAuthened")
     private boolean isAuthened;
-    @Column(name="isStudent")
+    @Column(name = "isStudent")
     private boolean isStudent;
     @Column(name = "number")
     private String number;
 
     public User() {
-
     }
 
     public User(String wechatId, boolean isAuthened, boolean isStudent, String number) {

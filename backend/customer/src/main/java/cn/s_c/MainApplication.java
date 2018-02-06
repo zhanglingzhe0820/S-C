@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -27,12 +28,12 @@ public class MainApplication {
     }
 
     @Bean
-    public Docket newsApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("S&C")
                 .apiInfo(apiInfo())
                 .select()
-                .paths(PathSelectors.regex("/springcontroller.*"))
+                .apis(RequestHandlerSelectors.basePackage("cn.s_c.springcontroller"))
+                .paths(PathSelectors.any())
                 .build();
     }
 

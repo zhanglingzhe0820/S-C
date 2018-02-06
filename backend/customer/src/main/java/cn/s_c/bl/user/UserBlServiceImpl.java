@@ -3,7 +3,8 @@ package cn.s_c.bl.user;
 import cn.s_c.blservice.user.UserBlService;
 import cn.s_c.dataservice.user.UserDataService;
 import cn.s_c.vo.ResultMessage;
-import cn.s_c.vo.user.UserVo;
+import cn.s_c.vo.user.UserAuthenVo;
+import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +15,24 @@ public class UserBlServiceImpl implements UserBlService {
     private UserDataService userDataService;
 
     /**
-     * resgister user
+     * authen user
      *
-     * @param userVo the user info to be register
+     * @param userAuthenVo the user info to be register
      * @return whether the operation is success or not
      */
     @Override
-    public ResultMessage register(UserVo userVo) {
+    public ResultMessage authen(UserAuthenVo userAuthenVo) {
         return ResultMessage.Success;
+    }
+
+    /**
+     * get the state od the user
+     *
+     * @param wechatId the user's openid
+     * @return the state of the user
+     */
+    @Override
+    public UserConfirmVo confirmState(String wechatId) {
+        return null;
     }
 }
