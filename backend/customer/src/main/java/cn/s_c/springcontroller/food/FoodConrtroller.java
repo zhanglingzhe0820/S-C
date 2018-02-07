@@ -19,7 +19,7 @@ public class FoodConrtroller {
     private FoodBlService foodBlService;
 
     @ApiOperation(value = "getFoodListByRestaurant", nickname = "getFoodListByRestaurant")
-    @RequestMapping(method = RequestMethod.GET, path = "/getFoodListByRestaurant", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/getFoodListByRestaurant", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = FoodReturnVo[].class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),

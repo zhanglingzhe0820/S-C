@@ -18,7 +18,7 @@ public class OrderController {
     private OrderBlService orderBlService;
 
     @ApiOperation(value = "saveOrder", nickname = "saveOrder")
-    @RequestMapping(method = RequestMethod.GET, path = "/saveOrder", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/saveOrder", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = ResultMessage.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "hasUnconfirmedOrder", nickname = "hasUnconfirmedOrder")
-    @RequestMapping(method = RequestMethod.GET, path = "/hasUnconfirmedOrder", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/hasUnconfirmedOrder", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = boolean.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "getOrderByUser", nickname = "getOrderByUser")
-    @RequestMapping(method = RequestMethod.GET, path = "/getOrderByUser", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/getOrderByUser", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = OrderReturnVo[].class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
@@ -55,7 +55,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "deleteOrder", nickname = "deleteOrder")
-    @RequestMapping(method = RequestMethod.GET, path = "/deleteOrder", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/deleteOrder", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = ResultMessage.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
@@ -67,7 +67,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "confirmOrder", nickname = "confirmOrder")
-    @RequestMapping(method = RequestMethod.GET, path = "/confirmOrder", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/confirmOrder", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = ResultMessage.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),

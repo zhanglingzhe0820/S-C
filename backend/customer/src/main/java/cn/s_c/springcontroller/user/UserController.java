@@ -14,19 +14,19 @@ public class UserController {
     private UserBlService userBlService;
 
     @ApiOperation(value = "authen", nickname = "authen")
-    @RequestMapping(method = RequestMethod.GET, path = "/authen", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/authen", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = ResultMessage.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage authen(@RequestBody UserAuthenVo userAuthenVo) {
-        return userBlService.authen(userAuthenVo);
+    public ResultMessage authen(@RequestBody String wechatId, String number) {
+        return userBlService.authen(new UserAuthenVo(wechatId, number));
     }
 
     @ApiOperation(value = "confirmState", nickname = "confirmState")
-    @RequestMapping(path = "/confirmState", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/confirmState", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = UserConfirmVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),
