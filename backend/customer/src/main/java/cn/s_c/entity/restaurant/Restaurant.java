@@ -20,8 +20,8 @@ public class Restaurant implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
-    @LazyCollection(LazyCollectionOption.EXTRA)
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Food.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "rid")
     private Set<Food> foods;
 
     public Restaurant() {

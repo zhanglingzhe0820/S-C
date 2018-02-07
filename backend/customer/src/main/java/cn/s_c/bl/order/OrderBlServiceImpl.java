@@ -1,16 +1,23 @@
 package cn.s_c.bl.order;
 
 import cn.s_c.blservice.order.OrderBlService;
+import cn.s_c.dataservice.order.OrderDataService;
+import cn.s_c.entity.order.Order;
+import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.order.OrderReturnVo;
 import cn.s_c.vo.order.OrderSaveVo;
 import cn.s_c.vo.user.UserConfirmVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class OrderBlServiceImpl implements OrderBlService {
+    @Autowired
+    private OrderDataService orderDataService;
 
     /**
      * save the order
@@ -20,7 +27,7 @@ public class OrderBlServiceImpl implements OrderBlService {
      */
     @Override
     public ResultMessage saveOrder(OrderSaveVo orderSaveVo) {
-        return null;
+        return orderDataService.saveOrder(Convertor.orderSaveVoToOrder(orderSaveVo));
     }
 
     /**
@@ -31,7 +38,7 @@ public class OrderBlServiceImpl implements OrderBlService {
      */
     @Override
     public boolean hasUnconfirmedOrder(String wechatId) {
-        return false;
+        return orderDataService.hasUnconfirmedOrder(wechatId);
     }
 
     /**
@@ -42,7 +49,12 @@ public class OrderBlServiceImpl implements OrderBlService {
      */
     @Override
     public List<OrderReturnVo> getOrderByUser(String wechatId) {
-        return null;
+        ArrayList<OrderReturnVo> orderReturnVoArrayList = new ArrayList<>();
+        List<Order> orderArrayList = orderDataService.getOrderByUser(wechatId);
+        for (Order order : orderArrayList) {
+            orderReturnVoArrayList.add(Convertor.orderToOrderReturnVo(order));
+        }
+        return orderReturnVoArrayList;
     }
 
     /**
@@ -52,8 +64,8 @@ public class OrderBlServiceImpl implements OrderBlService {
      * @return whether the operation is success or not
      */
     @Override
-    public ResultMessage confirmOrder(String orderId) {
-        return null;
+    public ResultMessage confirmOrder(int orderId) {
+        return orderDataService.confirmOrder(orderId);
     }
 
     /**
@@ -63,7 +75,7 @@ public class OrderBlServiceImpl implements OrderBlService {
      * @return whether the operation is success or not
      */
     @Override
-    public ResultMessage deleteOrder(String orderId) {
-        return null;
+    public ResultMessage deleteOrder(int orderId) {
+        return orderDataService.deleteOrder(orderId);
     }
 }

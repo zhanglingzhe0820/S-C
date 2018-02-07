@@ -41,7 +41,7 @@ public interface OrderBlService {
      * @param orderId the order to be confirmed
      * @return whether the operation is success or not
      */
-    ResultMessage confirmOrder(String orderId);
+    ResultMessage confirmOrder(int orderId);
 
     /**
      * delete the selected order
@@ -49,5 +49,5 @@ public interface OrderBlService {
      * @param orderId the order to be deleted
      * @return whether the operation is success or not
      */
-    ResultMessage deleteOrder(String orderId);
+    ResultMessage deleteOrder(int orderId);
 }

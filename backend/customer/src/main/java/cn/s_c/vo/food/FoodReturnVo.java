@@ -1,46 +1,26 @@
-package cn.s_c.entity.food;
+package cn.s_c.vo.food;
 
 import cn.s_c.entity.restaurant.Restaurant;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-@Table(name = "food")
-public class Food {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class FoodReturnVo {
     private int id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "position")
     private String position;
-
-    @Column(name = "price")
     private double price;
-
-    @Column(name = "url")
     private String url;
-
-    @Column(name = "maximum")
     private double maximum;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rid")
     private Restaurant restaurant;
+    private double currentOrders;
 
-    public Food() {
-    }
-
-    public Food(String name, String position, double price, String url, double maximum, Restaurant restaurant) {
+    public FoodReturnVo(int id, String name, String position, double price, String url, double maximum, Restaurant restaurant, double currentOrders) {
+        this.id = id;
         this.name = name;
         this.position = position;
         this.price = price;
         this.url = url;
         this.maximum = maximum;
         this.restaurant = restaurant;
+        this.currentOrders = currentOrders;
     }
 
     public int getId() {
@@ -97,5 +77,13 @@ public class Food {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public double getCurrentOrders() {
+        return currentOrders;
+    }
+
+    public void setCurrentOrders(double currentOrders) {
+        this.currentOrders = currentOrders;
     }
 }

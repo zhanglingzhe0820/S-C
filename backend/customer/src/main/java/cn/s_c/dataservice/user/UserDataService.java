@@ -2,6 +2,8 @@ package cn.s_c.dataservice.user;
 
 import cn.s_c.entity.user.User;
 import cn.s_c.vo.ResultMessage;
+import cn.s_c.vo.user.UserAuthenVo;
+import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -9,37 +11,31 @@ import javax.transaction.Transactional;
 @Service
 public interface UserDataService {
     /**
-     * judge whether the user exists
+     * watch whether the number exists
      *
-     * @param number student number
-     * @return exists or not
+     * @param number student or teacher number
+     * @return the number exists or not
      */
     @Transactional
-    boolean isUserExisted(String number);
+    boolean isNumberExisted(String number);
 
     /**
-     * get user by number
+     * bind the wechat id and student or teacher number
      *
-     * @param number student number
-     * @return the user who has the number
+     * @param wechatId  wechat id
+     * @param number    student or teacher number
+     * @param isStudent whether the number is a student id
+     * @return the operation is success or not
      */
     @Transactional
-    User getUserByNumber(String number);
+    ResultMessage bindWechatIdAndNumber(String wechatId, String number, boolean isStudent);
 
     /**
-     * insert the user class
+     * get the user's state by its wechat id
      *
-     * @param user the input user
-     * @return whether the operation is success or not
+     * @param wechatId wechat id
+     * @return the user's state
      */
     @Transactional
-    ResultMessage insertUser(User user);
-
-    /**
-     * delete a user
-     * @param number student number
-     * @return whether the operation is success or not
-     */
-    @Transactional
-    ResultMessage deleteUser(String number);
+    UserConfirmVo getUserStateByWechat(String wechatId);
 }

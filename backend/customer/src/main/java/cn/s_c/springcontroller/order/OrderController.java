@@ -62,7 +62,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage deleteOrder(@RequestBody String orderId) {
+    public ResultMessage deleteOrder(@RequestBody int orderId) {
         return orderBlService.deleteOrder(orderId);
     }
 
@@ -74,7 +74,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage confirmOrder(@RequestBody String orderId) {
+    public ResultMessage confirmOrder(@RequestBody int orderId) {
         return orderBlService.confirmOrder(orderId);
     }
 }

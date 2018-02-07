@@ -22,17 +22,22 @@ public class UserBlServiceImpl implements UserBlService {
      */
     @Override
     public ResultMessage authen(UserAuthenVo userAuthenVo) {
-        return ResultMessage.Success;
+        if (userDataService.isNumberExisted(userAuthenVo.getNumber())) {
+            return ResultMessage.DataError;
+        } else {
+            boolean isStudent = true;
+            return userDataService.bindWechatIdAndNumber(userAuthenVo.getWechatId(), userAuthenVo.getNumber(), isStudent);
+        }
     }
 
     /**
-     * get the state od the user
+     * get the state of the user
      *
      * @param wechatId the user's openid
      * @return the state of the user
      */
     @Override
     public UserConfirmVo confirmState(String wechatId) {
-        return null;
+        return userDataService.getUserStateByWechat(wechatId);
     }
 }

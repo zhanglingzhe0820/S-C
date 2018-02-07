@@ -4,83 +4,62 @@ import cn.s_c.data.dao.user.UserDao;
 import cn.s_c.dataservice.user.UserDataService;
 import cn.s_c.entity.user.User;
 import cn.s_c.vo.ResultMessage;
+import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 @Service
 public class UserDataServiceImpl implements UserDataService {
-    @Autowired
+    @Resource
     private UserDao userDao;
 
-
     /**
-     * judge whether the user exists
+     * watch whether the number exists
      *
-     * @param number student number
-     * @return exists or not
+     * @param number student or teacher number
+     * @return the number exists or not
      */
     @Override
-    @Transactional
-    public boolean isUserExisted(String number) {
-        try{
-            return userDao.exists(number);
-        }catch (Exception e){
-            e.printStackTrace();
-            return true;
-        }
+    public boolean isNumberExisted(String number) {
+        System.out.println(userDao);
+        return userDao.findUsersByNumber(number).size()!=0;
     }
 
     /**
-     * get user by number
+     * bind the wechat id and student or teacher number
      *
-     * @param number student number
-     * @return the user who has the number
+     * @param wechatId  wechat id
+     * @param number    student or teacher number
+     * @param isStudent whether the number is a student id
+     * @return the operation is success or not
      */
     @Override
-    @Transactional
-    public User getUserByNumber(String number) {
-        try{
-            return userDao.findOne(number);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * insert the user class
-     *
-     * @param user the input user
-     * @return whether the operation is success or not
-     */
-    @Override
-    @Transactional
-    public ResultMessage insertUser(User user) {
-        try{
-            userDao.save(user);
+    public ResultMessage bindWechatIdAndNumber(String wechatId, String number, boolean isStudent) {
+        User user=new User(wechatId,true,isStudent,number);
+        if(userDao.save(user)!=null){
             return ResultMessage.Success;
-        }catch (Exception e){
-            e.printStackTrace();
+        }else{
             return ResultMessage.SystemError;
         }
     }
 
     /**
-     * delete a user
+     * get the user's state by its wechat id
      *
-     * @param number student number
-     * @return whether the operation is success or not
+     * @param wechatId wechat id
+     * @return the user's state
      */
     @Override
-    public ResultMessage deleteUser(String number) {
-        try{
-            userDao.delete(number);
-            return ResultMessage.Success;
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResultMessage.SystemError;
+    public UserConfirmVo getUserStateByWechat(String wechatId) {
+        User user=userDao.findOne(wechatId);
+        if(user==null){
+            return new UserConfirmVo(false,false);
+        }
+        else{
+            return new UserConfirmVo(user.isAuthened(),user.isStudent());
         }
     }
 }
