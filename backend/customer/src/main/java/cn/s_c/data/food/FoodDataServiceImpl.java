@@ -48,7 +48,7 @@ public class FoodDataServiceImpl implements FoodDataService {
      */
     @Override
     public double getFoodAlreadyOrdered(int foodId) {
-        List<Order> orderList=orderDao.findOrdersByConfirmed(false);
+        List<Order> orderList=orderDao.findOrdersByIsConfirmed(false);
         double total=0;
         for(Order order:orderList){
             for(FoodOrder foodOrder:order.getFoodList()){

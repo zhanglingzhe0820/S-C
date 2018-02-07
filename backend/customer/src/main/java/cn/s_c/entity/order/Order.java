@@ -16,6 +16,7 @@ public class Order {
     private String wechatId;
 
     @ElementCollection(fetch = FetchType.LAZY)
+    @JoinTable(name = "foodOrder", joinColumns = @JoinColumn(name = "orderId"))
     @Column(name = "foodList")
     private List<FoodOrder> foodList;
 

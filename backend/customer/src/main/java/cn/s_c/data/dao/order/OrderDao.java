@@ -11,6 +11,4 @@ public interface OrderDao extends JpaRepository<Order, Integer> {
     List<Order> findOrdersByIsConfirmed(boolean isConfirmed);
 
     List<Order> findOrdersByWechatId(String wechatId);
-
-    List<Order> findOrdersByConfirmed(boolean isConfirmed);
 }

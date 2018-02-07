@@ -2,7 +2,9 @@ package cn.s_c.entity.order;
 
 import cn.s_c.entity.food.Food;
 
-public class FoodOrder {
+import java.io.Serializable;
+
+public class FoodOrder implements Serializable {
 
     private Food food;
     private double num;
