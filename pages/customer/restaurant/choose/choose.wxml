@@ -3,7 +3,7 @@
   <view class="page__hd">
     <view class="title">选择食堂</view>
     <block wx:for="{{restaurant}}" wx:for-item="item" wx:key="name">
-      <button id="{{item.name}}" class="weui-btn" type="default" bindtap="choose">
+      <button id="{{item.id}}" class="weui-btn" type="default" bindtap="choose">
         <view style="text-align:left;">{{item.name}}</view>
         <view style="text-align:right;">营业时间：{{item.time}}</view>
       </button>

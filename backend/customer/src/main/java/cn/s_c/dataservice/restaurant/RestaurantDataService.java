@@ -1,10 +1,12 @@
 package cn.s_c.dataservice.restaurant;
 
 import cn.s_c.entity.restaurant.Restaurant;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface ResaurantDataService {
+@Service
+public interface RestaurantDataService {
     /**
      * get all the restaurant
      *

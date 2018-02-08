@@ -1,6 +1,7 @@
 package cn.s_c.vo.food;
 
 import cn.s_c.entity.restaurant.Restaurant;
+import cn.s_c.vo.restaurant.RestaurantReturnVo;
 
 public class FoodReturnVo {
     private int id;
@@ -9,17 +10,17 @@ public class FoodReturnVo {
     private double price;
     private String url;
     private double maximum;
-    private Restaurant restaurant;
+    private RestaurantReturnVo restaurantReturnVo;
     private double currentOrders;
 
-    public FoodReturnVo(int id, String name, String position, double price, String url, double maximum, Restaurant restaurant, double currentOrders) {
+    public FoodReturnVo(int id, String name, String position, double price, String url, double maximum, RestaurantReturnVo restaurantReturnVo, double currentOrders) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.price = price;
         this.url = url;
         this.maximum = maximum;
-        this.restaurant = restaurant;
+        this.restaurantReturnVo = restaurantReturnVo;
         this.currentOrders = currentOrders;
     }
 
@@ -71,12 +72,12 @@ public class FoodReturnVo {
         this.maximum = maximum;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public RestaurantReturnVo getRestaurantReturnVo() {
+        return restaurantReturnVo;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurantReturnVo(RestaurantReturnVo restaurantReturnVo) {
+        this.restaurantReturnVo = restaurantReturnVo;
     }
 
     public double getCurrentOrders() {

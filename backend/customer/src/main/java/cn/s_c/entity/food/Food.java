@@ -28,7 +28,7 @@ public class Food {
     private double maximum;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rid")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     public Food() {

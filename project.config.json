@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -74,6 +74,12 @@
 					"name": "authentication",
 					"pathName": "pages/customer/authentication/authentication",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "menu with id",
+					"pathName": "pages/customer/restaurant/menu/menu",
+					"query": "restaurant=3"
 				}
 			]
 		}

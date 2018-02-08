@@ -20,15 +20,18 @@ public class Restaurant implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Food.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "rid")
+    @Column(name = "time")
+    private String time;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Food> foods;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, Set<Food> foods) {
+    public Restaurant(String name, String time, Set<Food> foods) {
         this.name = name;
+        this.time = time;
         this.foods = foods;
     }
 
@@ -54,5 +57,13 @@ public class Restaurant implements Serializable {
 
     public void setFoods(Set<Food> foods) {
         this.foods = foods;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

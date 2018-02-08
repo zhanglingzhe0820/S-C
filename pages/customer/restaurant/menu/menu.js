@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
   data: {
     list: [
@@ -70,46 +71,68 @@ Page({
     inputVal: ""
   },
   onLoad: function (options) {
-    //根据request获得食堂id并由此获得菜单
-    var restaurantId = options.restaurant;
-
-    //设置食品的餐厅位置
-    for (var i = 0; i < this.data.list.length; i++) {
-      var restaurantChangeTarget = "list[" + i + "].restaurant";
-      this.setData({
-        [restaurantChangeTarget]: restaurantId
-      })
-    }
-    
-    this.setData({
-      showList: this.data.list
-    })
-
-    //加载已经选择的商品
     var that = this;
-    wx.getStorageInfo({
-      success: function (res) {
-        var position = [];
-        for (var i = 0; i < res.keys.length; i++) {
-          if (res.keys[i].indexOf("food") == 0) {
-            wx.getStorage({
-              key: res.keys[i],
-              success: function (subRes) {
-                for (var j = 0; j < that.data.list.length; j++) {
-                  if (subRes.data.restaurant == that.data.showList[j].restaurant && subRes.data.position == that.data.showList[j].position && subRes.data.name==that.data.showList[j].name) {
-                    var selectChangeTarget = "showList[" + j + "].selected";
-                    var tempIdChangeTarget = "showList[" + j + "].tempStoredId";
-                    that.setData({
-                      [selectChangeTarget]: true,
-                      [tempIdChangeTarget]: subRes.data.tempStoredId
-                    })
-                  }
-                }
-              },
-            })
-          }
-        }
+    var restaurantId = options.restaurant;
+    //根据request获得食堂id并由此获得菜单
+    wx.request({
+      url: app.globalData.backendUrl + "getFoodListByRestaurant",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
       },
+      data: {
+        restaurantId: restaurantId
+      },
+      success: function (res) {
+        var tempList = [];
+        for (var i = 0; i < res.data.length; i++) {
+          var tempFood = {};
+          console.log(res.data)
+          tempFood.restaurant = res.data[i].restaurantReturnVo.name;
+          tempFood.position = res.data[i].position;
+          tempFood.name = res.data[i].name;
+          tempFood.price = res.data[i].price;
+          tempFood.alreadyOrdered = res.data[i].currentOrders;
+          tempFood.url = res.data[i].url;
+          tempFood.maxium = res.data[i].maximum;
+          tempFood.selected = false;
+          tempFood.tempStoredId = "";
+          tempList.push(tempFood);
+        }
+        that.setData({
+          list: tempList
+        })
+
+        that.setData({
+          showList: that.data.list
+        })
+
+        //加载已经选择的商品
+        wx.getStorageInfo({
+          success: function (res) {
+            var position = [];
+            for (var i = 0; i < res.keys.length; i++) {
+              if (res.keys[i].indexOf("food") == 0) {
+                wx.getStorage({
+                  key: res.keys[i],
+                  success: function (subRes) {
+                    for (var j = 0; j < that.data.list.length; j++) {
+                      if (subRes.data.restaurant == that.data.showList[j].restaurant && subRes.data.position == that.data.showList[j].position && subRes.data.name == that.data.showList[j].name) {
+                        var selectChangeTarget = "showList[" + j + "].selected";
+                        var tempIdChangeTarget = "showList[" + j + "].tempStoredId";
+                        that.setData({
+                          [selectChangeTarget]: true,
+                          [tempIdChangeTarget]: subRes.data.tempStoredId
+                        })
+                      }
+                    }
+                  },
+                })
+              }
+            }
+          },
+        })
+      }
     })
   },
 
@@ -143,7 +166,6 @@ Page({
     this.setData({
       showList: tempList
     })
-    console.log(this.data.showList)
   },
 
   /**
