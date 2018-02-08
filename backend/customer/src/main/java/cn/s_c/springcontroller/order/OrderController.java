@@ -37,7 +37,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public boolean hasUnconfirmedOrder(@RequestBody String wechatId) {
+    public boolean hasUnconfirmedOrder(@RequestParam("wechatId") String wechatId) {
         return orderBlService.hasUnconfirmedOrder(wechatId);
     }
 
@@ -49,7 +49,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public OrderReturnVo[] getOrderByUser(@RequestBody String wechatId) {
+    public OrderReturnVo[] getOrderByUser(@RequestParam("wechatId") String wechatId) {
         List<OrderReturnVo> orderReturnVoList=orderBlService.getOrderByUser(wechatId);
         return orderReturnVoList.toArray(new OrderReturnVo[orderReturnVoList.size()]);
     }
@@ -62,7 +62,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage deleteOrder(@RequestBody int orderId) {
+    public ResultMessage deleteOrder(@RequestParam("orderId") int orderId) {
         return orderBlService.deleteOrder(orderId);
     }
 
@@ -74,7 +74,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage confirmOrder(@RequestBody int orderId) {
+    public ResultMessage confirmOrder(@RequestParam("orderId") int orderId) {
         return orderBlService.confirmOrder(orderId);
     }
 }

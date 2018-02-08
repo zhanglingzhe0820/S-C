@@ -21,7 +21,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage authen(@RequestBody String wechatId, String number) {
+    public ResultMessage authen(@RequestParam("wechatId") String wechatId, @RequestParam("stNumber") String number) {
         return userBlService.authen(new UserAuthenVo(wechatId, number));
     }
 
@@ -33,7 +33,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public UserConfirmVo confirmState(@RequestBody String wechatId) {
+    public UserConfirmVo confirmState(@RequestParam("wechatId") String wechatId) {
         return userBlService.confirmState(wechatId);
     }
 }

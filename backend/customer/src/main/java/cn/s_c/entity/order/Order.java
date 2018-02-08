@@ -1,6 +1,7 @@
 package cn.s_c.entity.order;
 
 import cn.s_c.entity.food.Food;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Order {
     private double serviceTotal;
 
     @Column(name = "isConfirmed")
+    @Type(type = "yes_no")
     private boolean isConfirmed;
 
     public Order() {

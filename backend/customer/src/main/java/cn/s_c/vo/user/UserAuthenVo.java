@@ -4,6 +4,9 @@ public class UserAuthenVo {
     private String wechatId;
     private String number;
 
+    public UserAuthenVo() {
+    }
+
     public UserAuthenVo(String wechatId, String number) {
         this.wechatId = wechatId;
         this.number = number;

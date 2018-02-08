@@ -1,4 +1,4 @@
-// pages/user/user.js
+var app = getApp();
 Page({
 
   /**
@@ -6,10 +6,13 @@ Page({
    */
   data: {
     userInfo: "",
-    isAuthered: false,
+    openId: "",
+    isAuthened: false,
     isStudent: false,
     orderNum: 10,
-    dialogIsHiden: true
+    dialogIsHiden: true,
+
+    stNumber: ""
   },
 
   /**
@@ -17,6 +20,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    //获得userinfo
     wx.getUserInfo({
       success: function (res) {
         var userInfo = res.userInfo;
@@ -25,13 +29,47 @@ Page({
         });
       }
     })
+    //获得openid
+    wx.login({
+      success: function (res) {
+        var appId = app.globalData.appID;
+        var appSecret = app.globalData.appSecret;
+        var js_code = res.code;
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + js_code + '&grant_type=authorization_code',
+          data: {},
+          method: 'GET',
+          success: function (res) {
+            //获得从后端获取认证信息
+            wx.request({
+              url: app.globalData.backendUrl + "confirmState",
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              data: {
+                wechatId: res.data.openid
+              },
+              success: function (res) {
+                that.setData({
+                  isAuthened: res.data.authened,
+                  isStudent: res.data.student
+                })
+              }
+            })
+            that.setData({
+              openId: res.data.openid
+            })
+          }
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -116,20 +154,55 @@ Page({
    */
   confirmDialog: function () {
     //数据库交互认证学号
-    wx.showToast({
-      title: '认证成功',
-      icon: 'success',
-      duration: 1000
-    });
+    wx.request({
+      url: app.globalData.backendUrl + "authen",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        wechatId: this.data.openId,
+        stNumber: this.data.stNumber
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.showToast({
+            title: '认证成功',
+            icon: 'success',
+            duration: 1000
+          });
+        } else if (res.data == "DataError") {
+          wx.showToast({
+            title: '学号已被认证',
+            icon: 'warn',
+            duration: 1000
+          });
+        } else {
+          wx.showToast({
+            title: '系统繁忙',
+            icon: 'warn',
+            duration: 1000
+          });
+        }
+      }
+    })
 
     this.setData({
       dialogIsHiden: true
     })
+
+    this.onLoad();
   },
 
   showDialog: function () {
     this.setData({
       dialogIsHiden: false
+    })
+  },
+
+  setStNumber: function (e) {
+    this.setData({
+      stNumber: e.detail.value
     })
   }
 })

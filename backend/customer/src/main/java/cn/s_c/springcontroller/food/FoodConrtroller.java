@@ -26,7 +26,7 @@ public class FoodConrtroller {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public FoodReturnVo[] getFoodListByRestaurant(@RequestBody int restaurantId) {
+    public FoodReturnVo[] getFoodListByRestaurant(@RequestParam("restaurantId") int restaurantId) {
         List<FoodReturnVo> foodReturnVoList = foodBlService.getFoodListByRestaurant(restaurantId);
         return foodReturnVoList.toArray(new FoodReturnVo[foodReturnVoList.size()]);
     }

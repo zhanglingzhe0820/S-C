@@ -1,5 +1,7 @@
 package cn.s_c.entity.user;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,8 +14,10 @@ public class User {
     @Column(name = "wechatId")
     private String wechatId;
     @Column(name = "isAuthened")
+    @Type(type = "yes_no")
     private boolean isAuthened;
     @Column(name = "isStudent")
+    @Type(type = "yes_no")
     private boolean isStudent;
     @Column(name = "number")
     private String number;

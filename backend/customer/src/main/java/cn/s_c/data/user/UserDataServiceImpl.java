@@ -24,7 +24,6 @@ public class UserDataServiceImpl implements UserDataService {
      */
     @Override
     public boolean isNumberExisted(String number) {
-        System.out.println(userDao);
         return userDao.findUsersByNumber(number).size()!=0;
     }
 

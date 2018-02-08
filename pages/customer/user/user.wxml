@@ -6,12 +6,12 @@
       <text>{{userInfo.nickName}}</text>
     </view>
     <view style="text-align:center">
-      <button bindtap="showDialog" wx:if="{{!isAuthered}}" class="weui-btn mini-btn" type="default" size="mini">未认证</button>
-      <button wx:elif="{{isAuthered&&isStudent}}" class="weui-btn mini-btn" type="primary" size="mini">学生</button>
+      <button bindtap="showDialog" wx:if="{{!isAuthened}}" class="weui-btn mini-btn" type="default" size="mini">未认证</button>
+      <button wx:elif="{{isAuthened&&isStudent}}" class="weui-btn mini-btn" type="primary" size="mini">学生</button>
       <button wx:else class="weui-btn mini-btn" type="primary" size="mini">教师</button>
     </view>
     <modal hidden="{{dialogIsHiden}}" title="请输入学号／工资号" confirm-text="提交" cancel-text="取消" bindcancel="closeDialog" bindconfirm="confirmDialog">  
-    <input type='text'placeholder="学号／工资号" auto-focus/>  
+    <input type='text'placeholder="学号／工资号" bindinput="setStNumber" auto-focus/>  
 </modal> 
   </view>
   <view class="page_bd">
