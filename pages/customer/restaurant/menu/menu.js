@@ -26,7 +26,7 @@ Page({
         var tempList = [];
         for (var i = 0; i < res.data.length; i++) {
           var tempFood = {};
-          tempFood.id=res.data[i].id;
+          tempFood.id = res.data[i].id;
           tempFood.restaurant = res.data[i].restaurantReturnVo.name;
           tempFood.position = res.data[i].position;
           tempFood.name = res.data[i].name;
@@ -34,6 +34,9 @@ Page({
           tempFood.alreadyOrdered = res.data[i].currentOrders;
           tempFood.url = res.data[i].url;
           tempFood.maxium = res.data[i].maximum;
+          tempFood.hasChoice = res.data[i].hasChoice;
+          tempFood.choice = res.data[i].choice;
+          tempFood.specialChoice = "";
           tempFood.selected = false;
           tempFood.tempStoredId = "";
           tempList.push(tempFood);
@@ -111,10 +114,14 @@ Page({
    * 选择
    */
   select: function (e) {
+    var foodPosition = this.findBtnPosition(e.target.id);
     var that = this;
+    //如果有特殊口味选择
+    if(showList.data[foodPosition].hasChoice){
+      //显示选项窗口
+    }
     wx.getStorageInfo({
       success: function (res) {
-        var foodPosition = that.findBtnPosition(e.target.id);
         var nextId;
         var maxId = 0;
         for (var i = 0; i < res.keys.length; i++) {
@@ -137,6 +144,9 @@ Page({
         });
 
         //添加至餐盘
+        var selectedFood = that.data.showList[foodPosition];
+        selectedFood.name = selectedFood.name + selectedFood.specialChoice.length == 0 ? "" : "("
+          + selectedFood.specialChoice + ")";
         wx.setStorageSync(
           "food" + nextId,
           that.data.showList[foodPosition],

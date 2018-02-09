@@ -16,10 +16,10 @@ public class Order {
     @Column(name = "wechatId")
     private String wechatId;
 
-    @ElementCollection(fetch=FetchType.LAZY, //加载策略
-            targetClass=FoodOrder.class) //指定元素中集合的类型
-    @CollectionTable(name="foodOrder") //指定集合生成的表
-    @OrderColumn(name="foodOrderId") //指定排序列的名称
+    @ElementCollection(fetch=FetchType.LAZY,
+            targetClass=FoodOrder.class)
+    @CollectionTable(name="foodOrder")
+    @OrderColumn(name="foodOrderId")
     private List<FoodOrder> foodList;
 
     @Column(name = "commodityTotal")

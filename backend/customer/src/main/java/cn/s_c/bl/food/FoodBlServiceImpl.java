@@ -28,7 +28,7 @@ public class FoodBlServiceImpl implements FoodBlService {
         List<FoodReturnVo> foodReturnVoList = new ArrayList<>();
         Set<Food> foodList = foodDataService.getFoodListByRestaurant(restaurantId);
         for (Food food : foodList) {
-            FoodReturnVo foodReturnVo = new FoodReturnVo(food.getId(), food.getName(), food.getPosition(), food.getPrice(), food.getUrl(), food.getMaximum(), Convertor.restaurantToRestaurantReturnVo(food.getRestaurant()), foodDataService.getFoodAlreadyOrdered(food.getId()));
+            FoodReturnVo foodReturnVo = new FoodReturnVo(food.getId(), food.getName(), food.getPosition(), food.getPrice(), food.getUrl(), food.getMaximum(), food.isHasChoice(), food.getChoice(), Convertor.restaurantToRestaurantReturnVo(food.getRestaurant()), foodDataService.getFoodAlreadyOrdered(food.getId()));
             foodReturnVoList.add(foodReturnVo);
         }
         return foodReturnVoList;

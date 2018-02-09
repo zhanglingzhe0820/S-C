@@ -1,6 +1,7 @@
 package cn.s_c.entity.food;
 
 import cn.s_c.entity.restaurant.Restaurant;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,13 @@ public class Food {
     @Column(name = "maximum")
     private double maximum;
 
+    @Column(name = "hasChoice")
+    @Type(type = "yes_no")
+    private boolean hasChoice;
+
+    @Column(name = "choice")
+    private String[] choice;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
@@ -34,12 +42,14 @@ public class Food {
     public Food() {
     }
 
-    public Food(String name, String position, double price, String url, double maximum, Restaurant restaurant) {
+    public Food(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, Restaurant restaurant) {
         this.name = name;
         this.position = position;
         this.price = price;
         this.url = url;
         this.maximum = maximum;
+        this.hasChoice = hasChoice;
+        this.choice = choice;
         this.restaurant = restaurant;
     }
 
@@ -89,6 +99,22 @@ public class Food {
 
     public void setMaximum(double maximum) {
         this.maximum = maximum;
+    }
+
+    public boolean isHasChoice() {
+        return hasChoice;
+    }
+
+    public void setHasChoice(boolean hasChoice) {
+        this.hasChoice = hasChoice;
+    }
+
+    public String[] getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String[] choice) {
+        this.choice = choice;
     }
 
     public Restaurant getRestaurant() {

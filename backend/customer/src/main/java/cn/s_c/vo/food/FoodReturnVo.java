@@ -10,16 +10,20 @@ public class FoodReturnVo {
     private double price;
     private String url;
     private double maximum;
+    private boolean hasChoice;
+    private String[] choice;
     private RestaurantReturnVo restaurantReturnVo;
     private double currentOrders;
 
-    public FoodReturnVo(int id, String name, String position, double price, String url, double maximum, RestaurantReturnVo restaurantReturnVo, double currentOrders) {
+    public FoodReturnVo(int id, String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, RestaurantReturnVo restaurantReturnVo, double currentOrders) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.price = price;
         this.url = url;
         this.maximum = maximum;
+        this.hasChoice = hasChoice;
+        this.choice = choice;
         this.restaurantReturnVo = restaurantReturnVo;
         this.currentOrders = currentOrders;
     }
@@ -70,6 +74,22 @@ public class FoodReturnVo {
 
     public void setMaximum(double maximum) {
         this.maximum = maximum;
+    }
+
+    public boolean isHasChoice() {
+        return hasChoice;
+    }
+
+    public void setHasChoice(boolean hasChoice) {
+        this.hasChoice = hasChoice;
+    }
+
+    public String[] getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String[] choice) {
+        this.choice = choice;
     }
 
     public RestaurantReturnVo getRestaurantReturnVo() {
