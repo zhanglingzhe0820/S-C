@@ -26,6 +26,7 @@ public class OrderController {
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
     public ResultMessage saveOrder(@RequestBody OrderSaveVo orderSaveVo) {
+        System.out.println(orderSaveVo.getComment());
         return orderBlService.saveOrder(orderSaveVo);
     }
 

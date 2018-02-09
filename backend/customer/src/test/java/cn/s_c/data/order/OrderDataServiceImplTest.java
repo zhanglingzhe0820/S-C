@@ -1,6 +1,7 @@
 package cn.s_c.data.order;
 
 import cn.s_c.dataservice.order.OrderDataService;
+import cn.s_c.entity.order.FoodOrder;
 import cn.s_c.entity.order.Order;
 import cn.s_c.vo.ResultMessage;
 import org.junit.After;
@@ -9,7 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -28,17 +34,23 @@ public class OrderDataServiceImplTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     public void originSaveAndDelete() {
-        Order order = new Order("123", null, 10, 0.5, false);
+        FoodOrder foodOrder = new FoodOrder(1, "包子", "大众美食", 2, "至善楼一楼", 1);
+        List<FoodOrder> foodOrderList = new ArrayList<>();
+        foodOrderList.add(foodOrder);
+        Order order = new Order("123", foodOrderList, 3, 0.5, 11, 20, "123", false);
         assertEquals(ResultMessage.Success, orderDataService.saveOrder(order));
-        assertEquals(10, orderDataService.getOrderByUser("123").get(0).getCommodityTotal(), 0.1);
-        int orderId = orderDataService.getOrderByUser("123").get(0).getId();
-        orderDataService.deleteOrder(orderId);
+        assertEquals(2, orderDataService.getOrderByUser("123").get(0).getFoodList().get(0).getPrice(), 0.1);
     }
 
     @Test
     public void hasUnconfirmedOrder() {
-        Order order = new Order("123", null, 10, 0.5, false);
+        FoodOrder foodOrder = new FoodOrder(1, "包子", "大众美食", 2, "至善楼一楼", 1);
+        List<FoodOrder> foodOrderList = new ArrayList<>();
+        foodOrderList.add(foodOrder);
+        Order order = new Order("123", foodOrderList, 3, 0.5, 11, 20, "123", false);
         assertEquals(ResultMessage.Success, orderDataService.saveOrder(order));
         assertEquals(true, orderDataService.hasUnconfirmedOrder("123"));
         int orderId = orderDataService.getOrderByUser("123").get(0).getId();
@@ -52,7 +64,10 @@ public class OrderDataServiceImplTest {
 
     @Test
     public void commonConfirmOrder() {
-        Order order = new Order("123", null, 10, 0.5, false);
+        FoodOrder foodOrder = new FoodOrder(1, "包子", "大众美食", 2, "至善楼一楼", 1);
+        List<FoodOrder> foodOrderList = new ArrayList<>();
+        foodOrderList.add(foodOrder);
+        Order order = new Order("123", foodOrderList, 3, 0.5, 11, 20, "123", false);
         assertEquals(ResultMessage.Success, orderDataService.saveOrder(order));
         int orderId = orderDataService.getOrderByUser("123").get(0).getId();
         orderDataService.confirmOrder(orderId);

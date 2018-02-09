@@ -81,7 +81,6 @@ Page({
    */
   choose: function (e) {
     var uri = "../menu/menu?restaurant=" + e.target.id
-    console.log(uri)
     wx.navigateTo({
       url: uri
     })

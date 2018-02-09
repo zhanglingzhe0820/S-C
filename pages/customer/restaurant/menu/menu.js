@@ -1,68 +1,7 @@
 var app = getApp();
 Page({
   data: {
-    list: [
-      {
-        restaurant: "致善楼一楼",
-        position: 'xx档口',
-        name: '咖喱盖饭',
-        price: 10.00,
-        alreadyOrdered: 49,
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: 100,
-        selected: false,
-        tempStoredId: "",
-        open: false,
-      },
-      {
-        restaurant: "致善楼一楼",
-        position: 'xx档口',
-        name: '青椒盖饭',
-        price: 10.00,
-        alreadyOrdered: 49,
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: 100,
-        selected: false,
-        tempStoredId: "",
-        open: false,
-      },
-      {
-        restaurant: "致善楼一楼",
-        position: 'xx档口',
-        name: '鸡蛋面',
-        price: 10.00,
-        alreadyOrdered: 49,
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: 100,
-        selected: false,
-        tempStoredId: "",
-        open: false,
-      },
-      {
-        restaurant: "致善楼一楼",
-        position: 'xx档口',
-        name: '芝士焗生蚝',
-        price: 10.00,
-        alreadyOrdered: 49,
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: 100,
-        selected: false,
-        tempStoredId: "",
-        open: false,
-      },
-      {
-        restaurant: "致善楼一楼",
-        position: 'xxx餐厅',
-        name: '大龙虾',
-        price: 10.00,
-        alreadyOrdered: 49,
-        url: "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab64c9d958e5fd36afc379311e6f.jpg",
-        maxium: 100,
-        selected: false,
-        tempStoredId: "",
-        open: false,
-      }
-    ],//传输过来的数据
+    list: [],//传输过来的数据
     showList: [],//展现出的数据
     already: "已预订",
     limit: "限额",
@@ -87,7 +26,7 @@ Page({
         var tempList = [];
         for (var i = 0; i < res.data.length; i++) {
           var tempFood = {};
-          console.log(res.data)
+          tempFood.id=res.data[i].id;
           tempFood.restaurant = res.data[i].restaurantReturnVo.name;
           tempFood.position = res.data[i].position;
           tempFood.name = res.data[i].name;

@@ -52,7 +52,7 @@ public class FoodDataServiceImpl implements FoodDataService {
         double total=0;
         for(Order order:orderList){
             for(FoodOrder foodOrder:order.getFoodList()){
-                if(foodOrder.getFood().getId()==foodId){
+                if(foodOrder.getId()==foodId){
                     total+= foodOrder.getNum();
                 }
             }

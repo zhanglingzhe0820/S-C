@@ -29,6 +29,9 @@ Page({
                 for (var j = 0; j < position.length; j++) {
                   if (position[j].name == positionName) {
                     var foodItem = {
+                      id: subRes.data.id,
+                      position: subRes.data.position,
+                      restaurantName: subRes.data.restaurant,
                       foodKey: subRes.data.tempStoredId,
                       foodName: subRes.data.name,
                       url: subRes.data.url,
@@ -44,6 +47,9 @@ Page({
                 }
                 if (!isInPosition) {
                   var foodItem = {
+                    id: subRes.data.id,
+                    position: subRes.data.position,
+                    restaurantName: subRes.data.restaurant,
                     foodKey: subRes.data.tempStoredId,
                     foodName: subRes.data.name,
                     url: subRes.data.url,

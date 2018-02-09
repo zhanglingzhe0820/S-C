@@ -174,13 +174,13 @@ Page({
         } else if (res.data == "DataError") {
           wx.showToast({
             title: '学号已被认证',
-            icon: 'warn',
+            icon: 'cancel',
             duration: 1000
           });
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'warn',
+            icon: 'cancel',
             duration: 1000
           });
         }

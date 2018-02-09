@@ -10,12 +10,21 @@ public class OrderSaveVo {
     private List<FoodOrder> foodList;
     private double commodityTotal;
     private double serviceTotal;
+    private int pickHour;
+    private int pickMinute;
+    private String comment;
 
-    public OrderSaveVo(String wechatId, List<FoodOrder> foodList, double commodityTotal, double serviceTotal) {
+    public OrderSaveVo() {
+    }
+
+    public OrderSaveVo(String wechatId, List<FoodOrder> foodList, double commodityTotal, double serviceTotal, int pickHour, int pickMinute, String comment) {
         this.wechatId = wechatId;
         this.foodList = foodList;
         this.commodityTotal = commodityTotal;
         this.serviceTotal = serviceTotal;
+        this.pickHour = pickHour;
+        this.pickMinute = pickMinute;
+        this.comment = comment;
     }
 
     public String getWechatId() {
@@ -48,5 +57,29 @@ public class OrderSaveVo {
 
     public void setServiceTotal(double serviceTotal) {
         this.serviceTotal = serviceTotal;
+    }
+
+    public int getPickHour() {
+        return pickHour;
+    }
+
+    public void setPickHour(int pickHour) {
+        this.pickHour = pickHour;
+    }
+
+    public int getPickMinute() {
+        return pickMinute;
+    }
+
+    public void setPickMinute(int pickMinute) {
+        this.pickMinute = pickMinute;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

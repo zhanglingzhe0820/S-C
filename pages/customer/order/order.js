@@ -1,4 +1,4 @@
-// pages/customer/order/order.js
+var app = getApp();
 Page({
 
   /**
@@ -6,10 +6,12 @@ Page({
    */
   data: {
     userInfo: "",
+    openId: "",
     commodityPrice: 0.00,
     orderPrice: 0.50,
     hour: 11,
-    minute: 20
+    minute: 20,
+    comment:""
   },
 
   /**
@@ -43,6 +45,25 @@ Page({
           }
         }
       },
+    })
+
+    //获得openid
+    wx.login({
+      success: function (res) {
+        var appId = app.globalData.appID;
+        var appSecret = app.globalData.appSecret;
+        var js_code = res.code;
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + js_code + '&grant_type=authorization_code',
+          data: {},
+          method: 'GET',
+          success: function (res) {
+            that.setData({
+              openId: res.data.openid
+            })
+          }
+        })
+      }
     })
   },
 
@@ -111,17 +132,77 @@ Page({
    * 提交订单(mock)
    */
   submitOrder: function (e) {
-    //支付并保存订单
-    wx.showToast({
-      title: '提交成功',
-      icon: 'success',
-      duration: 1000
-    });
-    setTimeout(function () {
-      wx.switchTab({
-        url: "../orderPreview/orderPreview",
-      })
-    }, 1000);
+var that=this;
+    wx.getStorageInfo({
+      success: function (res) {
+        var foodList = [];
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("selected") == 0) {
+            wx.getStorage({
+              key: res.keys[i],
+              success: function (subRes) {
+                var foodOrder={
+                  wechatId:that.data.openId,
+                  foodList:{
+                    id:subRes.data.id,
+                    name:subRes.data.foodName,
+                    position:subRes.data.position,
+                    price:subRes.data.price,
+                    restaurantName:subRes.data.restaurantName,
+                    num:subRes.data.num
+                  },
+                  commodityTotal:that.data.commodityPrice,
+                  serviceTotal:that.data.orderPrice,
+                  pickHour:that.data.hour,
+                  pickMinute:that.data.minute,
+                  comment:that.data.comment
+                }
+                foodList.push(foodOrder);
+              }
+            })
+          }
+        }
+        var orderSaveVo={
+          wechatId: that.data.openId,
+          foodList: foodList,
+          commodityTotal: that.data.commodityPrice,
+          serviceTotal: that.data.orderPrice,
+          pickHour: that.data.hour,
+          pickMinute: that.data.minute,
+          comment: that.data.comment
+        }
+        //支付并保存订单
+        wx.request({
+          url: app.globalData.backendUrl + "saveOrder",
+          method: "POST",
+          header: {
+            'content-type': 'application/json'
+          },
+          data: orderSaveVo,
+          success: function (res) {
+            if(res.data=="Success"){
+              wx.showToast({
+                title: '提交成功',
+                icon: 'success',
+                duration: 1000
+              });
+              setTimeout(function () {
+                wx.switchTab({
+                  url: "../orderPreview/orderPreview",
+                })
+              }, 1000);
+            }
+            else{
+              wx.showToast({
+                title: '系统繁忙',
+                icon: 'cancel',
+                duration: 1000
+              });
+            }
+          }
+        })
+      },
+    })
   },
 
   /**
@@ -135,10 +216,10 @@ Page({
     this.removeStorageSelected();
   },
 
-/**
- * 删除缓存
- */
-  removeStorageSelected:function(){
+  /**
+   * 删除缓存
+   */
+  removeStorageSelected: function () {
     wx.getStorageInfo({
       success: function (res) {
         var totalPrice = 0;
@@ -148,6 +229,12 @@ Page({
           }
         }
       },
+    })
+  },
+
+  onCommentInput:function(e){
+    this.setData({
+      comment:e.detail.value
     })
   }
 })

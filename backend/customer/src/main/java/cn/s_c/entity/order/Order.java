@@ -16,9 +16,10 @@ public class Order {
     @Column(name = "wechatId")
     private String wechatId;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @JoinTable(name = "foodOrder", joinColumns = @JoinColumn(name = "orderId"))
-    @Column(name = "foodList")
+    @ElementCollection(fetch=FetchType.LAZY, //加载策略
+            targetClass=FoodOrder.class) //指定元素中集合的类型
+    @CollectionTable(name="foodOrder") //指定集合生成的表
+    @OrderColumn(name="foodOrderId") //指定排序列的名称
     private List<FoodOrder> foodList;
 
     @Column(name = "commodityTotal")
@@ -27,6 +28,15 @@ public class Order {
     @Column(name = "serviceTotal")
     private double serviceTotal;
 
+    @Column(name = "pickHour")
+    private int pickHour;
+
+    @Column(name = "pickMinute")
+    private int pickMinute;
+
+    @Column(name = "comment")
+    private String comment;
+
     @Column(name = "isConfirmed")
     @Type(type = "yes_no")
     private boolean isConfirmed;
@@ -34,11 +44,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(String wechatId, List<FoodOrder> foodList, double commodityTotal, double serviceTotal, boolean isConfirmed) {
+    public Order(String wechatId, List<FoodOrder> foodList, double commodityTotal, double serviceTotal, int pickHour, int pickMinute, String comment, boolean isConfirmed) {
         this.wechatId = wechatId;
         this.foodList = foodList;
         this.commodityTotal = commodityTotal;
         this.serviceTotal = serviceTotal;
+        this.pickHour = pickHour;
+        this.pickMinute = pickMinute;
+        this.comment = comment;
         this.isConfirmed = isConfirmed;
     }
 
@@ -80,6 +93,30 @@ public class Order {
 
     public void setServiceTotal(double serviceTotal) {
         this.serviceTotal = serviceTotal;
+    }
+
+    public int getPickHour() {
+        return pickHour;
+    }
+
+    public void setPickHour(int pickHour) {
+        this.pickHour = pickHour;
+    }
+
+    public int getPickMinute() {
+        return pickMinute;
+    }
+
+    public void setPickMinute(int pickMinute) {
+        this.pickMinute = pickMinute;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public boolean isConfirmed() {

@@ -11,7 +11,7 @@
         <view class="weui-cell">
           <view class="weui-cell__bd">备注</view>
           <view class="weui-cell__ft">
-            <input type="text" placeholder="点击以填写备注信息" />
+            <input bindinput="onCommentInput" type="text" placeholder="点击以填写备注信息" />
           </view>
         </view>
       </view>

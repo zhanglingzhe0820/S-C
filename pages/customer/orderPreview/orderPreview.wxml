@@ -3,7 +3,7 @@
     <view class="page__title" style="text-align:center">我的订单</view>
   </view>
   <view class="page__bd">
-    <block wx:for="{{uncompleteOrder}}" wx:for-item="item" wx:for-index="id">
+    <block wx:for="{{uncompleteOrder}}" wx:for-item="item" wx:key="id">
       <view class="weui-form-preview" style="margin-bottom:20px;">
         <view class="weui-form-preview__hd">
           <view class="weui-form-preview__item">
@@ -34,7 +34,7 @@
       </view>
     </block>
 
-    <block wx:for="{{completeOrder}}" wx:for-item="item" wx:for-index="id">
+    <block wx:for="{{completeOrder}}" wx:for-item="item" wx:key="id">
       <view class="weui-form-preview" style="margin-bottom:20px;">
         <view class="weui-form-preview__hd">
           <view class="weui-form-preview__item">
