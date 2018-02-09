@@ -156,11 +156,63 @@ Page({
 
   },
 
-  completeOrder: function () {
-    wx.showToast({
-      title: '取餐成功',
-      icon: 'success',
-      duration: 3000
-    });
+  completeOrder: function (e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.backendUrl + "confirmOrder",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        orderId: e.target.id
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.showToast({
+            title: '取餐成功',
+            icon: 'success',
+            duration: 1000
+          });
+          that.onLoad();
+        } else {
+          wx.showToast({
+            title: '系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+      }
+    })
+  },
+
+  deleteOrder: function (e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.backendUrl + "deleteOrder",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        orderId: e.target.id
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          });
+          that.onLoad();
+        } else {
+          wx.showToast({
+            title: '系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+      }
+    })
   }
 })
