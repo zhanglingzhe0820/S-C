@@ -40,7 +40,7 @@ public class OrderDataServiceImplTest {
         FoodOrder foodOrder = new FoodOrder(1, "包子", "大众美食", 2, "至善楼一楼", 1);
         List<FoodOrder> foodOrderList = new ArrayList<>();
         foodOrderList.add(foodOrder);
-        Order order = new Order("123", foodOrderList, 3, 0.5, 11, 20, "123", false);
+        Order order = new Order("otQkl0QK5ettpggaAhlfVvDlUD7U", foodOrderList, 3, 0.5, 11, 20, "123", false);
         assertEquals(ResultMessage.Success, orderDataService.saveOrder(order));
         assertEquals(2, orderDataService.getOrderByUser("123").get(0).getFoodList().get(0).getPrice(), 0.1);
     }

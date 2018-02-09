@@ -150,7 +150,7 @@ Page({
   },
 
   /**
-   * 认证学号(mock)
+   * 认证学号
    */
   confirmDialog: function () {
     //数据库交互认证学号

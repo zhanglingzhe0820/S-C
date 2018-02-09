@@ -11,7 +11,7 @@ Page({
     orderPrice: 0.50,
     hour: 11,
     minute: 20,
-    comment:""
+    comment: "",
   },
 
   /**
@@ -132,37 +132,26 @@ Page({
    * 提交订单(mock)
    */
   submitOrder: function (e) {
-var that=this;
+    var that = this;
     wx.getStorageInfo({
       success: function (res) {
         var foodList = [];
         for (var i = 0; i < res.keys.length; i++) {
           if (res.keys[i].indexOf("selected") == 0) {
-            wx.getStorage({
-              key: res.keys[i],
-              success: function (subRes) {
-                var foodOrder={
-                  wechatId:that.data.openId,
-                  foodList:{
-                    id:subRes.data.id,
-                    name:subRes.data.foodName,
-                    position:subRes.data.position,
-                    price:subRes.data.price,
-                    restaurantName:subRes.data.restaurantName,
-                    num:subRes.data.num
-                  },
-                  commodityTotal:that.data.commodityPrice,
-                  serviceTotal:that.data.orderPrice,
-                  pickHour:that.data.hour,
-                  pickMinute:that.data.minute,
-                  comment:that.data.comment
-                }
-                foodList.push(foodOrder);
-              }
-            })
+            var value = wx.getStorageSync(res.keys[i]);
+            var foodOrder = {
+              id: value.id,
+              name: value.foodName,
+              position: value.position,
+              price: value.price,
+              restaurantName: value.restaurantName,
+              num: value.num
+            }
+            foodList.push(foodOrder);
           }
         }
-        var orderSaveVo={
+
+        var orderSaveVo = {
           wechatId: that.data.openId,
           foodList: foodList,
           commodityTotal: that.data.commodityPrice,
@@ -171,6 +160,7 @@ var that=this;
           pickMinute: that.data.minute,
           comment: that.data.comment
         }
+
         //支付并保存订单
         wx.request({
           url: app.globalData.backendUrl + "saveOrder",
@@ -180,7 +170,7 @@ var that=this;
           },
           data: orderSaveVo,
           success: function (res) {
-            if(res.data=="Success"){
+            if (res.data == "Success") {
               wx.showToast({
                 title: '提交成功',
                 icon: 'success',
@@ -192,7 +182,7 @@ var that=this;
                 })
               }, 1000);
             }
-            else{
+            else {
               wx.showToast({
                 title: '系统繁忙',
                 icon: 'cancel',
@@ -232,9 +222,9 @@ var that=this;
     })
   },
 
-  onCommentInput:function(e){
+  onCommentInput: function (e) {
     this.setData({
-      comment:e.detail.value
+      comment: e.detail.value
     })
   }
 })

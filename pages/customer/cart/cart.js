@@ -21,55 +21,51 @@ Page({
         var position = [];
         for (var i = 0; i < res.keys.length; i++) {
           if (res.keys[i].indexOf("food") == 0) {
-            wx.getStorage({
-              key: res.keys[i],
-              success: function (subRes) {
-                var isInPosition = false;
-                var positionName = subRes.data.restaurant + "-" + subRes.data.position;
-                for (var j = 0; j < position.length; j++) {
-                  if (position[j].name == positionName) {
-                    var foodItem = {
-                      id: subRes.data.id,
-                      position: subRes.data.position,
-                      restaurantName: subRes.data.restaurant,
-                      foodKey: subRes.data.tempStoredId,
-                      foodName: subRes.data.name,
-                      url: subRes.data.url,
-                      num: 1,
-                      canReduce: false,
-                      price: subRes.data.price,
-                      selected: true
-                    };
-                    position[j].food.push(foodItem);
-                    isInPosition = true;
-                    break;
-                  }
-                }
-                if (!isInPosition) {
-                  var foodItem = {
-                    id: subRes.data.id,
-                    position: subRes.data.position,
-                    restaurantName: subRes.data.restaurant,
-                    foodKey: subRes.data.tempStoredId,
-                    foodName: subRes.data.name,
-                    url: subRes.data.url,
-                    num: 1,
-                    canReduce: false,
-                    price: subRes.data.price,
-                    selected: true
-                  };
-                  var positionItem = {
-                    name: positionName,
-                    food: []
-                  };
-                  positionItem.food.push(foodItem);
-                  position.push(positionItem);
-                }
-                that.setData({
-                  position: position
-                })
-              },
-            })
+            var value = wx.getStorageSync(res.keys[i]);
+            var isInPosition = false;
+            var positionName = value.restaurant + "-" + value.position;
+            for (var j = 0; j < position.length; j++) {
+              if (position[j].name == positionName) {
+                var foodItem = {
+                  id: value.id,
+                  position: value.position,
+                  restaurantName: value.restaurant,
+                  foodKey: value.tempStoredId,
+                  foodName: value.name,
+                  url: value.url,
+                  num: 1,
+                  canReduce: false,
+                  price: value.price,
+                  selected: true
+                };
+                position[j].food.push(foodItem);
+                isInPosition = true;
+                break;
+              }
+            }
+            if (!isInPosition) {
+              var foodItem = {
+                id: value.id,
+                position: value.position,
+                restaurantName: value.restaurant,
+                foodKey: value.tempStoredId,
+                foodName: value.name,
+                url: value.url,
+                num: 1,
+                canReduce: false,
+                price: value.price,
+                selected: true
+              };
+              var positionItem = {
+                name: positionName,
+                food: []
+              };
+              positionItem.food.push(foodItem);
+              position.push(positionItem);
+            }
+            that.setData({
+              position: position
+            });
           }
         }
       },
