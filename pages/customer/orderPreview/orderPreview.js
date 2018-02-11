@@ -2,50 +2,8 @@ var app = getApp();
 Page({
   data: {
     openId: "",
-    uncompleteOrder: [
-      {
-        id: 2018020300001,
-        hour: 11,
-        minute: 20,
-        total: 100,
-        comment: "",
-        food: [
-          {
-            position: "xxx-xxx",
-            name: "包子",
-            num: 5,
-            price: 10
-          },
-          {
-            position: "xxx-xxx",
-            name: "狗粮",
-            num: 5,
-            price: 10
-          }
-        ],
-      }
-    ],
-    completeOrder: [
-      {
-        id: 2018020300001,
-        total: 100,
-        comment: "",
-        food: [
-          {
-            position: "xxx-xxx",
-            name: "包子",
-            num: 5,
-            price: 10
-          },
-          {
-            position: "xxx-xxx",
-            name: "狗粮",
-            num: 5,
-            price: 10
-          }
-        ]
-      }
-    ]
+    uncompleteOrder: [],
+    completeOrder: []
   },
 
   /**

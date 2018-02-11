@@ -4,10 +4,21 @@ Page({
     list: [],//传输过来的数据
     showList: [],//展现出的数据
     already: "已预订",
-    limit: "限额",
+    limit: "档口限额",
     element: "人",
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+
+    dialogIsHiden: true,
+    selectedFoodPosition: 0,
+    specialChoices: [{
+      value: "加辣",
+      selected: false
+    }, {
+      value: "不加辣",
+      selected: true
+    }]
+
   },
   onLoad: function (options) {
     var that = this;
@@ -115,48 +126,61 @@ Page({
    */
   select: function (e) {
     var foodPosition = this.findBtnPosition(e.target.id);
+    this.setData({
+      selectedFoodPosition: foodPosition
+    })
     var that = this;
     //如果有特殊口味选择
-    if(showList.data[foodPosition].hasChoice){
-      //显示选项窗口
+    if (this.data.showList[foodPosition].hasChoice) {
+      this.showDialog(this.data.showList[foodPosition].choice);
     }
-    wx.getStorageInfo({
-      success: function (res) {
-        var nextId;
-        var maxId = 0;
-        for (var i = 0; i < res.keys.length; i++) {
-          if (res.keys[i].indexOf("food") == 0) {
-            var id = parseInt(res.keys[i].substring(4), 10);
-            if (id > maxId) {
-              maxId = id;
+    else {
+      wx.getStorageInfo({
+        success: function (res) {
+          var nextId;
+          var maxId = 0;
+          for (var i = 0; i < res.keys.length; i++) {
+            if (res.keys[i].indexOf("food") == 0) {
+              var id = parseInt(res.keys[i].substring(4), 10);
+              if (id > maxId) {
+                maxId = id;
+              }
             }
           }
-        }
-        nextId = maxId + 1;
+          nextId = maxId + 1;
 
-        var selectChangeTarget = "showList[" + foodPosition + "].selected";
-        that.setData({
-          [selectChangeTarget]: true
-        });
-        var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
-        that.setData({
-          [tempDataChangeTarget]: "food" + nextId
-        });
+          var selectChangeTarget = "showList[" + foodPosition + "].selected";
+          that.setData({
+            [selectChangeTarget]: true
+          });
+          var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
+          that.setData({
+            [tempDataChangeTarget]: "food" + nextId
+          });
 
-        //添加至餐盘
-        var selectedFood = that.data.showList[foodPosition];
-        selectedFood.name = selectedFood.name + selectedFood.specialChoice.length == 0 ? "" : "("
-          + selectedFood.specialChoice + ")";
-        wx.setStorageSync(
-          "food" + nextId,
-          that.data.showList[foodPosition],
-        );
-      },
-    })
+          //添加至餐盘
+          for (var i = 0; i < that.data.specialChoices.length; i++) {
+            if (that.data.specialChoices[i].selected) {
+              var specialChoiceChangeTarget = "showList[" + foodPosition + "].specialChoice";
+              that.setData({
+                [specialChoiceChangeTarget]: that.data.specialChoices[i].value
+              });
+            }
+          }
+          var selectedFood = that.data.showList[foodPosition];
+          selectedFood.name = selectedFood.name + (selectedFood.specialChoice.length == 0 ? "" : "("
+            + selectedFood.specialChoice + ")");
+          wx.setStorageSync(
+            "food" + nextId,
+            that.data.showList[foodPosition],
+          );
+        },
+      })
+    }
   },
 
   /**
-   * 取消选择（mock）
+   * 取消选择
    */
   unselect: function (e) {
     //从餐盘删除
@@ -188,5 +212,88 @@ Page({
         return i;
       }
     }
+  },
+
+  showDialog: function (choices) {
+    var specialChoices = [];
+    for (var i = 0; i < choices.length; i++) {
+      var tempChoice = {
+        value: choices[i],
+        selected: false
+      };
+      specialChoices.push(tempChoice)
+    }
+    this.setData({
+      specialChoices: specialChoices,
+      dialogIsHiden: false
+    })
+  },
+
+  clickDialog: function (e) {
+    var specialChoices = this.data.specialChoices;
+    for (var i = 0; i < specialChoices.length; i++) {
+      if (specialChoices[i].value == e.target.id) {
+        specialChoices[i].selected = true;
+      }
+      else {
+        specialChoices[i].selected = false;
+      }
+    }
+    this.setData({
+      specialChoices: specialChoices
+    })
+  },
+
+  closeDialog: function () {
+    this.setData({
+      dialogIsHiden: true
+    })
+  },
+
+  confirmDialog: function () {
+    var that = this;
+    var foodPosition = this.data.selectedFoodPosition;
+    wx.getStorageInfo({
+      success: function (res) {
+        var nextId;
+        var maxId = 0;
+        for (var i = 0; i < res.keys.length; i++) {
+          if (res.keys[i].indexOf("food") == 0) {
+            var id = parseInt(res.keys[i].substring(4), 10);
+            if (id > maxId) {
+              maxId = id;
+            }
+          }
+        }
+        nextId = maxId + 1;
+
+        var selectChangeTarget = "showList[" + foodPosition + "].selected";
+        that.setData({
+          [selectChangeTarget]: true
+        });
+        var tempDataChangeTarget = "showList[" + foodPosition + "].tempStoredId";
+        that.setData({
+          [tempDataChangeTarget]: "food" + nextId
+        });
+
+        //添加至餐盘
+        for (var i = 0; i < that.data.specialChoices.length; i++) {
+          if (that.data.specialChoices[i].selected) {
+            var specialChoiceChangeTarget = "showList[" + foodPosition + "].specialChoice";
+            that.setData({
+              [specialChoiceChangeTarget]: that.data.specialChoices[i].value
+            });
+          }
+        }
+        var selectedFood = that.data.showList[foodPosition];
+        selectedFood.name = selectedFood.name + (selectedFood.specialChoice.length == 0 ? "" : "("
+          + selectedFood.specialChoice + ")");
+        wx.setStorageSync(
+          "food" + nextId,
+          that.data.showList[foodPosition],
+        );
+      },
+    })
+    this.closeDialog();
   }
 });

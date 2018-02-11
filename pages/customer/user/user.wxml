@@ -10,9 +10,9 @@
       <button wx:elif="{{isAuthened&&isStudent}}" class="weui-btn mini-btn" type="primary" size="mini">学生</button>
       <button wx:else class="weui-btn mini-btn" type="primary" size="mini">教师</button>
     </view>
-    <modal hidden="{{dialogIsHiden}}" title="请输入学号／工资号" confirm-text="提交" cancel-text="取消" bindcancel="closeDialog" bindconfirm="confirmDialog">  
-    <input type='text'placeholder="学号／工资号" bindinput="setStNumber" auto-focus/>  
-</modal> 
+    <modal hidden="{{dialogIsHiden}}" title="请输入学号／工资号" confirm-text="提交" cancel-text="取消" bindcancel="closeDialog" bindconfirm="confirmDialog">
+      <input type='text' placeholder="学号／工资号" bindinput="setStNumber" auto-focus/>
+    </modal>
   </view>
   <view class="page_bd">
     <view class="weui-cells weui-cells_after-title">

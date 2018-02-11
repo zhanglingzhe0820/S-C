@@ -1,0 +1,30 @@
+<!--pages/index/index.wxml-->
+<view class="page" style="background:url('../images/background.jpg')">
+  <view class="page__hd">
+  </view>
+  <view class="page__hd">
+  </view>
+  <view class="page__hd">
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <button bindtap="startOrdering" type="primary">我要订餐</button>
+    <view class="page__bd page__bd_spacing"></view>
+    <button bindtap="startSupplying" type="primary" plain="true">我是食堂</button>
+  </view>
+  <modal hidden="{{dialogIsHiden}}" title="请输入商户账号密码" confirm-text="提交" cancel-text="取消" bindcancel="closeDialog" bindconfirm="confirmDialog">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input type='text' placeholder="账号" bindinput="setUsername" auto-focus/>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <input type='password' placeholder="密码" bindinput="setPassword" auto-focus/>
+      </view>
+    </view>
+  </modal>
+  <view class="page__hd">
+  </view>
+  <view class="page__hd">
+  </view>
+  <view class="page__hd">
+  </view>
+</view>

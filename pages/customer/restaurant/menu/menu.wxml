@@ -45,13 +45,19 @@
               </view>
               <view style="text-align:right">
                 <icon wx:if="{{item.selected}}" type="success" bindtap="unselect" id="{{item.position}}_{{item.name}}" size="30" />
-              <icon wx:else size="30" type="circle" bindtap="select" id="{{item.position}}_{{item.name}}" />
+                <icon wx:else size="30" type="circle" bindtap="select" id="{{item.position}}_{{item.name}}" />
               </view>
             </view>
           </view>
         </block>
       </view>
     </view>
+    <modal hidden="{{dialogIsHiden}}" title="请选择特殊需求" cancel-text="取消" bindcancel="closeDialog" bindconfirm="confirmDialog">
+      <block wx:for="{{specialChoices}}" wx:for-item="item" wx:key="value">
+        <button id="{{item.value}}" bindtap="clickDialog" style="margin:10px;" wx:if="{{item.selected}}" size="mini" type="primary">{{item.value}}</button>
+        <button id="{{item.value}}" bindtap="clickDialog" style="margin:10px;" wx:else size="mini" type="default">{{item.value}}</button>
+      </block>
+    </modal>
     <view>
       <button class="bottomBtn" type="primary" bindtap="completeChoose">选餐完成</button>
     </view>

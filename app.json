@@ -26,7 +26,7 @@
     "example/toast/toast",
     "example/navbar/navbar",
     "example/searchbar/searchbar",
-    "pages/customer/index/index",
+    "pages/index/index",
     "pages/customer/user/user",
     "pages/customer/restaurant/menu/menu",
     "pages/customer/restaurant/choose/choose",
@@ -34,7 +34,8 @@
     "pages/customer/cart/cart",
     "pages/customer/about/about",
     "pages/customer/order/order",
-    "pages/customer/orderPreview/orderPreview"
+    "pages/customer/orderPreview/orderPreview",
+    "pages/supplier/home/home"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -49,7 +50,7 @@
     "borderStyle": "white",
     "list": [
       {
-        "pagePath": "pages/customer/index/index",
+        "pagePath": "pages/index/index",
         "iconPath": "pages/customer/images/home.png",
         "selectedIconPath": "pages/customer/images/home.png",
         "text": "首页"
