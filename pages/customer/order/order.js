@@ -129,7 +129,7 @@ Page({
   },
 
   /**
-   * 提交订单(mock)
+   * 提交订单
    */
   submitOrder: function (e) {
     var that = this;
