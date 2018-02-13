@@ -1,7 +1,5 @@
 package cn.s_c;
 
-import cn.s_c.data.user.UserDataServiceImpl;
-import cn.s_c.dataservice.suppiler.UserDataService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -39,7 +37,7 @@ public class MainApplication {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("S&C backend customer rest api")
+                .title("S&C backend supplier rest api")
                 .termsOfServiceUrl("")
                 .contact(new Contact("surevil", "S&C wechat app", "445073309@qq.com"))
                 .version("1.0")

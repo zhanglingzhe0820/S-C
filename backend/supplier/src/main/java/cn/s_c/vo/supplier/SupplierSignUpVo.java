@@ -1,42 +1,18 @@
-package cn.s_c.entity.supplier;
+package cn.s_c.vo.supplier;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 
-@Entity
-@Table(name = "supplier")
-public class Supplier {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @Column(name = "name")
+public class SupplierSignUpVo {
     private String name;
-
-    @Column(name = "username")
     private String username;
-
-    @Column(name = "password")
     private String password;
-
-    @Column(name = "restaurantId")
     private int restaurantId;
 
-    public Supplier() {
-    }
-
-    public Supplier(String name, String username, String password, int restaurantId) {
+    public SupplierSignUpVo(String name, String username, String password, int restaurantId) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.restaurantId = restaurantId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
