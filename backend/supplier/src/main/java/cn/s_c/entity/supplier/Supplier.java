@@ -1,11 +1,11 @@
-package cn.s_c.entity.restaurant;
+package cn.s_c.entity.supplier;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Position {
+public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -22,10 +22,10 @@ public class Position {
     @Column(name = "restaurantId")
     private int restaurantId;
 
-    public Position() {
+    public Supplier() {
     }
 
-    public Position(String name, String username, String password, int restaurantId) {
+    public Supplier(String name, String username, String password, int restaurantId) {
         this.name = name;
         this.username = username;
         this.password = password;
