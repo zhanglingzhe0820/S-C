@@ -1,5 +1,6 @@
-<view class="page" style="background:url('../../images/background.jpg')">
+<view class="page" style="background:#FFFFF0;">
   <view class="page__hd">
+    <view class="page__title" style="text-align:center">选择功能</view>
   </view>
   <view class="page__hd">
   </view>

@@ -102,7 +102,20 @@ Page({
     })
   },
 
-  confirmDialog: function(){
-    
+  /**
+   * 提交账号密码(mock)
+   */
+  confirmDialog: function () {
+    //从后端服务器确认账号密码
+
+    wx.setStorage({
+      key: "supplierUsername",
+      data: this.data.username,
+      success: function () {
+        wx.navigateTo({
+          url: "../supplier/home/home",
+        })
+      }
+    })
   }
 })

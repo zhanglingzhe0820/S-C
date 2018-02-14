@@ -1,6 +1,9 @@
 package cn.s_c.entity.supplier;
 
+import cn.s_c.entity.food.SupplierFood;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "supplier")
@@ -21,14 +24,22 @@ public class Supplier {
     @Column(name = "restaurantId")
     private int restaurantId;
 
+
+    @ElementCollection(fetch = FetchType.LAZY,
+            targetClass = SupplierFood.class)
+    @CollectionTable(name = "supplierFood")
+    @OrderColumn(name = "supplierFoodId")
+    private List<SupplierFood> supplierFoodList;
+
     public Supplier() {
     }
 
-    public Supplier(String name, String username, String password, int restaurantId) {
+    public Supplier(String name, String username, String password, int restaurantId, List<SupplierFood> supplierFoodList) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.restaurantId = restaurantId;
+        this.supplierFoodList = supplierFoodList;
     }
 
     public int getId() {
@@ -69,5 +80,13 @@ public class Supplier {
 
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public List<SupplierFood> getSupplierFoodList() {
+        return supplierFoodList;
+    }
+
+    public void setSupplierFoodList(List<SupplierFood> supplierFoodList) {
+        this.supplierFoodList = supplierFoodList;
     }
 }
