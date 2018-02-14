@@ -37,7 +37,9 @@
     "pages/customer/orderPreview/orderPreview",
     "pages/supplier/home/home",
     "pages/supplier/addFood/addFood",
-    "pages/supplier/chooseFood/chooseFood"
+    "pages/supplier/chooseFood/chooseFood",
+    "pages/supplier/receiveOrder/receiveOrder",
+    "pages/supplier/orderSetting/orderSetting"
   ],
   "window": {
     "navigationBarTextStyle": "white",

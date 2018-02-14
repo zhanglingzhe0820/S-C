@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center">取餐设置</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">取餐开始时间</view>
+      <view class="weui-panel__bd">
+        <view class="weui-cell">
+          <view class="weui-cell__bd" style="text-align:center">{{startHour}}:{{startMinute}}</view>
+        </view>
+        <view class="weui-cell">
+          <picker class="weui-cell__bd" style="text-align:center" mode="time" value="{{time}}" start="6:00" end="22:00" bindchange="chooseStartTime">
+            <button type="default">选择开始时间</button>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">取餐结束时间</view>
+      <view class="weui-panel__bd">
+        <view class="weui-cell">
+          <view class="weui-cell__bd" style="text-align:center">{{endHour}}:{{endMinute}}</view>
+        </view>
+        <view class="weui-cell">
+          <picker class="weui-cell__bd" style="text-align:center" mode="time" value="{{time}}" start="6:00" end="22:00" bindchange="chooseEndTime">
+            <button type="default">选择结束时间</button>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">取餐人数限制</view>
+      <view class="weui-panel__bd">
+        <input style="margin:20px;" type="number" placeholder="填写此时间段取餐极限人数"></input>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <button bindtap="confirmSetting" type="primary">确定</button>
+    </view>
+  </view>
+</view>

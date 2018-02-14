@@ -1,10 +1,44 @@
-// pages/supplier/home/home.js
+// pages/supplier/receiveOrder/receiveOrder.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    orderList: [
+      {
+        startTime: "11:20",
+        endTime: "11:30",
+        foodList: [
+          {
+            name: "包子",
+            price: 1.0,
+            num: 10
+          },
+          {
+            name: "馒头",
+            price: 2.0,
+            num: 10
+          }
+        ]
+      },
+      {
+        startTime: "11:30",
+        endTime: "11:40",
+        foodList: [
+          {
+            name: "包子",
+            price: 1.0,
+            num: 10
+          },
+          {
+            name: "馒头",
+            price: 2.0,
+            num: 10
+          }
+        ]
+      }
+    ]
   },
 
   /**
@@ -63,15 +97,7 @@ Page({
 
   },
 
-  toOrderSetting: function(){
-    wx.navigateTo({
-      url: "../orderSetting/orderSetting",
-    })
-  },
+  stopReceivingOrder: function () {
 
-  toAddFood: function () {
-    wx.navigateTo({
-      url: "../addFood/addFood",
-    })
   }
 })
