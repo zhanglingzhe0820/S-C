@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="page__bd page__bd_spacing">
+      <view class="page__bd page__bd_spacing"></view>
+      <view class="kind-list">
+        <block wx:for="{{showList}}" wx:for-item="item" wx:key="id">
+          <view class="kind-list__item">
+            <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}">
+              <view class="weui-flex__item">
+                <view style="text-align:left">
+                  <image class="kind-list__img" src="{{item.url}}" mode="aspectFill"></image>
+                </view>
+              </view>
+              <view class="weui-flex__item">
+                <view style="text-align:left">
+                  {{item.name}}
+                </view>
+              </view>
+              <view class="weui-flex__item" style="text-align">
+                <view class="small-font">
+                  ￥{{item.price}}
+                </view>
+                <view class="small-font">
+                  {{limit}}{{item.maxium}}{{element}}
+                </view>
+              </view>
+              <view style="text-align:right">
+                <icon wx:if="{{item.selected}}" type="success" bindtap="unselect" size="30" />
+                <icon wx:else size="30" type="circle" bindtap="select" />
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view>
+      <view class="bottomBtn">
+        <view class="weui-flex">
+          <view class="weui-flex__item" style="text-align:left;padding:2px">
+            <icon wx:if="{{allSelected}}" type="success" color="red" bindtap="unselectAll" />
+            <icon wx:else type="circle" bindtap="selectAll" />
+            <text style="padding:5px">全选</text>
+          </view>
+          <view class="weui-flex__item" style="text-align:center;color:black;font-size:20px">
+            <button type="primary" bindtap="completeChoose">完成</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

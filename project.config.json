@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 11,
 			"list": [
 				{
 					"id": 0,
@@ -86,6 +86,17 @@
 					"name": "supplier home",
 					"pathName": "pages/supplier/home/home",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "addFood",
+					"pathName": "pages/supplier/addFood/addFood",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "chooseFood",
+					"pathName": "pages/supplier/chooseFood/chooseFood"
 				}
 			]
 		}
