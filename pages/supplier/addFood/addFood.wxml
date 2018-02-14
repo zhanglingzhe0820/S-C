@@ -7,7 +7,7 @@
       <view class="weui-panel__hd">菜品图片</view>
       <view class="weui-panel__bd">
         <view class="weui-cell">
-          <image wx:if="{{imageUrl}}" src="{{imageUrl}}"></image>
+          <image style="margin:30px;" wx:if="{{imageUrl}}" src="{{imageUrl}}" mode="scaleToFill"></image>
         </view>
         <button style="margin:20px;" type="default" bindtap="addImage">点击添加图片</button>
       </view>
@@ -20,7 +20,7 @@
           <view class="weui-label">名称</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入菜品名称" />
+          <input class="weui-input" placeholder="请输入菜品名称" bindinput="onFoodNameInput" />
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -28,7 +28,7 @@
           <view class="weui-label">单价</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入菜品单价" />
+          <input type="number" class="weui-input" placeholder="请输入菜品单价" bindinput="onFoodPriceInput" />
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -53,7 +53,7 @@
             <view class="weui-label">属性{{item.index}}</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入属性" />
+            <input class="weui-input" placeholder="请输入属性" bindinput="onSpecialChoiceInput" id="{{item.index}}" />
           </view>
         </view>
       </block>

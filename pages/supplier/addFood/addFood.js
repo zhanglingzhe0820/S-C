@@ -5,12 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    startHour: 11,
-    startMinute: 20,
-    endHour: 12,
-    endMinute: 20,
-    hasSpecialChoice: false,
     imageUrl: "",
+    name: "",
+    price: 0,
+    hasSpecialChoice: false,
     specialChoices: []
   },
 
@@ -87,17 +85,8 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        wx.uploadFile({
-          url: "../tmp", // 你的接口地址
-          filePath: tempFilePaths[0],
-          name: "image",
-          success: function (res) {
-            var data = res.data
-            that.setData({
-              imageUrl: data
-            })
-          }
+        that.setData({
+          imageUrl: res.tempFilePaths[0]
         })
       }
     })
@@ -153,6 +142,26 @@ Page({
   confirmSetting: function () {
     wx.navigateTo({
       url: "../addFood/addFood",
+    })
+  },
+
+  onFoodNameInput: function (e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+
+  onFoodPriceInput: function (e) {
+    this.setData({
+      price: e.detail.value
+    })
+  },
+
+  onSpecialChoiceInput: function (e) {
+    var specialChoices = this.data.specialChoices;
+    specialChoices[e.target.id - 1].value = e.detail.value;
+    this.setData({
+      specialChoices: specialChoices
     })
   }
 })
