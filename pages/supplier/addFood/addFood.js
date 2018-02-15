@@ -163,5 +163,11 @@ Page({
     this.setData({
       specialChoices: specialChoices
     })
+  },
+
+  backToHome: function () {
+    wx.navigateTo({
+      url: "../home/home",
+    })
   }
 })

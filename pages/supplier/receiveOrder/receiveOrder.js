@@ -98,6 +98,10 @@ Page({
   },
 
   stopReceivingOrder: function () {
+    //在后端数据库删除本店食品
 
+    wx.navigateTo({
+      url: "../home/home",
+    })
   }
 })

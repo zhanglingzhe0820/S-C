@@ -142,5 +142,13 @@ Page({
     wx.navigateTo({
       url: "../addFood/addFood?id=" + this.data.showList[foodPosition].id
     });
+  },
+
+  completeChoose: function () {
+    //与后端交互发布今日菜品
+
+    wx.navigateTo({
+      url: "../receiveOrder/receiveOrder",
+    })
   }
 })

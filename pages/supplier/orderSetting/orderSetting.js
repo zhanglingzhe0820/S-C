@@ -95,7 +95,7 @@ Page({
    */
   confirmSetting: function () {
     wx.navigateTo({
-      url: "../receiveOrder/receiveOrder",
+      url: "../chooseFood/chooseFood",
     })
   }
 }) 
