@@ -110,6 +110,12 @@
 					"name": "chooseFunction",
 					"pathName": "pages/supplier/chooseFunction/chooseFunction",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "orderSetting",
+					"pathName": "pages/supplier/orderSetting/orderSetting",
+					"query": ""
 				}
 			]
 		}

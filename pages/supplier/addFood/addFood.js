@@ -1,4 +1,4 @@
-// pages/supplier/addFood/addFood.js
+var app = getApp();
 Page({
 
   /**
@@ -139,9 +139,51 @@ Page({
   /**
    * 确定添加(mock)
    */
-  confirmSetting: function () {
-    wx.navigateTo({
-      url: "../addFood/addFood",
+  confirmAdd: function () {
+    var that = this;
+    wx.uploadFile({
+      url: app.globalData.backendUrl + "uploadImage",
+      filePath: that.data.imageUrl,
+      name: 'foodImage',
+      success: function (res) {
+        var data = res.data
+        that.setData({
+          imageUrl: data.imageUrl
+        })
+
+        wx.request({
+          url: app.globalData.backendUrl + "saveFood",
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            imageUrl: that.data.imageUrl,
+            name: that.data.name,
+            price: that.data.price,
+            hasSpecialChoice: that.data.hasSpecialChoice,
+            specialChoices: that.data.specialChoices
+          },
+          success: function (res) {
+            if (res.data == "Success") {
+              wx.showToast({
+                title: '添加成功',
+                icon: 'success',
+                duration: 1000
+              });
+              wx.navigateTo({
+                url: "../addFood/addFood",
+              })
+            } else {
+              wx.showToast({
+                title: '系统繁忙，请稍后再试',
+                icon: 'cancel',
+                duration: 1000
+              });
+            }
+          }
+        })
+      }
     })
   },
 

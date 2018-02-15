@@ -1,55 +1,25 @@
-package cn.s_c.entity.food;
+package cn.s_c.vo.food;
 
 import cn.s_c.entity.supplier.Supplier;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "supplierFood")
-public class SupplierFood {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @Column(name = "name")
+public class SupplierFoodSaveVo {
     private String name;
-
-    @Column(name = "price")
     private double price;
-
-    @Column(name = "url")
     private String url;
-
-    @Column(name = "hasChoice")
-    @Type(type = "yes_no")
     private boolean hasChoice;
-
-    @Column(name = "choice")
     private String[] choice;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    public SupplierFood() {
+    public SupplierFoodSaveVo() {
     }
 
-    public SupplierFood(String name, double price, String url, boolean hasChoice, String[] choice, Supplier supplier) {
+    public SupplierFoodSaveVo(String name, double price, String url, boolean hasChoice, String[] choice, Supplier supplier) {
         this.name = name;
         this.price = price;
         this.url = url;
         this.hasChoice = hasChoice;
         this.choice = choice;
         this.supplier = supplier;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

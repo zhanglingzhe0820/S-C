@@ -1,13 +1,13 @@
 package cn.s_c.entity.food;
 
-import cn.s_c.entity.supplier.Supplier;
+import cn.s_c.entity.restaurant.Restaurant;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "supplierFood")
-public class SupplierFood {
+@Table(name = "food")
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -15,11 +15,17 @@ public class SupplierFood {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "position")
+    private String position;
+
     @Column(name = "price")
     private double price;
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "maximum")
+    private double maximum;
 
     @Column(name = "hasChoice")
     @Type(type = "yes_no")
@@ -29,19 +35,21 @@ public class SupplierFood {
     private String[] choice;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "supplier_id")
-    private Supplier supplier;
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
-    public SupplierFood() {
+    public Food() {
     }
 
-    public SupplierFood(String name, double price, String url, boolean hasChoice, String[] choice, Supplier supplier) {
+    public Food(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, Restaurant restaurant) {
         this.name = name;
+        this.position = position;
         this.price = price;
         this.url = url;
+        this.maximum = maximum;
         this.hasChoice = hasChoice;
         this.choice = choice;
-        this.supplier = supplier;
+        this.restaurant = restaurant;
     }
 
     public int getId() {
@@ -60,6 +68,14 @@ public class SupplierFood {
         this.name = name;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -74,6 +90,14 @@ public class SupplierFood {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public double getMaximum() {
+        return maximum;
+    }
+
+    public void setMaximum(double maximum) {
+        this.maximum = maximum;
     }
 
     public boolean isHasChoice() {
@@ -92,11 +116,11 @@ public class SupplierFood {
         this.choice = choice;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

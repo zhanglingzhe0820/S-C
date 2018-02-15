@@ -24,4 +24,12 @@ public interface SupplierBlService {
      * @return whether the operation is success or not
      */
     ResultMessage signUp(SupplierSignUpVo supplierSignUpVo);
+
+    /**
+     * get the supplier object by id
+     *
+     * @param supplierId the if of supplier
+     * @return the return supplier object
+     */
+    Supplier getSupplierById(int supplierId);
 }

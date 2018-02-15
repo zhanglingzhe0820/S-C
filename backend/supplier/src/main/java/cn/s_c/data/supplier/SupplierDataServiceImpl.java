@@ -57,4 +57,15 @@ public class SupplierDataServiceImpl implements SupplierDataService {
             return null;
         }
     }
+
+    /**
+     * get the supplier object by id
+     *
+     * @param supplierId the if of supplier
+     * @return the return supplier object
+     */
+    @Override
+    public Supplier getSupplierById(int supplierId) {
+        return supplierDao.findOne(supplierId);
+    }
 }

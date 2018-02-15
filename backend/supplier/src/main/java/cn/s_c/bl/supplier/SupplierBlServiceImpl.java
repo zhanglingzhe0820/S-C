@@ -2,6 +2,7 @@ package cn.s_c.bl.supplier;
 
 import cn.s_c.blservice.supplier.SupplierBlService;
 import cn.s_c.dataservice.suppiler.SupplierDataService;
+import cn.s_c.entity.supplier.Supplier;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.supplier.SupplierLoginVo;
@@ -43,5 +44,16 @@ public class SupplierBlServiceImpl implements SupplierBlService {
         } else {
             return supplierDataService.saveSupplierInfo(Convertor.supplierSignUpVoToSupplier(supplierSignUpVo));
         }
+    }
+
+    /**
+     * get the supplier object by id
+     *
+     * @param supplierId the if of supplier
+     * @return the return supplier object
+     */
+    @Override
+    public Supplier getSupplierById(int supplierId) {
+        return supplierDataService.getSupplierById(supplierId);
     }
 }

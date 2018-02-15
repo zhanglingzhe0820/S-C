@@ -7,7 +7,8 @@ Page({
     startHour: 11,
     startMinute: 20,
     endHour: 12,
-    endMinute: 20
+    endMinute: 20,
+    maximum: 100
   },
 
   /**
@@ -94,8 +95,21 @@ Page({
    * 确认设置(mock)
    */
   confirmSetting: function () {
-    wx.navigateTo({
-      url: "../chooseFood/chooseFood",
+    var setting = {
+      startHour: this.data.startHour,
+      startMinute: this.data.startMinute,
+      endHour: this.data.endHour,
+      endMinute: this.data.endMinute,
+      maximum: this.data.maximum
+    }
+    wx.setStorage({
+      key: "setting",
+      data: setting,
+      success: function () {
+        wx.navigateTo({
+          url: "../chooseFood/chooseFood",
+        })
+      }
     })
   }
 }) 

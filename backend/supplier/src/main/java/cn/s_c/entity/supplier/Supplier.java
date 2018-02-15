@@ -4,6 +4,7 @@ import cn.s_c.entity.food.SupplierFood;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "supplier")
@@ -24,22 +25,18 @@ public class Supplier {
     @Column(name = "restaurantId")
     private int restaurantId;
 
-
-    @ElementCollection(fetch = FetchType.LAZY,
-            targetClass = SupplierFood.class)
-    @CollectionTable(name = "supplierFood")
-    @OrderColumn(name = "supplierFoodId")
-    private List<SupplierFood> supplierFoodList;
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<SupplierFood> supplierFoodSet;
 
     public Supplier() {
     }
 
-    public Supplier(String name, String username, String password, int restaurantId, List<SupplierFood> supplierFoodList) {
+    public Supplier(String name, String username, String password, int restaurantId, Set<SupplierFood> supplierFoodSet) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.restaurantId = restaurantId;
-        this.supplierFoodList = supplierFoodList;
+        this.supplierFoodSet = supplierFoodSet;
     }
 
     public int getId() {
@@ -82,11 +79,11 @@ public class Supplier {
         this.restaurantId = restaurantId;
     }
 
-    public List<SupplierFood> getSupplierFoodList() {
-        return supplierFoodList;
+    public Set<SupplierFood> getSupplierFoodSet() {
+        return supplierFoodSet;
     }
 
-    public void setSupplierFoodList(List<SupplierFood> supplierFoodList) {
-        this.supplierFoodList = supplierFoodList;
+    public void setSupplierFoodSet(Set<SupplierFood> supplierFoodSet) {
+        this.supplierFoodSet = supplierFoodSet;
     }
 }

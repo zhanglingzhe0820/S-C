@@ -59,7 +59,7 @@
       </block>
     </view>
     <view class="weui-panel weui-panel_access">
-      <button bindtap="confirmSetting" type="primary">确定添加</button>
+      <button bindtap="confirmAdd" type="primary">确定添加</button>
     </view>
     <view class="weui-panel weui-panel_access">
       <button bindtap="backToHome" plain="true" type="primary">返回首页</button>

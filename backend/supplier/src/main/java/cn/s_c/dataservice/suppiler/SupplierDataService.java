@@ -30,4 +30,12 @@ public interface SupplierDataService {
      * @return the password of the username(null when system wrong)
      */
     String getPasswordByUsername(String username);
+
+    /**
+     * get the supplier object by id
+     *
+     * @param supplierId the if of supplier
+     * @return the return supplier object
+     */
+    Supplier getSupplierById(int supplierId);
 }

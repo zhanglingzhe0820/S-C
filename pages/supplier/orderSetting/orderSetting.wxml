@@ -34,7 +34,7 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">取餐人数限制</view>
       <view class="weui-panel__bd">
-        <input style="margin:20px;" type="number" placeholder="填写此时间段取餐极限人数"></input>
+        <input style="margin:20px;" type="number" placeholder="填写此时间段取餐极限人数（默认为100）"></input>
       </view>
     </view>
 
