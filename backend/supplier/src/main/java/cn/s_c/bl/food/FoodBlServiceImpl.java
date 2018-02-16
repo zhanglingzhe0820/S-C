@@ -1,12 +1,24 @@
 package cn.s_c.bl.food;
 
 import cn.s_c.blservice.food.FoodBlService;
+import cn.s_c.blservice.restaurant.RestaurantBlService;
+import cn.s_c.dataservice.food.FoodDataService;
+import cn.s_c.entity.food.Food;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.food.FoodPublishVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FoodBlServiceImpl implements FoodBlService {
+    @Autowired
+    private FoodDataService foodDataService;
+    @Autowired
+    private RestaurantBlService restaurantBlService;
+
     /**
      * publish the foods
      *
@@ -15,7 +27,11 @@ public class FoodBlServiceImpl implements FoodBlService {
      */
     @Override
     public ResultMessage publishFoods(FoodPublishVo[] foodPublishVos) {
-        return null;
+        List<Food> foodList = new ArrayList<>();
+        for (FoodPublishVo foodPublishVo : foodPublishVos) {
+            Food food = new Food(foodPublishVo.getName(), foodPublishVo.getPosition(), foodPublishVo.getPrice(), foodPublishVo.getUrl(), foodPublishVo.getMaximum(), foodPublishVo.isHasChoice(), foodPublishVo.getChoice(), restaurantBlService.getRestaurantObjectByRestaurantId(foodPublishVo.getRestaurantId()));
+        }
+        return foodDataService.addFoodsToShelf(foodList.toArray(new Food[foodList.size()]));
     }
 
     /**
@@ -27,6 +43,6 @@ public class FoodBlServiceImpl implements FoodBlService {
      */
     @Override
     public ResultMessage shelfOffFoods(int restaurantId, String positionName) {
-        return null;
+        return foodDataService.removeFoodFromShelf(restaurantId, positionName);
     }
 }

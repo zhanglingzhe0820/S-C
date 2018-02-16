@@ -1,17 +1,24 @@
 package cn.s_c.bl.food;
 
 import cn.s_c.blservice.food.SupplierFoodBlService;
+import cn.s_c.dataservice.food.SupplierFoodDataService;
 import cn.s_c.entity.food.SupplierFood;
+import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
+    @Autowired
+    private SupplierFoodDataService supplierFoodDataService;
+
     /**
      * upload image to cloud
      *
@@ -20,7 +27,7 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
      */
     @Override
     public String uploadImage(byte[] bytes) {
-        return null;
+        return supplierFoodDataService.uploadImageToCloud(bytes);
     }
 
     /**
@@ -31,7 +38,7 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
      */
     @Override
     public ResultMessage saveSupplierFood(SupplierFoodSaveVo supplierFoodSaveVo) {
-        return null;
+        return supplierFoodDataService.saveSupplierFood(Convertor.supplierFoodSaveVoToSupplierFood(supplierFoodSaveVo));
     }
 
     /**
@@ -42,7 +49,12 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
      */
     @Override
     public List<SupplierFoodReturnVo> getSupplierFoodBySupplierId(int supplierId) {
-        return null;
+        Set<SupplierFood> supplierFoodSet = supplierFoodDataService.getSupplierFoodBySupplierId(supplierId);
+        List<SupplierFoodReturnVo> supplierFoodReturnVoList = new ArrayList<>();
+        for (SupplierFood supplierFood : supplierFoodSet) {
+            supplierFoodReturnVoList.add(Convertor.supplierFoodToSupplierFoodReturnVo(supplierFood));
+        }
+        return supplierFoodReturnVoList;
     }
 
     /**
@@ -53,6 +65,6 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
      */
     @Override
     public ResultMessage deleteSupplierFood(int foodId) {
-        return null;
+        return supplierFoodDataService.deleteSupplierFood(foodId);
     }
 }

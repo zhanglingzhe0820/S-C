@@ -9,9 +9,9 @@ public class FoodPublishVo {
     private double maximum;
     private boolean hasChoice;
     private String[] choice;
-    private String restaurantId;
+    private int restaurantId;
 
-    public FoodPublishVo(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, String restaurantId) {
+    public FoodPublishVo(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, int restaurantId) {
         this.name = name;
         this.position = position;
         this.price = price;
@@ -78,11 +78,11 @@ public class FoodPublishVo {
         this.choice = choice;
     }
 
-    public String getRestaurantId() {
+    public int getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(String restaurantId) {
+    public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
     }
 }
