@@ -26,10 +26,10 @@ public interface SupplierBlService {
     ResultMessage signUp(SupplierSignUpVo supplierSignUpVo);
 
     /**
-     * get the supplier object by id
+     * get the supplier object by username
      *
-     * @param supplierId the if of supplier
+     * @param supplierUsername the username of supplier
      * @return the return supplier object
      */
-    Supplier getSupplierById(int supplierId);
+    Supplier getSupplierByUsername(String supplierUsername);
 }

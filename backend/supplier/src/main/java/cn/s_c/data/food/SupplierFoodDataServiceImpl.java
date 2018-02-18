@@ -9,19 +9,28 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.math.BigInteger;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.util.Date;
 import java.util.Set;
-
-import static javax.crypto.Cipher.SECRET_KEY;
 
 @Service
 public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
-    private static String END_POINT = "http://oos-bj2.ctyunapi.cn";
-    private static String BUCKET_NAME = "S&C";
-    private static String ACCESS_KEY = "c4582dec5d0809103126";
-    private static String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
+    private static final String END_POINT = "http://oos-bj2.ctyunapi.cn";
+    private static final String BUCKET_NAME = "S-C";
+    private static final String ACCESS_KEY = "c4582dec5d0809103126";
+    private static final String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
+    private static final long EXPIRATION =
+            new Date().getTime() * 1000 * 60 * 60 * 24 * 100;
+    private static final String FILE_PATH = "/temp.jpeg";
 
     @Autowired
     private SupplierFoodDao supplierFoodDao;
@@ -37,11 +46,35 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
     @Override
     public String uploadImageToCloud(byte[] bytes) {
         try {
+            //保存到临时文件
+            File file = new File(FILE_PATH);
+            DataOutputStream fileWriter = new DataOutputStream(new FileOutputStream(file));
+            fileWriter.write(bytes);
+
+            //MD5根据图片信息生成图片名称
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.reset();
+            m.update(bytes);
+            byte[] digest = m.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            StringBuilder imageName = new StringBuilder(bigInt.toString(16));
+            while (imageName.length() < 32) {
+                imageName.insert(0, "0");
+            }
+
+            //上传图片
             AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
             AmazonS3 oos = new AmazonS3Client(credentials);
             oos.setEndpoint(END_POINT);
-            oos.putObject(BUCKET_NAME, file);
-            return ResultMessage.Success;
+            oos.putObject(BUCKET_NAME, imageName.toString(), file);
+
+            //生成共享地址
+            GeneratePresignedUrlRequest generatePresignedUrlRequest =
+                    new GeneratePresignedUrlRequest(BUCKET_NAME, imageName.toString());
+            generatePresignedUrlRequest.setExpiration(new Date(EXPIRATION));
+            URL url = oos.generatePresignedUrl(generatePresignedUrlRequest);
+
+            return url.toURI().toString();
         } catch (Exception e) {
             return "";
         }
@@ -82,6 +115,11 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
     @Override
     public ResultMessage deleteSupplierFood(int foodId) {
         try {
+            SupplierFood supplierFood = supplierFoodDao.findOne(foodId);
+            AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
+            AmazonS3 oos = new AmazonS3Client(credentials);
+            oos.setEndpoint(END_POINT);
+            oos.deleteObject(BUCKET_NAME, supplierFood.getUrl().split("/")[0].split("/?")[0]);
             supplierFoodDao.delete(foodId);
             return ResultMessage.Success;
         } catch (Exception e) {

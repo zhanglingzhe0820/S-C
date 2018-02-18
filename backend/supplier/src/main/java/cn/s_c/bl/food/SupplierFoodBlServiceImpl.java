@@ -48,13 +48,13 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
      * @return the set of supplier food
      */
     @Override
-    public List<SupplierFoodReturnVo> getSupplierFoodBySupplierId(int supplierId) {
+    public SupplierFoodReturnVo[] getSupplierFoodBySupplierId(int supplierId) {
         Set<SupplierFood> supplierFoodSet = supplierFoodDataService.getSupplierFoodBySupplierId(supplierId);
         List<SupplierFoodReturnVo> supplierFoodReturnVoList = new ArrayList<>();
         for (SupplierFood supplierFood : supplierFoodSet) {
             supplierFoodReturnVoList.add(Convertor.supplierFoodToSupplierFoodReturnVo(supplierFood));
         }
-        return supplierFoodReturnVoList;
+        return supplierFoodReturnVoList.toArray(new SupplierFoodReturnVo[supplierFoodReturnVoList.size()]);
     }
 
     /**

@@ -3,12 +3,13 @@ package cn.s_c.blservice.food;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
+@Service
 public interface SupplierFoodBlService {
-
     /**
      * upload image to cloud
      *
@@ -31,7 +32,7 @@ public interface SupplierFoodBlService {
      * @param supplierId the id of the supplier
      * @return the set of supplier food
      */
-    List<SupplierFoodReturnVo> getSupplierFoodBySupplierId(int supplierId);
+    SupplierFoodReturnVo[] getSupplierFoodBySupplierId(int supplierId);
 
     /**
      * delete the food

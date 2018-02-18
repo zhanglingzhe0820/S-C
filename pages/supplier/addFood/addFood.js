@@ -152,17 +152,14 @@ Page({
         })
 
         wx.request({
-          url: app.globalData.backendUrl + "saveFood",
+          url: app.globalData.backendUrl + "saveSupplierFood",
           method: "POST",
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
           data: {
-            imageUrl: that.data.imageUrl,
             name: that.data.name,
             price: that.data.price,
-            hasSpecialChoice: that.data.hasSpecialChoice,
-            specialChoices: that.data.specialChoices
+            url: that.data.imageUrl,
+            hasChoice: that.data.hasSpecialChoice,
+            Choice: that.data.specialChoices
           },
           success: function (res) {
             if (res.data == "Success") {

@@ -47,13 +47,13 @@ public class SupplierBlServiceImpl implements SupplierBlService {
     }
 
     /**
-     * get the supplier object by id
+     * get the supplier object by username
      *
-     * @param supplierId the if of supplier
+     * @param supplierUsername the username of supplier
      * @return the return supplier object
      */
     @Override
-    public Supplier getSupplierById(int supplierId) {
-        return supplierDataService.getSupplierById(supplierId);
+    public Supplier getSupplierByUsername(String supplierUsername) {
+        return supplierDataService.getSupplierByUsername(supplierUsername);
     }
 }
