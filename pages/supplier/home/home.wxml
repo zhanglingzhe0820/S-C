@@ -7,9 +7,9 @@
   <view class="page__hd">
   </view>
   <view class="page__bd page__bd_spacing">
-    <button bindtap="startOrdering" type="primary" bindtap="toOrderSetting">开始此次销售</button>
+    <button type="primary" bindtap="toOrderSetting">开始此次销售</button>
     <view class="page__bd page__bd_spacing"></view>
-    <button bindtap="startSupplying" type="primary" plain="true" bindtap="toAddFood">添加食品</button>
+    <button type="primary" plain="true" bindtap="toManageFood">管理食品</button>
   </view>
   <view class="page__hd">
   </view>

@@ -1,13 +1,10 @@
-// pages/supplier/chooseFood/chooseFood.js
+// pages/supplier/manageFood/manageFood.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    allSelected: true,
-    limit: "档口限额",
-    element: "人",
     showList: [
       {
         id: 1,
@@ -15,7 +12,6 @@ Page({
         url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
         price: 1.0,
         maxium: 100,
-        selected: true
       },
       {
         id: 2,
@@ -23,7 +19,6 @@ Page({
         url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
         price: 1.0,
         maxium: 100,
-        selected: true
       }
     ]
   },
@@ -32,7 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //加载菜品
   },
 
   /**
@@ -84,47 +79,29 @@ Page({
 
   },
 
-  unselect: function (e) {
+  editFood: function (e) {
     var foodPosition = this.findPositionByBtn(e.target.id);
-    var showList = this.data.showList;
-    showList[foodPosition].selected = false;
-    this.setData({
-      showList: showList
-    })
+    wx.navigateTo({
+      url: "../addFood/addFood?id=" + this.data.showList[foodPosition].id
+    });
   },
 
-  select: function (e) {
+  deleteFood:function(){
     var foodPosition = this.findPositionByBtn(e.target.id);
-    var showList = this.data.showList;
-    showList[foodPosition].selected = true;
-    this.setData({
-      showList: showList
+    //与后端交互删除本菜品
+
+    //重新加载
+  },
+
+  toAddFood: function () {
+    wx.navigateTo({
+      url: "../addFood/addFood",
     })
   },
 
-  unselectAll: function () {
-    this.setData({
-      allSelected: false
-    });
-    var showList = this.data.showList;
-    for (var i = 0; i < showList.length; i++) {
-      showList[i].selected = false;
-    }
-    this.setData({
-      showList: showList
-    })
-  },
-
-  selectAll: function () {
-    this.setData({
-      allSelected: true
-    });
-    var showList = this.data.showList;
-    for (var i = 0; i < showList.length; i++) {
-      showList[i].selected = true;
-    }
-    this.setData({
-      showList: showList
+  toHome: function () {
+    wx.navigateTo({
+      url: "../home/home",
     })
   },
 
@@ -135,12 +112,4 @@ Page({
       }
     }
   },
-
-  completeChoose: function () {
-    //与后端交互发布今日菜品
-
-    wx.navigateTo({
-      url: "../receiveOrder/receiveOrder",
-    })
-  }
 })

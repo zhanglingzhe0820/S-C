@@ -9,7 +9,8 @@ Page({
     name: "",
     price: 0,
     hasSpecialChoice: false,
-    specialChoices: []
+    specialChoices: [],
+    supplierId:0,
   },
 
   /**
@@ -206,7 +207,7 @@ Page({
 
   backToHome: function () {
     wx.navigateTo({
-      url: "../home/home",
+      url: "../addFood/addFood",
     })
   }
 })

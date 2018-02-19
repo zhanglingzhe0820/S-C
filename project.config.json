@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 15,
 			"list": [
 				{
 					"id": 0,
@@ -115,6 +115,12 @@
 					"id": -1,
 					"name": "orderSetting",
 					"pathName": "pages/supplier/orderSetting/orderSetting",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "manageFood",
+					"pathName": "pages/supplier/manageFood/manageFood",
 					"query": ""
 				}
 			]

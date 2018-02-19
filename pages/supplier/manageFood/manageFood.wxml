@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="page__bd page__bd_spacing">
+      <view class="page__bd page__bd_spacing">
+        <view class="page__title" style="text-align:center;margin-top:20px;">菜品管理</view>
+      </view>
+      <view class="kind-list">
+        <block wx:for="{{showList}}" wx:for-item="item" wx:key="id">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-media-box weui-media-box_appmsg">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image src="{{item.url}}" mode="scaleToFill" style="width:70px;height:65px;" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-flex">
+                  <view class="weui-flex__item" style="text-align:center">
+                    <view class="weui-flex">
+                      <view class="weui-flex__item" style="text-align:center">{{item.name}}</view>
+                      <view class="weui-flex__item" style="text-align:center">
+                        <view style="height:26px"></view>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="weui-flex__item" style="text-align:right">
+                    <view>单价：￥{{item.price}}</view>
+                    <text id="{{item.id}}" class="iconfont icon-edit" bindtap="editFood"></text>
+                    <text id="{{item.id}}" class="iconfont icon-delete" bindtap="deleteFood"></text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view>
+      <view class="bottomBtnAdd">
+        <button type="primary" bindtap="toAddFood">添加食品</button>
+      </view>
+      <view class="bottomBtnComplete">
+        <button type="primary" plain="true" bindtap="toHome">完成</button>
+      </view>
+    </view>
+  </view>
+</view>
