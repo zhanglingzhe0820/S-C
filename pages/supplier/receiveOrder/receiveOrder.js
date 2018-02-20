@@ -99,7 +99,7 @@ Page({
 
   stopReceivingOrder: function () {
     //在后端数据库删除本店食品
-
+    wx.setStorageSync("isReceivingOrder", false)
     wx.navigateTo({
       url: "../home/home",
     })

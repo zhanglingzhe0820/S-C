@@ -205,9 +205,9 @@ Page({
     })
   },
 
-  backToHome: function () {
+  backToManageFood: function () {
     wx.navigateTo({
-      url: "../addFood/addFood",
+      url: "../manageFood/manageFood",
     })
   }
 })

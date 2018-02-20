@@ -138,7 +138,7 @@ Page({
 
   completeChoose: function () {
     //与后端交互发布今日菜品
-
+    wx.setStorageSync("isReceivingOrder", true)
     wx.navigateTo({
       url: "../receiveOrder/receiveOrder",
     })
