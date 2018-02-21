@@ -26,7 +26,7 @@ public class SupplierController {
     }
 
     @ApiOperation(value = "signUp", nickname = "signUp")
-    @RequestMapping(method = RequestMethod.POST, path = "/signUp", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/signUp", produces = "application/json")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success", response = ResultMessage.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 403, message = "Forbidden"),

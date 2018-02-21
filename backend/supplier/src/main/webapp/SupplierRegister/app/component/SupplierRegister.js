@@ -1,20 +1,77 @@
 import React, { Component } from "react";
-import { Menu, Icon, Button, Layout, Select } from 'antd';
+import { Menu, Icon, Button, Layout, Select, notification } from 'antd';
 const Option = Select.Option;
 const { Header, Footer, Sider, Content } = Layout;
 import IconInput from './IconInput';
+import config from './config.json';
 
 class SupplierRegister extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.render=this.render.bind(this);
+        this.render = this.render.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            "options": null,
+            "selected": 1
+        }
     };
-    handleClick() {
 
+    componentWillMount() {
+        fetch(config.backendUrl + "loadRestaurant")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    var options = result.map(
+                        function (option) {
+                            return <Option key={option.id}>{option.name}</Option>
+                        }
+                    )
+                    this.setState({
+                        "options": options
+                    })
+                },
+                (error) => {
+                    notification.open({
+                        message: '系统繁忙，稍后再试',
+                    });
+                }
+            )
+    };
+
+    handleClick() {
+        fetch(config.backendUrl + "signUp?name=" + this.refs.position.state.value + "&username=" + this.refs.username.state.value + "&password=" + this.refs.password.state.value + "&restaurantId=" + this.state.selected)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    if (result == "Success") {
+                        notification.open({
+                            message: '注册成功',
+                        });
+                    } else if (result == "DataError") {
+                        notification.open({
+                            message: '已存在相同的用户名',
+                        });
+                    } else {
+                        notification.open({
+                            message: '系统繁忙，稍后再试',
+                        });
+                    }
+                },
+                (error) => {
+                    notification.open({
+                        message: '服务器错误，请检查网络',
+                    });
+                }
+            )
     };
 
     handleChange(value) {
-        console.log(`selected ${value}`);
+        this.setState({
+            "selected": value
+        })
     };
 
     handleBlur() {
@@ -48,9 +105,7 @@ class SupplierRegister extends Component {
                         onBlur={this.handleBlur}
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="tom">Tom</Option>
+                        {this.state.options}
                     </Select>
                     <Button type="primary" onClick={this.handleClick} style={{ margin: '10%' }}>确认注册</Button>
                 </Content>
