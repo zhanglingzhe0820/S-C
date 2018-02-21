@@ -5,6 +5,10 @@ const { Header, Footer, Sider, Content } = Layout;
 import IconInput from './IconInput';
 
 class SupplierRegister extends Component {
+    constructor(){
+        super();
+        this.render=this.render.bind(this);
+    };
     handleClick() {
 
     };
@@ -26,10 +30,13 @@ class SupplierRegister extends Component {
             <Layout style={{ margin: '10%', padding: "10%", border: "solid", borderRadius: "5%", marginLeft: "20%", marginRight: "20%" }}>
                 <Content style={{ textAlign: 'center' }}>
                     <div style={{ margin: '10%' }}>
-                        <IconInput type="user" placeholder="请输入用户名" style={{ padding: '40%' }} />
+                        <IconInput ref="username" type="user" placeholder="请输入用户名" style={{ padding: '40%' }} />
                     </div>
                     <div style={{ margin: '10%' }}>
-                        <IconInput type="eye" placeholder="请输入密码" style={{ padding: '40%' }} />
+                        <IconInput ref="password" type="eye" placeholder="请输入密码" style={{ padding: '40%' }} />
+                    </div>
+                    <div style={{ margin: '10%' }}>
+                        <IconInput ref="position" type="credit-card" placeholder="请输入档口名称" style={{ padding: '40%' }} />
                     </div>
                     <Select
                         showSearch

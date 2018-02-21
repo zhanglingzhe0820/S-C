@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Icon, Button, Layout, TimePicker } from 'antd';
+import { Menu, Icon, Button, Layout, TimePicker, notification } from 'antd';
 import moment from 'moment';
 const { Header, Footer, Sider, Content } = Layout;
 import IconInput from './IconInput';
@@ -22,10 +22,24 @@ class RestaurantManagement extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
+                    if (result == "Success") {
+                        notification.open({
+                            message: '添加成功',
+                        });
+                    } else if (result == "DataError") {
+                        notification.open({
+                            message: '已存在名称相同的餐厅',
+                        });
+                    } else {
+                        notification.open({
+                            message: '系统繁忙，稍后再试',
+                        });
+                    }
                 },
                 (error) => {
-                    console.log(error)
+                    notification.open({
+                        message: '服务器错误，请检查网络',
+                    });
                 }
             )
     };

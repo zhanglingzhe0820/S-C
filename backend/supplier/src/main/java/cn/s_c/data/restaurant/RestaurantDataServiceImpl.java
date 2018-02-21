@@ -7,6 +7,8 @@ import cn.s_c.vo.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RestaurantDataServiceImpl implements RestaurantDataService {
     @Autowired
@@ -47,5 +49,15 @@ public class RestaurantDataServiceImpl implements RestaurantDataService {
         } else {
             return ResultMessage.SystemError;
         }
+    }
+
+    /**
+     * get all restaurants
+     *
+     * @return the list of restaurants
+     */
+    @Override
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantDao.findAll();
     }
 }

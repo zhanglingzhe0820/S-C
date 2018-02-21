@@ -6,6 +6,7 @@ import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.entity.supplier.Supplier;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import cn.s_c.vo.restaurant.RestaurantReturnVo;
 import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import cn.s_c.vo.supplier.SupplierSignUpVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,9 @@ public class Convertor {
 
     public static Restaurant restaurantSaveVoToRestaurant(RestaurantSaveVo restaurantSaveVo) {
         return new Restaurant(restaurantSaveVo.getName(), restaurantSaveVo.getTime(), null);
+    }
+
+    public static RestaurantReturnVo restaurantToRestaurantReturnVo(Restaurant restaurant) {
+        return new RestaurantReturnVo(restaurant.getId(), restaurant.getName());
     }
 }

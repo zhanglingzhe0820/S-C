@@ -5,6 +5,8 @@ import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface RestaurantDataService {
 
@@ -31,4 +33,11 @@ public interface RestaurantDataService {
      * @return whether the operation is success or not
      */
     ResultMessage saveRestaurant(Restaurant restaurant);
+
+    /**
+     * get all restaurants
+     *
+     * @return the list of restaurants
+     */
+    List<Restaurant> getAllRestaurants();
 }
