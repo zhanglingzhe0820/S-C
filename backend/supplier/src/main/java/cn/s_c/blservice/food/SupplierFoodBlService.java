@@ -29,10 +29,10 @@ public interface SupplierFoodBlService {
     /**
      * get all the supplier food by the supplier
      *
-     * @param supplierId the id of the supplier
+     * @param supplierUsername the username of the supplier
      * @return the set of supplier food
      */
-    SupplierFoodReturnVo[] getSupplierFoodBySupplierId(int supplierId);
+    SupplierFoodReturnVo[] getSupplierFoodBySupplierUsername(String supplierUsername);
 
     /**
      * delete the food

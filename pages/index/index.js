@@ -1,4 +1,4 @@
-// pages/index/index.js
+var app = getApp();
 Page({
 
   /**
@@ -106,15 +106,42 @@ Page({
    * 提交账号密码(mock)
    */
   confirmDialog: function () {
+    var that = this;
     //从后端服务器确认账号密码
-
-    wx.setStorage({
-      key: "supplierUsername",
-      data: this.data.username,
-      success: function () {
-        wx.navigateTo({
-          url: "../supplier/home/home",
-        })
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "login",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        username: this.data.username,
+        password: this.data.password
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.setStorage({
+            key: "supplierUsername",
+            data: that.data.username,
+            success: function () {
+              wx.navigateTo({
+                url: "../supplier/home/home",
+              })
+            }
+          })
+        } else if (res.data == "DataError") {
+          wx.showToast({
+            title: '错误的用户名或密码',
+            icon: 'cancel',
+            duration: 1000
+          });
+        } else {
+          wx.showToast({
+            title: '系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
       }
     })
   }

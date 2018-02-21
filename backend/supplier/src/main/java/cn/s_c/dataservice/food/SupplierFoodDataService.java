@@ -28,10 +28,10 @@ public interface SupplierFoodDataService {
     /**
      * get the supplier foods by supplier
      *
-     * @param supplierId the id of the supplier
+     * @param supplierUsername the username of the supplier
      * @return the supplier food set
      */
-    Set<SupplierFood> getSupplierFoodBySupplierId(int supplierId);
+    Set<SupplierFood> getSupplierFoodBySupplierUsername(String supplierUsername);
 
     /**
      * delete the supplier food by its id

@@ -1,4 +1,4 @@
-// pages/supplier/manageFood/manageFood.js
+var app = getApp();
 Page({
 
   /**
@@ -10,15 +10,13 @@ Page({
         id: 1,
         name: "包子",
         url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0,
-        maxium: 100,
+        price: 1.0
       },
       {
         id: 2,
         name: "馒头",
         url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0,
-        maxium: 100,
+        price: 1.0
       }
     ]
   },
@@ -27,7 +25,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    var supplierUsername = wx.getStorageSync("supplierUsername");
     //加载菜品
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "getSupplierFoodBySupplierUsername",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        supplierUsername: supplierUsername,
+      },
+      success: function (res) {
+        that.setData({
+          showList: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -86,7 +101,7 @@ Page({
     });
   },
 
-  deleteFood:function(){
+  deleteFood: function () {
     var foodPosition = this.findPositionByBtn(e.target.id);
     //与后端交互删除本菜品
 

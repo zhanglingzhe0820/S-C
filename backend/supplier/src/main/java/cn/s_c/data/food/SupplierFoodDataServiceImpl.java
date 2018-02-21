@@ -76,6 +76,7 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
 
             return url.toURI().toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return "";
         }
     }
@@ -98,12 +99,12 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
     /**
      * get the supplier foods by supplier
      *
-     * @param supplierId the id of the supplier
+     * @param supplierUsername the id of the supplier
      * @return the supplier food set
      */
     @Override
-    public Set<SupplierFood> getSupplierFoodBySupplierId(int supplierId) {
-        return supplierDao.findOne(supplierId).getSupplierFoodSet();
+    public Set<SupplierFood> getSupplierFoodBySupplierUsername(String supplierUsername) {
+        return supplierDao.findSupplierByUsername(supplierUsername).getSupplierFoodSet();
     }
 
     /**

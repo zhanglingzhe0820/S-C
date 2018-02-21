@@ -10,7 +10,7 @@ Page({
     price: 0,
     hasSpecialChoice: false,
     specialChoices: [],
-    supplierId:0,
+    supplierId: 0,
   },
 
   /**
@@ -142,45 +142,56 @@ Page({
    */
   confirmAdd: function () {
     var that = this;
+    var supplierUsername = wx.getStorageSync("supplierUsername");
     wx.uploadFile({
       url: app.globalData.backendUrl + "uploadImage",
       filePath: that.data.imageUrl,
       name: 'foodImage',
       success: function (res) {
-        var data = res.data
-        that.setData({
-          imageUrl: data.imageUrl
-        })
+        var data = res.data;
+        if (data.length == 0) {
+          wx.showToast({
+            title: '图片上传失败',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+        else {
+          that.setData({
+            imageUrl: data.imageUrl
+          })
 
-        wx.request({
-          url: app.globalData.backendUrl + "saveSupplierFood",
-          method: "POST",
-          data: {
-            name: that.data.name,
-            price: that.data.price,
-            url: that.data.imageUrl,
-            hasChoice: that.data.hasSpecialChoice,
-            Choice: that.data.specialChoices
-          },
-          success: function (res) {
-            if (res.data == "Success") {
-              wx.showToast({
-                title: '添加成功',
-                icon: 'success',
-                duration: 1000
-              });
-              wx.navigateTo({
-                url: "../addFood/addFood",
-              })
-            } else {
-              wx.showToast({
-                title: '系统繁忙，请稍后再试',
-                icon: 'cancel',
-                duration: 1000
-              });
+          wx.request({
+            url: app.globalData.backendUrl + "saveSupplierFood",
+            method: "POST",
+            data: {
+              name: that.data.name,
+              price: that.data.price,
+              url: that.data.imageUrl,
+              hasChoice: that.data.hasSpecialChoice,
+              choice: that.data.specialChoices,
+              supplierUsername: supplierUsername
+            },
+            success: function (res) {
+              if (res.data == "Success") {
+                wx.showToast({
+                  title: '添加成功',
+                  icon: 'success',
+                  duration: 1000
+                });
+                wx.navigateTo({
+                  url: "../addFood/addFood",
+                })
+              } else {
+                wx.showToast({
+                  title: '系统繁忙，请稍后再试',
+                  icon: 'cancel',
+                  duration: 1000
+                });
+              }
             }
-          }
-        })
+          })
+        }
       }
     })
   },
