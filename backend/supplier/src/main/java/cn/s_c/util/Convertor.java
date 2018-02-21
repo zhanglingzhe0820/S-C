@@ -2,9 +2,11 @@ package cn.s_c.util;
 
 import cn.s_c.blservice.supplier.SupplierBlService;
 import cn.s_c.entity.food.SupplierFood;
+import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.entity.supplier.Supplier;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import cn.s_c.vo.supplier.SupplierSignUpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,5 +21,9 @@ public class Convertor {
 
     public static SupplierFoodReturnVo supplierFoodToSupplierFoodReturnVo(SupplierFood supplierFood) {
         return new SupplierFoodReturnVo(supplierFood.getId(), supplierFood.getName(), supplierFood.getPrice(), supplierFood.getUrl());
+    }
+
+    public static Restaurant restaurantSaveVoToRestaurant(RestaurantSaveVo restaurantSaveVo) {
+        return new Restaurant(restaurantSaveVo.getName(), restaurantSaveVo.getTime(), null);
     }
 }

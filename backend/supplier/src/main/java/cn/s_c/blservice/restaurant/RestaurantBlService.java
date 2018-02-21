@@ -1,6 +1,8 @@
 package cn.s_c.blservice.restaurant;
 
 import cn.s_c.entity.restaurant.Restaurant;
+import cn.s_c.vo.ResultMessage;
+import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,4 +15,12 @@ public interface RestaurantBlService {
      * @return the restaurant object
      */
     Restaurant getRestaurantObjectByRestaurantId(int restaurantId);
+
+    /**
+     * save restaurant
+     *
+     * @param restaurantSaveVo the restaurant to be saved
+     * @return whether the operation is success or not
+     */
+    ResultMessage saveRestaurant(RestaurantSaveVo restaurantSaveVo);
 }

@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
 import FunctionMenu from './FunctionMenu';
 import MainPane from './MainPane';
+import HeaderPane from './HeaderPane';
 
 class App extends Component {
     constructor(props) {
@@ -21,12 +22,12 @@ class App extends Component {
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider id="sider">
-                    <img id="logo" src={require('./images/logo.png')} alt="" />
+                    <img id="logo" src={require('./images/logo.png')} alt="" style={{marginBottom:'10%'}}/>
                     <FunctionMenu transferMsg={msg => this.transferMsg(msg)} />
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }} >
-                        <h3 style={{ textAlign: 'center' }}>餐厅管理</h3>
+                        <HeaderPane paneIndex={this.state.paneIndex} />
                     </Header>
                     <Content id="content" style={{ margin: '0 16px' }}>
                         <MainPane paneIndex={this.state.paneIndex} />

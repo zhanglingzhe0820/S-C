@@ -1,6 +1,8 @@
 package cn.s_c.dataservice.restaurant;
 
 import cn.s_c.entity.restaurant.Restaurant;
+import cn.s_c.vo.ResultMessage;
+import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,4 +15,20 @@ public interface RestaurantDataService {
      * @return the restaurant object
      */
     Restaurant getRestaurantById(int restaurantId);
+
+    /**
+     * is the name of restaurant existed
+     *
+     * @param name the name of the restaurant
+     * @return whether the name exists
+     */
+    boolean isNameExisted(String name);
+
+    /**
+     * save restaurant
+     *
+     * @param restaurant the restaurant to be saved
+     * @return whether the operation is success or not
+     */
+    ResultMessage saveRestaurant(Restaurant restaurant);
 }
