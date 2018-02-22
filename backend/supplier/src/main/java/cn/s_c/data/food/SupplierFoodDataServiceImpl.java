@@ -1,5 +1,6 @@
 package cn.s_c.data.food;
 
+import cn.s_c.MainApplication;
 import cn.s_c.data.dao.food.SupplierFoodDao;
 import cn.s_c.data.dao.supplier.SupplierDao;
 import cn.s_c.dataservice.food.SupplierFoodDataService;
@@ -13,6 +14,7 @@ import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.stream.FileImageOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,12 +27,12 @@ import java.util.Set;
 @Service
 public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
     private static final String END_POINT = "http://oos-bj2.ctyunapi.cn";
-    private static final String BUCKET_NAME = "S-C";
+    private static final String BUCKET_NAME = "s-c";
     private static final String ACCESS_KEY = "c4582dec5d0809103126";
     private static final String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
     private static final long EXPIRATION =
-            new Date().getTime() * 1000 * 60 * 60 * 24 * 100;
-    private static final String FILE_PATH = "/temp.jpeg";
+            new Date().getTime() + 1000 * 60 * 60 * 24 * 100;
+    private static final String FILE_PATH = (MainApplication.class.getResource("") + "/temp/temp.jpeg").substring(5);
 
     @Autowired
     private SupplierFoodDao supplierFoodDao;
@@ -48,8 +50,9 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
         try {
             //保存到临时文件
             File file = new File(FILE_PATH);
-            DataOutputStream fileWriter = new DataOutputStream(new FileOutputStream(file));
+            FileImageOutputStream fileWriter = new FileImageOutputStream(file);
             fileWriter.write(bytes);
+            fileWriter.close();
 
             //MD5根据图片信息生成图片名称
             MessageDigest m = MessageDigest.getInstance("MD5");
@@ -60,6 +63,9 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
             StringBuilder imageName = new StringBuilder(bigInt.toString(16));
             while (imageName.length() < 32) {
                 imageName.insert(0, "0");
+            }
+            for (int i = 0; i < 10; i++) {
+                imageName.append(Math.floor(Math.random() * 10));
             }
 
             //上传图片
@@ -73,7 +79,6 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
                     new GeneratePresignedUrlRequest(BUCKET_NAME, imageName.toString());
             generatePresignedUrlRequest.setExpiration(new Date(EXPIRATION));
             URL url = oos.generatePresignedUrl(generatePresignedUrlRequest);
-
             return url.toURI().toString();
         } catch (Exception e) {
             e.printStackTrace();

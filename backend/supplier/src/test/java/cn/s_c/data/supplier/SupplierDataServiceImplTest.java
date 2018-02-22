@@ -33,14 +33,14 @@ public class SupplierDataServiceImplTest {
     @Test
     @Transactional
     public void saveSupplierInfo() {
-        Supplier supplier = new Supplier("123", "123", "123", 1);
+        Supplier supplier = new Supplier("123", "123", "123", 1, null);
         assertEquals(ResultMessage.Success, supplierDataService.saveSupplierInfo(supplier));
     }
 
     @Test
     @Transactional
     public void isUsernameExisted() {
-        Supplier supplier = new Supplier("123", "123", "123", 1);
+        Supplier supplier = new Supplier("123", "123", "123", 1, null);
         supplierDataService.saveSupplierInfo(supplier);
         assertEquals(true, supplierDataService.isUsernameExisted("123"));
     }
@@ -48,7 +48,7 @@ public class SupplierDataServiceImplTest {
     @Test
     @Transactional
     public void getPasswordByUsername() {
-        Supplier supplier = new Supplier("123", "123", "123", 1);
+        Supplier supplier = new Supplier("123", "123", "123", 1, null);
         supplierDataService.saveSupplierInfo(supplier);
         assertEquals("123", supplierDataService.getPasswordByUsername("123"));
     }

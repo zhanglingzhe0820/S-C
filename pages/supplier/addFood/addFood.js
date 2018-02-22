@@ -138,7 +138,7 @@ Page({
   },
 
   /**
-   * 确定添加(mock)
+   * 确定添加
    */
   confirmAdd: function () {
     var that = this;
@@ -158,12 +158,15 @@ Page({
         }
         else {
           that.setData({
-            imageUrl: data.imageUrl
+            imageUrl: data
           })
 
           wx.request({
             url: app.globalData.backendUrl + "saveSupplierFood",
             method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
             data: {
               name: that.data.name,
               price: that.data.price,
