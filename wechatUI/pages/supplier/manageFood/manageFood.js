@@ -88,11 +88,37 @@ Page({
     });
   },
 
-  deleteFood: function () {
+  deleteFood: function (e) {
+    var that = this;
     var foodPosition = this.findPositionByBtn(e.target.id);
     //与后端交互删除本菜品
-
+    wx.request({
+      url: app.globalData.backendUrl + "deleteSupplierFood",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        foodId: this.data.showList[foodPosition].id
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          });
+        } else {
+          wx.showToast({
+            title: '系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+      }
+    })
     //重新加载
+    this.onLoad();
   },
 
   toAddFood: function () {

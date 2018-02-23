@@ -9,6 +9,9 @@ import cn.s_c.vo.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class FoodDataServiceImpl implements FoodDataService {
     @Autowired
@@ -45,13 +48,15 @@ public class FoodDataServiceImpl implements FoodDataService {
     public ResultMessage removeFoodFromShelf(int restaurantId, String positionName) {
         try {
             Restaurant restaurant = restaurantDao.findOne(restaurantId);
-            for (Food food : restaurant.getFoods()) {
+            Set<Food> foodSet = restaurant.getFoods();
+            for (Food food : foodSet) {
                 if (food.getPosition().equals(positionName)) {
-                    foodDao.delete(food);
+                    foodDao.delete(food.getId());
                 }
             }
             return ResultMessage.Success;
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultMessage.SystemError;
         }
     }

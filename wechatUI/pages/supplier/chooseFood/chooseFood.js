@@ -1,4 +1,4 @@
-// pages/supplier/chooseFood/chooseFood.js
+var app = getApp();
 Page({
 
   /**
@@ -8,31 +8,43 @@ Page({
     allSelected: true,
     limit: "档口限额",
     element: "人",
-    showList: [
-      {
-        id: 1,
-        name: "包子",
-        url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0,
-        maxium: 100,
-        selected: true
-      },
-      {
-        id: 2,
-        name: "馒头",
-        url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0,
-        maxium: 100,
-        selected: true
-      }
-    ]
+    showList: [],
+    setting: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    var supplierUsername = wx.getStorageSync("supplierUsername");
+    var setting = wx.getStorageSync("setting");
 
+    this.setData({
+      setting: setting
+    })
+
+    //加载菜品
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "getSupplierFoodBySupplierUsername",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        supplierUsername: supplierUsername,
+      },
+      success: function (res) {
+        var list = res.data;
+        for (var i = 0; i < list.length; i++) {
+          list[i].selected = true;
+          list[i].maxium = setting.maximun;
+        }
+        that.setData({
+          showList: list
+        })
+      }
+    })
   },
 
   /**
@@ -138,6 +150,39 @@ Page({
 
   completeChoose: function () {
     //与后端交互发布今日菜品
+    var supplierFoodIds = [];
+    var list = this.data.showList;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].selected) {
+        supplierFoodIds.push(list[i].id);
+      }
+    }
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "publishFoods",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        supplierFoodIds: supplierFoodIds,
+        maximum: this.data.setting.maximum
+      },
+      success: function (res) {
+        if (res.data == "Success") {
+          wx.showToast({
+            title: '上架成功',
+            icon: 'success',
+            duration: 1000
+          });
+        } else {
+          wx.showToast({
+            title: '上架失败，系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+      }
+    })
     wx.setStorageSync("isReceivingOrder", true)
     wx.navigateTo({
       url: "../receiveOrder/receiveOrder",

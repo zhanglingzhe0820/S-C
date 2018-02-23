@@ -30,14 +30,21 @@ Page({
         supplierFoodId: id
       },
       success: function (res) {
-        console.log(res.data)
+        var specialChoices = [];
+        for (var i = 0; i < res.data.choice.length; i++) {
+          var choicePart = {
+            index: i + 1,
+            value: res.data.choice[i]
+          };
+          specialChoices.push(choicePart);
+        }
         that.setData({
           id: res.data.id,
           name: res.data.name,
           price: res.data.price,
           imageUrl: res.data.url,
           hasSpecialChoice: res.data.hasChoice,
-          specialChoices: res.data.choice
+          specialChoices: specialChoices
         });
       }
     })
@@ -167,6 +174,10 @@ Page({
   confirmUpdate: function () {
     var that = this;
     var supplierUsername = wx.getStorageSync("supplierUsername");
+    var choices = [];
+    for (var i = 0; i < this.data.specialChoices.length; i++) {
+      choices.push(this.data.specialChoices[i].value);
+    }
     if (this.data.imageUrl.indexOf('tmp') != 7) {
       wx.request({
         url: app.globalData.backendUrl + "updateSupplierFood",
@@ -180,7 +191,7 @@ Page({
           price: that.data.price,
           url: that.data.imageUrl,
           hasChoice: that.data.hasSpecialChoice,
-          choice: that.data.specialChoices,
+          choice: choices,
           supplierUsername: supplierUsername
         },
         success: function (res) {
@@ -234,7 +245,7 @@ Page({
                 price: that.data.price,
                 url: that.data.imageUrl,
                 hasChoice: that.data.hasSpecialChoice,
-                choice: that.data.specialChoices,
+                choice: choices,
                 supplierUsername: supplierUsername
               },
               success: function (res) {

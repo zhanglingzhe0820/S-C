@@ -2,7 +2,6 @@ package cn.s_c.springcontroller.food;
 
 import cn.s_c.blservice.food.FoodBlService;
 import cn.s_c.vo.ResultMessage;
-import cn.s_c.vo.food.FoodPublishVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -22,8 +21,8 @@ public class FoodController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage publishFoods(@RequestBody FoodPublishVo[] foodPublishVos) {
-        return foodBlService.publishFoods(foodPublishVos);
+    public ResultMessage publishFoods(@RequestParam(name = "supplierFoodIds") int[] supplierFoodIds, @RequestParam(name = "maximum") double maximum) {
+        return foodBlService.publishFoods(supplierFoodIds, maximum);
     }
 
     @ApiOperation(value = "shelfOffFoods", nickname = "shelfOffFoods")
@@ -34,7 +33,7 @@ public class FoodController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage shelfOffFoods(@RequestParam(name = "restaurantId") int restaurantId, @RequestParam(name = "positionName") String positionName) {
-        return foodBlService.shelfOffFoods(restaurantId, positionName);
+    public ResultMessage shelfOffFoods(@RequestParam(name = "supplierUsername") String supplierUsername) {
+        return foodBlService.shelfOffFoods(supplierUsername);
     }
 }

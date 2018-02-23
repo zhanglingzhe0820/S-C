@@ -1,10 +1,11 @@
-// pages/supplier/receiveOrder/receiveOrder.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    supplierUsername: "",
     orderList: [
       {
         startTime: "11:20",
@@ -45,7 +46,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var supplierUsername = wx.getStorageSync("supplierUsername");
+    this.setData({
+      supplierUsername: supplierUsername
+    })
   },
 
   /**
@@ -99,9 +103,34 @@ Page({
 
   stopReceivingOrder: function () {
     //在后端数据库删除本店食品
-    wx.setStorageSync("isReceivingOrder", false)
-    wx.navigateTo({
-      url: "../home/home",
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "shelfOffFoods",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        supplierUsername: this.data.supplierUsername,
+      },
+      success: function (res) {
+        if(res.data=="Success"){
+          wx.setStorageSync("isReceivingOrder", false);
+          wx.showToast({
+            title: '停止接单成功',
+            icon: 'success',
+            duration: 1000
+          });
+          wx.navigateTo({
+            url: "../home/home",
+          });
+        }else{
+          wx.showToast({
+            title: '停止接单失败，系统繁忙',
+            icon: 'cancel',
+            duration: 1000
+          });
+        }
+      }
     })
   }
 })

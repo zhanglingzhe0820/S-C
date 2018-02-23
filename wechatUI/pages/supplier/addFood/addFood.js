@@ -143,6 +143,10 @@ Page({
   confirmAdd: function () {
     var that = this;
     var supplierUsername = wx.getStorageSync("supplierUsername");
+    var choices = [];
+    for (var i = 0; i < this.data.specialChoices.length; i++) {
+      choices.push(this.data.specialChoices[i].value);
+    }
     wx.uploadFile({
       url: app.globalData.backendUrl + "uploadImage",
       filePath: that.data.imageUrl,
@@ -172,7 +176,7 @@ Page({
               price: that.data.price,
               url: that.data.imageUrl,
               hasChoice: that.data.hasSpecialChoice,
-              choice: that.data.specialChoices,
+              choice: choices,
               supplierUsername: supplierUsername
             },
             success: function (res) {
