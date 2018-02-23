@@ -4,8 +4,10 @@ import cn.s_c.blservice.supplier.SupplierBlService;
 import cn.s_c.entity.food.SupplierFood;
 import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.entity.supplier.Supplier;
+import cn.s_c.vo.food.SupplierFoodEditableReturnVo;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import cn.s_c.vo.food.SupplierFoodUpdateVo;
 import cn.s_c.vo.restaurant.RestaurantReturnVo;
 import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import cn.s_c.vo.supplier.SupplierSignUpVo;
@@ -30,5 +32,15 @@ public class Convertor {
 
     public static RestaurantReturnVo restaurantToRestaurantReturnVo(Restaurant restaurant) {
         return new RestaurantReturnVo(restaurant.getId(), restaurant.getName());
+    }
+
+    public static SupplierFoodEditableReturnVo supplierFoodToSupplierFoodEditableReturnVo(SupplierFood supplierFood) {
+        return new SupplierFoodEditableReturnVo(supplierFood.getId(), supplierFood.getName(), supplierFood.getPrice(), supplierFood.getUrl(), supplierFood.isHasChoice(), supplierFood.getChoice());
+    }
+
+    public static SupplierFood supplierFoodUpdateVoToSupplierFood(SupplierFoodUpdateVo supplierFoodUpdateVo) {
+        SupplierFood supplierFood = new SupplierFood(supplierFoodUpdateVo.getName(), supplierFoodUpdateVo.getPrice(), supplierFoodUpdateVo.getUrl(), supplierFoodUpdateVo.isHasChoice(), supplierFoodUpdateVo.getChoice(), supplierFoodUpdateVo.getSupplier());
+        supplierFood.setId(supplierFoodUpdateVo.getId());
+        return supplierFood;
     }
 }

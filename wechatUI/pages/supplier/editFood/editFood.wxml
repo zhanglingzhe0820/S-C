@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center">添加食品</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">菜品图片</view>
+      <view class="weui-panel__bd">
+        <view class="weui-cell">
+          <image style="margin:30px;" wx:if="{{imageUrl}}" src="{{imageUrl}}" mode="scaleToFill"></image>
+        </view>
+        <button style="margin:20px;" type="default" bindtap="addImage">点击添加图片</button>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">菜品信息</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">名称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入菜品名称" bindinput="onFoodNameInput" value="{{name}}" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">单价</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input type="number" class="weui-input" placeholder="请输入菜品单价" bindinput="onFoodPriceInput" value="{{price}}" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label">
+            <checkbox class="weui-check" checked="{{hasSpecialChoice}}" />是否有特殊口味供选择
+
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+              <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!hasSpecialChoice}}"></icon>
+              <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{hasSpecialChoice}}"></icon>
+            </view>
+          </label>
+        </checkbox-group>
+        <view hidden="{{!hasSpecialChoice}}">
+          <button style="margin:10px;" size="mini" bindtap="abstractChoice">-</button>
+          <button style="margin:10px;" size="mini" bindtap="addChoice">+</button>
+        </view>
+      </view>
+      <block wx:for="{{specialChoices}}" wx:for-item="item" wx:key="index">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">属性{{item.index}}</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入属性" bindinput="onSpecialChoiceInput" id="{{item.index}}" value="{{item.value}}" />
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="weui-panel weui-panel_access">
+      <button bindtap="confirmUpdate" type="primary">确定修改</button>
+    </view>
+    <view class="weui-panel weui-panel_access">
+      <button bindtap="backToManageFood" plain="true" type="primary">返回菜品管理</button>
+      <view class="page__bd page__bd_spacing"></view>
+    </view>
+  </view>
+</view>

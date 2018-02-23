@@ -132,4 +132,30 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
             return ResultMessage.SystemError;
         }
     }
+
+    /**
+     * get the supplier food by its id
+     *
+     * @param supplierFoodId the id of the supplier food
+     * @return the supplier food object
+     */
+    @Override
+    public SupplierFood getSupplierFoodById(int supplierFoodId) {
+        return supplierFoodDao.findOne(supplierFoodId);
+    }
+
+    /**
+     * update the supplier food
+     *
+     * @param supplierFood the to be updated supplier fodd
+     * @return whether the operation is success or not
+     */
+    @Override
+    public ResultMessage updateSupplierFood(SupplierFood supplierFood) {
+        if (supplierFoodDao.save(supplierFood) != null) {
+            return ResultMessage.Success;
+        } else {
+            return ResultMessage.SystemError;
+        }
+    }
 }

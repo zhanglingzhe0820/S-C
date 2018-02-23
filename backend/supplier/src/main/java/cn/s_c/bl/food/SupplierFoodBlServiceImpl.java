@@ -5,8 +5,10 @@ import cn.s_c.dataservice.food.SupplierFoodDataService;
 import cn.s_c.entity.food.SupplierFood;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
+import cn.s_c.vo.food.SupplierFoodEditableReturnVo;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
+import cn.s_c.vo.food.SupplierFoodUpdateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +46,7 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
     /**
      * get all the supplier food by the supplier
      *
-     * @param supplierId the id of the supplier
+     * @param supplierUsername the id of the supplier
      * @return the set of supplier food
      */
     @Override
@@ -66,5 +68,27 @@ public class SupplierFoodBlServiceImpl implements SupplierFoodBlService {
     @Override
     public ResultMessage deleteSupplierFood(int foodId) {
         return supplierFoodDataService.deleteSupplierFood(foodId);
+    }
+
+    /**
+     * load supplier food by its id
+     *
+     * @param supplierFoodId the id of the food to be loaded
+     * @return the editable supplier food with its id
+     */
+    @Override
+    public SupplierFoodEditableReturnVo loadSupplierFoodById(int supplierFoodId) {
+        return Convertor.supplierFoodToSupplierFoodEditableReturnVo(supplierFoodDataService.getSupplierFoodById(supplierFoodId));
+    }
+
+    /**
+     * update supplier food
+     *
+     * @param supplierFoodUpdateVo the food to be updated
+     * @return whether the operation is success or not
+     */
+    @Override
+    public ResultMessage updateSupplierFood(SupplierFoodUpdateVo supplierFoodUpdateVo) {
+        return supplierFoodDataService.updateSupplierFood(Convertor.supplierFoodUpdateVoToSupplierFood(supplierFoodUpdateVo));
     }
 }

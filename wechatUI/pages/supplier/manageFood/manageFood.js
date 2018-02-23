@@ -5,20 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showList: [
-      {
-        id: 1,
-        name: "包子",
-        url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0
-      },
-      {
-        id: 2,
-        name: "馒头",
-        url: "https://thumbs.dreamstime.com/b/pictogram-123-693500.jpg",
-        price: 1.0
-      }
-    ]
+    showList: []
   },
 
   /**
@@ -97,7 +84,7 @@ Page({
   editFood: function (e) {
     var foodPosition = this.findPositionByBtn(e.target.id);
     wx.navigateTo({
-      url: "../addFood/addFood?id=" + this.data.showList[foodPosition].id
+      url: "../editFood/editFood?id=" + this.data.showList[foodPosition].id
     });
   },
 

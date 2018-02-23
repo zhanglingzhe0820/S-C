@@ -40,7 +40,8 @@
     "pages/supplier/chooseFood/chooseFood",
     "pages/supplier/receiveOrder/receiveOrder",
     "pages/supplier/orderSetting/orderSetting",
-    "pages/supplier/manageFood/manageFood"
+    "pages/supplier/manageFood/manageFood",
+    "pages/supplier/editFood/editFood"
   ],
   "window": {
     "navigationBarTextStyle": "white",

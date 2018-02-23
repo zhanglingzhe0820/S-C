@@ -40,4 +40,20 @@ public interface SupplierFoodDataService {
      * @return whether the operation is success or not
      */
     ResultMessage deleteSupplierFood(int foodId);
+
+    /**
+     * get the supplier food by its id
+     *
+     * @param supplierFoodId the id of the supplier food
+     * @return the supplier food object
+     */
+    SupplierFood getSupplierFoodById(int supplierFoodId);
+
+    /**
+     * update the supplier food
+     *
+     * @param supplierFood the to be updated supplier fodd
+     * @return whether the operation is success or not
+     */
+    ResultMessage updateSupplierFood(SupplierFood supplierFood);
 }
