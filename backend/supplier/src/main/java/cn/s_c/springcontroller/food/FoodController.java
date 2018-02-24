@@ -21,8 +21,8 @@ public class FoodController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @ResponseBody
-    public ResultMessage publishFoods(@RequestParam(name = "supplierFoodIds") int[] supplierFoodIds, @RequestParam(name = "maximum") double maximum) {
-        return foodBlService.publishFoods(supplierFoodIds, maximum);
+    public ResultMessage publishFoods(@RequestParam(name = "supplierFoodIds") int[] supplierFoodIds, @RequestParam(name = "maximum") double maximum, @RequestParam(name = "endHour") int endHour, @RequestParam(name = "endMinute") int endMinute) {
+        return foodBlService.publishFoods(supplierFoodIds, maximum, endHour, endMinute);
     }
 
     @ApiOperation(value = "shelfOffFoods", nickname = "shelfOffFoods")

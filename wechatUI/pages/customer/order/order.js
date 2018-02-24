@@ -12,12 +12,18 @@ Page({
     hour: 11,
     minute: 20,
     comment: "",
+    nowTime: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var date = new Date();
+    this.setData({
+      nowTime: date.getHours() + ":" + (date.getMinutes() <= 9 ? "0" + date.getMinutes() : date.getMinutes())
+    });
+
     var that = this;
     wx.getUserInfo({
       success: function (res) {
@@ -181,6 +187,13 @@ Page({
                   url: "../orderPreview/orderPreview",
                 })
               }, 1000);
+            }
+            else if (res.data == "DataError") {
+              wx.showToast({
+                title: '取餐时间过晚',
+                icon: 'cancel',
+                duration: 1000
+              });
             }
             else {
               wx.showToast({

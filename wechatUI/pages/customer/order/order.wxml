@@ -37,7 +37,7 @@
         <view class="weui-cell__bd" style="text-align:center">{{hour}}:{{minute}}</view>
       </view>
       <view class="weui-cell">
-        <picker class="weui-cell__bd" style="text-align:center" mode="time" value="{{time}}" start="6:00" end="22:00" bindchange="chooseTime">
+        <picker class="weui-cell__bd" style="text-align:center" mode="time" value="{{time}}" start="{{nowTime}}" end="22:00" bindchange="chooseTime">
           <button type="default">选择时间</button>
         </picker>
       </view>

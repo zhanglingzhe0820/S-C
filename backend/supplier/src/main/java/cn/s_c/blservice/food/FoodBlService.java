@@ -13,7 +13,7 @@ public interface FoodBlService {
      * @param maximum         the maximum of the supplier
      * @return whether the operation is success or not
      */
-    ResultMessage publishFoods(int[] supplierFoodIds, double maximum);
+    ResultMessage publishFoods(int[] supplierFoodIds, double maximum, int endHour, int endMinute);
 
     /**
      * shelf off the foods

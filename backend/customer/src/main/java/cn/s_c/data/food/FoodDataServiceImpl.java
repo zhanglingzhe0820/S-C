@@ -1,5 +1,6 @@
 package cn.s_c.data.food;
 
+import cn.s_c.data.dao.food.FoodDao;
 import cn.s_c.data.dao.order.OrderDao;
 import cn.s_c.data.dao.restaurant.RestaurantDao;
 import cn.s_c.dataservice.food.FoodDataService;
@@ -23,6 +24,8 @@ public class FoodDataServiceImpl implements FoodDataService {
     RestaurantDao restaurantDao;
     @Autowired
     OrderDao orderDao;
+    @Autowired
+    FoodDao foodDao;
 
     /**
      * get the food in the restaurant
@@ -35,7 +38,7 @@ public class FoodDataServiceImpl implements FoodDataService {
         try {
             Restaurant restaurant = restaurantDao.getOne(restaurantId);
             return restaurant.getFoods();
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return new HashSet<Food>();
         }
     }
@@ -48,15 +51,26 @@ public class FoodDataServiceImpl implements FoodDataService {
      */
     @Override
     public double getFoodAlreadyOrdered(int foodId) {
-        List<Order> orderList=orderDao.findOrdersByIsConfirmed(false);
-        double total=0;
-        for(Order order:orderList){
-            for(FoodOrder foodOrder:order.getFoodList()){
-                if(foodOrder.getId()==foodId){
-                    total+= foodOrder.getNum();
+        List<Order> orderList = orderDao.findOrdersByIsConfirmed(false);
+        double total = 0;
+        for (Order order : orderList) {
+            for (FoodOrder foodOrder : order.getFoodList()) {
+                if (foodOrder.getId() == foodId) {
+                    total += foodOrder.getNum();
                 }
             }
         }
         return total;
+    }
+
+    /**
+     * get food object by id
+     *
+     * @param foodId the food id
+     * @return the food object
+     */
+    @Override
+    public Food getFoodById(int foodId) {
+        return foodDao.findOne(foodId);
     }
 }

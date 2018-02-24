@@ -165,7 +165,9 @@ Page({
       },
       data: {
         supplierFoodIds: supplierFoodIds,
-        maximum: this.data.setting.maximum
+        maximum: this.data.setting.maximum,
+        endHour: this.data.setting.endHour,
+        endMinute: this.data.setting.endMinute
       },
       success: function (res) {
         if (res.data == "Success") {

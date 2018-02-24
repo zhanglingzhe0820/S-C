@@ -35,6 +35,12 @@ public class Food {
     @Column(name = "choice")
     private String[] choice;
 
+    @Column(name = "endHour")
+    private int endHour;
+
+    @Column(name = "endMinute")
+    private int endMinute;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
@@ -42,7 +48,7 @@ public class Food {
     public Food() {
     }
 
-    public Food(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, Restaurant restaurant) {
+    public Food(String name, String position, double price, String url, double maximum, boolean hasChoice, String[] choice, int endHour, int endMinute, Restaurant restaurant) {
         this.name = name;
         this.position = position;
         this.price = price;
@@ -50,6 +56,8 @@ public class Food {
         this.maximum = maximum;
         this.hasChoice = hasChoice;
         this.choice = choice;
+        this.endHour = endHour;
+        this.endMinute = endMinute;
         this.restaurant = restaurant;
     }
 
@@ -115,6 +123,22 @@ public class Food {
 
     public void setChoice(String[] choice) {
         this.choice = choice;
+    }
+
+    public int getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(int endHour) {
+        this.endHour = endHour;
+    }
+
+    public int getEndMinute() {
+        return endMinute;
+    }
+
+    public void setEndMinute(int endMinute) {
+        this.endMinute = endMinute;
     }
 
     public Restaurant getRestaurant() {

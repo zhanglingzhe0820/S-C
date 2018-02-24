@@ -35,11 +35,11 @@ public class FoodBlServiceImpl implements FoodBlService {
      * @return whether the operation is success or not
      */
     @Override
-    public ResultMessage publishFoods(int[] supplierFoodIds, double maximum) {
+    public ResultMessage publishFoods(int[] supplierFoodIds, double maximum, int endHour, int endMinute) {
         List<Food> foodList = new ArrayList<>();
         for (int supplierFoodId : supplierFoodIds) {
             SupplierFood supplierFood = supplierFoodDataService.getSupplierFoodById(supplierFoodId);
-            Food food = new Food(supplierFood.getName(), supplierFood.getSupplier().getName(), supplierFood.getPrice(), supplierFood.getUrl(), maximum, supplierFood.isHasChoice(), supplierFood.getChoice(), restaurantBlService.getRestaurantObjectByRestaurantId(supplierFood.getSupplier().getRestaurantId()));
+            Food food = new Food(supplierFood.getName(), supplierFood.getSupplier().getName(), supplierFood.getPrice(), supplierFood.getUrl(), maximum, supplierFood.isHasChoice(), supplierFood.getChoice(), endHour, endMinute, restaurantBlService.getRestaurantObjectByRestaurantId(supplierFood.getSupplier().getRestaurantId()));
             foodList.add(food);
         }
         return foodDataService.addFoodsToShelf(foodList.toArray(new Food[foodList.size()]));

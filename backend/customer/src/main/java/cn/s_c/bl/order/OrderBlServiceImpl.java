@@ -1,7 +1,10 @@
 package cn.s_c.bl.order;
 
 import cn.s_c.blservice.order.OrderBlService;
+import cn.s_c.dataservice.food.FoodDataService;
 import cn.s_c.dataservice.order.OrderDataService;
+import cn.s_c.entity.food.Food;
+import cn.s_c.entity.order.FoodOrder;
 import cn.s_c.entity.order.Order;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
@@ -18,6 +21,8 @@ import java.util.List;
 public class OrderBlServiceImpl implements OrderBlService {
     @Autowired
     private OrderDataService orderDataService;
+    @Autowired
+    private FoodDataService foodDataService;
 
     /**
      * save the order
@@ -27,6 +32,12 @@ public class OrderBlServiceImpl implements OrderBlService {
      */
     @Override
     public ResultMessage saveOrder(OrderSaveVo orderSaveVo) {
+        for (FoodOrder foodOrder : orderSaveVo.getFoodList()) {
+            Food food = foodDataService.getFoodById(foodOrder.getId());
+            if (food.getEndHour() * 60 + food.getEndMinute() < orderSaveVo.getPickHour() * 60 + orderSaveVo.getPickMinute()) {
+                return ResultMessage.DataError;
+            }
+        }
         return orderDataService.saveOrder(Convertor.orderSaveVoToOrder(orderSaveVo));
     }
 

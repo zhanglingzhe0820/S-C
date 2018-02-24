@@ -18,8 +18,17 @@ public interface FoodDataService {
 
     /**
      * get the number of the food already ordered
+     *
      * @param foodId the food id
      * @return the num of the food ordered
      */
     double getFoodAlreadyOrdered(int foodId);
+
+    /**
+     * get food object by id
+     *
+     * @param foodId the food id
+     * @return the food object
+     */
+    Food getFoodById(int foodId);
 }
