@@ -8,6 +8,9 @@ import cn.s_c.vo.food.SupplierFoodEditableReturnVo;
 import cn.s_c.vo.food.SupplierFoodReturnVo;
 import cn.s_c.vo.food.SupplierFoodSaveVo;
 import cn.s_c.vo.food.SupplierFoodUpdateVo;
+import cn.s_c.vo.order.OrderFood;
+import cn.s_c.vo.order.OrderList;
+import cn.s_c.vo.order.OrderListResponse;
 import cn.s_c.vo.restaurant.RestaurantReturnVo;
 import cn.s_c.vo.restaurant.RestaurantSaveVo;
 import cn.s_c.vo.supplier.SupplierSignUpVo;
@@ -42,5 +45,14 @@ public class Convertor {
         SupplierFood supplierFood = new SupplierFood(supplierFoodUpdateVo.getName(), supplierFoodUpdateVo.getPrice(), supplierFoodUpdateVo.getUrl(), supplierFoodUpdateVo.isHasChoice(), supplierFoodUpdateVo.getChoice(), supplierFoodUpdateVo.getSupplier());
         supplierFood.setId(supplierFoodUpdateVo.getId());
         return supplierFood;
+    }
+
+    public static OrderListResponse[] orderListsToOrderListResponses(OrderList[] orderLists) {
+        OrderListResponse[] orderListResponses = new OrderListResponse[orderLists.length];
+        for (int i = 0; i < orderLists.length; i++) {
+            OrderFood[] orderFoods = orderLists[i].getOrderFoodList().toArray(new OrderFood[orderLists[i].getOrderFoodList().size()]);
+            orderListResponses[i]=new OrderListResponse(orderLists[i].getStartTime(),orderLists[i].getEndTime(),orderFoods);
+        }
+        return orderListResponses;
     }
 }

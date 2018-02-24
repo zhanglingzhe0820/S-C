@@ -2,15 +2,15 @@ package cn.s_c.vo.order;
 
 import java.util.List;
 
-public class OrderList {
+public class OrderListResponse {
     private String startTime;
     private String endTime;
-    private List<OrderFood> orderFoodList;
+    private OrderFood[] foodList;
 
-    public OrderList(String startTime, String endTime, List<OrderFood> orderFoodList) {
+    public OrderListResponse(String startTime, String endTime, OrderFood[] foodList) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.orderFoodList = orderFoodList;
+        this.foodList = foodList;
     }
 
     public String getStartTime() {
@@ -29,11 +29,11 @@ public class OrderList {
         this.endTime = endTime;
     }
 
-    public List<OrderFood> getOrderFoodList() {
-        return orderFoodList;
+    public OrderFood[] getFoodList() {
+        return foodList;
     }
 
-    public void setOrderFoodList(List<OrderFood> orderFoodList) {
-        this.orderFoodList = orderFoodList;
+    public void setFoodList(OrderFood[] foodList) {
+        this.foodList = foodList;
     }
 }

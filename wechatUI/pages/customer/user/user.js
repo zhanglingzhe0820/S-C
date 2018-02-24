@@ -121,7 +121,7 @@ Page({
     wx.showToast({
       title: '签到成功',
       icon: 'success',
-      duration: 3000
+      duration: 1000
     });
   },
 

@@ -11,14 +11,7 @@ Page({
 
     dialogIsHiden: true,
     selectedFoodPosition: 0,
-    specialChoices: [{
-      value: "加辣",
-      selected: false
-    }, {
-      value: "不加辣",
-      selected: true
-    }]
-
+    specialChoices: []
   },
   onLoad: function (options) {
     var that = this;

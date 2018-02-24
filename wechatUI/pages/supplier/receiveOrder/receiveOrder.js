@@ -6,50 +6,21 @@ Page({
    */
   data: {
     supplierUsername: "",
-    orderList: [
-      {
-        startTime: "11:20",
-        endTime: "11:30",
-        foodList: [
-          {
-            name: "包子",
-            price: 1.0,
-            num: 10
-          },
-          {
-            name: "馒头",
-            price: 2.0,
-            num: 10
-          }
-        ]
-      },
-      {
-        startTime: "11:30",
-        endTime: "11:40",
-        foodList: [
-          {
-            name: "包子",
-            price: 1.0,
-            num: 10
-          },
-          {
-            name: "馒头",
-            price: 2.0,
-            num: 10
-          }
-        ]
-      }
-    ]
+    setting: {},
+    orderList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     var supplierUsername = wx.getStorageSync("supplierUsername");
+    var setting = wx.getStorageSync("setting");
     this.setData({
-      supplierUsername: supplierUsername
-    })
+      supplierUsername: supplierUsername,
+      setting: setting
+    });
+    this.refresh();
   },
 
   /**
@@ -84,7 +55,11 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.refresh();
+    //模拟加载
+    wx.hideNavigationBarLoading(); //完成停止加载
+    wx.stopPullDownRefresh(); //停止下拉刷新
   },
 
   /**
@@ -113,7 +88,7 @@ Page({
         supplierUsername: this.data.supplierUsername,
       },
       success: function (res) {
-        if(res.data=="Success"){
+        if (res.data == "Success") {
           wx.setStorageSync("isReceivingOrder", false);
           wx.showToast({
             title: '停止接单成功',
@@ -123,13 +98,36 @@ Page({
           wx.navigateTo({
             url: "../home/home",
           });
-        }else{
+        } else {
           wx.showToast({
             title: '停止接单失败，系统繁忙',
             icon: 'cancel',
             duration: 1000
           });
         }
+      }
+    })
+  },
+
+  refresh: function () {
+    var that = this;
+    wx.request({
+      url: app.globalData.backendSupplierUrl + "getOrders",
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        supplierUsername: this.data.supplierUsername,
+        startHour: this.data.setting.startHour,
+        startMinute: this.data.setting.startMinute,
+        endHour: this.data.setting.endHour,
+        endMinute: this.data.setting.endMinute
+      },
+      success: function (res) {
+        that.setData({
+          orderList: res.data
+        })
       }
     })
   }
