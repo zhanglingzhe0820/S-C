@@ -16,6 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var isReceivingOrder = wx.getStorageSync("isReceivingOrder");
+    if (isReceivingOrder) {
+      wx.navigateTo({
+        url: "../supplier/receiveOrder/receiveOrder",
+      })
+    }
     var that = this;
     var supplierUsername = wx.getStorageSync("supplierUsername");
     var setting = wx.getStorageSync("setting");

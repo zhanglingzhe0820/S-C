@@ -1,1 +1,15 @@
-/* pages/about/about.wxss */
+.logo {
+  width: 250rpx;
+  height: 250rpx;
+  margin: 20rpx;
+  border-width: 10rpx;
+  border-color: gray;
+}
+
+.footer {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size: small;
+}
