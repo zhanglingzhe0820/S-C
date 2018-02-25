@@ -1,5 +1,8 @@
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    key-store: /sandc.xyz.jks
+    key-store-password: d45dev2lvs7
 spring:
   jpa:
     database: mysql

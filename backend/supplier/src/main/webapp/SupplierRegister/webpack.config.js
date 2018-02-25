@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
     devtool: 'source-map',
     entry: __dirname + "/app/index.js",
@@ -7,7 +9,7 @@ module.exports = {
     },
     devServer: {
         contentBase: "./public",
-        port: "8081",
+        port: "8082",
         inline: true
     },
     module: {
@@ -43,5 +45,8 @@ module.exports = {
                 },]
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ],
 }

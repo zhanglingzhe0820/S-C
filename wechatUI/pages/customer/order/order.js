@@ -8,7 +8,7 @@ Page({
     userInfo: "",
     openId: "",
     commodityPrice: 0.00,
-    orderPrice: 0.50,
+    orderPrice: 0.00,
     hour: 11,
     minute: 20,
     comment: "",
