@@ -9,9 +9,8 @@
   </view>
   <view class="page_bd" style="text-align:center">
     <view>联系方式：</view>
-    <view>qq:445073309</view>
-    <view>微信:zhanglingzheHUGH</view>
-    <view>张同学</view>
+    <view>qq:445073309（张同学）</view>
+    <view>微信:Yuanxi_sun_301179（孙同学）</view>
   </view>
   <view class="footer">
     <view>Version:0.9.0</view>
