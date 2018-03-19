@@ -7,7 +7,6 @@ import cn.s_c.dataservice.food.SupplierFoodDataService;
 import cn.s_c.dataservice.suppiler.SupplierDataService;
 import cn.s_c.entity.food.Food;
 import cn.s_c.entity.food.SupplierFood;
-import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.entity.supplier.Supplier;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;

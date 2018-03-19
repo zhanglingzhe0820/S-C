@@ -1,8 +1,6 @@
 package cn.s_c.dataservice.user;
 
-import cn.s_c.entity.user.User;
 import cn.s_c.vo.ResultMessage;
-import cn.s_c.vo.user.UserAuthenVo;
 import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.stereotype.Service;
 

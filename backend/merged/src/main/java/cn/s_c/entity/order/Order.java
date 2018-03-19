@@ -1,6 +1,5 @@
 package cn.s_c.entity.order;
 
-import cn.s_c.entity.food.Food;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -16,10 +15,10 @@ public class Order {
     @Column(name = "wechatId")
     private String wechatId;
 
-    @ElementCollection(fetch=FetchType.LAZY,
-            targetClass=FoodOrder.class)
-    @CollectionTable(name="foodOrder")
-    @OrderColumn(name="foodOrderId")
+    @ElementCollection(fetch = FetchType.LAZY,
+            targetClass = FoodOrder.class)
+    @CollectionTable(name = "foodOrder")
+    @OrderColumn(name = "foodOrderId")
     private List<FoodOrder> foodList;
 
     @Column(name = "commodityTotal")

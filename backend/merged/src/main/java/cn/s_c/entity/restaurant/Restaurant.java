@@ -1,10 +1,6 @@
 package cn.s_c.entity.restaurant;
 
 import cn.s_c.entity.food.Food;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;

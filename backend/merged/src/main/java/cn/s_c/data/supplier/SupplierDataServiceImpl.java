@@ -35,11 +35,7 @@ public class SupplierDataServiceImpl implements SupplierDataService {
      */
     @Override
     public boolean isUsernameExisted(String username) {
-        if (supplierDao.findSupplierByUsername(username) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return supplierDao.findSupplierByUsername(username) != null;
     }
 
     /**

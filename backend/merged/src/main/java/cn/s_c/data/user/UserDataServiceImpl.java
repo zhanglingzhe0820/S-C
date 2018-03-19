@@ -5,11 +5,9 @@ import cn.s_c.dataservice.user.UserDataService;
 import cn.s_c.entity.user.User;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.user.UserConfirmVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 @Service
 public class UserDataServiceImpl implements UserDataService {
@@ -24,7 +22,7 @@ public class UserDataServiceImpl implements UserDataService {
      */
     @Override
     public boolean isNumberExisted(String number) {
-        return userDao.findUsersByNumber(number).size()!=0;
+        return userDao.findUsersByNumber(number).size() != 0;
     }
 
     /**
@@ -37,10 +35,10 @@ public class UserDataServiceImpl implements UserDataService {
      */
     @Override
     public ResultMessage bindWechatIdAndNumber(String wechatId, String number, boolean isStudent) {
-        User user=new User(wechatId,true,isStudent,number);
-        if(userDao.save(user)!=null){
+        User user = new User(wechatId, true, isStudent, number);
+        if (userDao.save(user) != null) {
             return ResultMessage.Success;
-        }else{
+        } else {
             return ResultMessage.SystemError;
         }
     }
@@ -53,12 +51,11 @@ public class UserDataServiceImpl implements UserDataService {
      */
     @Override
     public UserConfirmVo getUserStateByWechat(String wechatId) {
-        User user=userDao.findOne(wechatId);
-        if(user==null){
-            return new UserConfirmVo(false,false);
-        }
-        else{
-            return new UserConfirmVo(user.isAuthened(),user.isStudent());
+        User user = userDao.findOne(wechatId);
+        if (user == null) {
+            return new UserConfirmVo(false, false);
+        } else {
+            return new UserConfirmVo(user.isAuthened(), user.isStudent());
         }
     }
 }

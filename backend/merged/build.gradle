@@ -1,9 +1,11 @@
 group 's&c'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 buildscript {
     repositories {
-        mavenCentral()//依赖Maven仓库
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         //使用1.4.2.RELEASE版本的Spring框架
@@ -11,27 +13,61 @@ buildscript {
     }
 }
 
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'war'
 
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
 }
 
 dependencies {
-    compile 'com.amazonaws:aws-java-sdk-s3:1.10.66'
-
-    compile 'org.springframework.boot:spring-boot-starter'
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework:spring-core'
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.4.0'
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.4.0'
-    compile group: 'io.springfox', name: 'springfox-spi', version: '2.4.0'
-    runtime 'mysql:mysql-connector-java'
+    compile 'org.springframework.boot:spring-boot-autoconfigure'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    compile 'com.amazonaws:aws-java-sdk-s3:1.10.66'
+    compile 'mysql:mysql-connector-java'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'cn.s_c.MainApplication'
+    }
+    into('lib') {
+        from configurations.runtime
+    }
+}
+//依赖编译，然后打包JAR
+task taskJar(type: Jar, dependsOn: compileJava) {
+    from 'build/classes'
+    destinationDir = file('build/libs')
+}
+
+//清除上次的编译过的文件
+task clearPj(type: Delete) {
+    delete 'build', 'target'
+}
+
+//把JAR复制到目标目录
+task release(type: Copy, dependsOn: [clearPj, taskJar]) {
+    from('build/libs') {
+        include '*.jar'
+    }
+    into('target')
+}
+
+//导出依赖jar包
+task copyJars(type: Copy) {
+    from configurations.runtime
+    into 'dist' // 目标位置
 }

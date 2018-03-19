@@ -4,7 +4,6 @@ import cn.s_c.entity.restaurant.Restaurant;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "food")

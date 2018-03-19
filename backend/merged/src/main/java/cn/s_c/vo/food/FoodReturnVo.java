@@ -1,6 +1,5 @@
 package cn.s_c.vo.food;
 
-import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.vo.restaurant.RestaurantReturnVo;
 
 public class FoodReturnVo {

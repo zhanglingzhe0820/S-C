@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public interface UserBlService {
     /**
      * authen user
+     *
      * @param userAuthenVo the user info to be register
      * @return whether the operation is success or not
      */
@@ -16,6 +17,7 @@ public interface UserBlService {
 
     /**
      * get the state od the user
+     *
      * @param wechatId the user's openid
      * @return the state of the user
      */

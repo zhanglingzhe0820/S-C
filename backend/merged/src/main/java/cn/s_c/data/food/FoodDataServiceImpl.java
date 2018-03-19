@@ -9,8 +9,6 @@ import cn.s_c.entity.order.FoodOrder;
 import cn.s_c.entity.order.Order;
 import cn.s_c.entity.restaurant.Restaurant;
 import cn.s_c.vo.ResultMessage;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

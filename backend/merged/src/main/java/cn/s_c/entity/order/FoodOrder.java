@@ -1,9 +1,6 @@
 package cn.s_c.entity.order;
 
-import cn.s_c.entity.food.Food;
-import cn.s_c.entity.restaurant.Restaurant;
-
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable

@@ -1,6 +1,5 @@
 package cn.s_c.vo.order;
 
-import cn.s_c.entity.food.Food;
 import cn.s_c.entity.order.FoodOrder;
 
 import java.util.List;
