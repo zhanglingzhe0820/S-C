@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class cn.s_c.data.user.UserDataServiceImplTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class cn.s_c.data.user.UserDataServiceImplTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/cn.s_c.data.user.html">cn.s_c.data.user</a> &gt; UserDataServiceImplTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.045s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">bindWechatIdAndNumber</td>
+<td>0.016s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getUserStateByWechat</td>
+<td>0.019s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">isNumberExisted</td>
+<td>0.010s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2018-03-26 21:10:09.555  INFO 7761 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [cn.s_c.data.user.UserDataServiceImplTest], using SpringBootContextLoader
+2018-03-26 21:10:09.556  INFO 7761 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [cn.s_c.data.user.UserDataServiceImplTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2018-03-26 21:10:09.557  INFO 7761 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cn.s_c.data.user.UserDataServiceImplTest]: UserDataServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2018-03-26 21:10:09.571  INFO 7761 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cn.s_c.MainApplication for test class cn.s_c.data.user.UserDataServiceImplTest
+2018-03-26 21:10:09.574  INFO 7761 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-03-26 21:10:09.581  INFO 7761 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@15989f9a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@588ccead, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@edc792d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6d40918d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3cf5b7f0, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2b2ff65, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6fcafb0f, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@66fc382, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1734be88, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2e822dc, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3ac2a30d, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@42c91404]
+Hibernate: select user0_.wechat_id as wechat_i1_6_0_, user0_.is_authened as is_authe2_6_0_, user0_.is_student as is_stude3_6_0_, user0_.number as number4_6_0_ from user user0_ where user0_.wechat_id=?
+Hibernate: insert into user (is_authened, is_student, number, wechat_id) values (?, ?, ?, ?)
+Hibernate: select user0_.wechat_id as wechat_i1_6_, user0_.is_authened as is_authe2_6_, user0_.is_student as is_stude3_6_, user0_.number as number4_6_ from user user0_ where user0_.number=?
+Hibernate: select user0_.wechat_id as wechat_i1_6_0_, user0_.is_authened as is_authe2_6_0_, user0_.is_student as is_stude3_6_0_, user0_.number as number4_6_0_ from user user0_ where user0_.wechat_id=?
+Hibernate: select user0_.wechat_id as wechat_i1_6_0_, user0_.is_authened as is_authe2_6_0_, user0_.is_student as is_stude3_6_0_, user0_.number as number4_6_0_ from user user0_ where user0_.wechat_id=?
+Hibernate: select user0_.wechat_id as wechat_i1_6_0_, user0_.is_authened as is_authe2_6_0_, user0_.is_student as is_stude3_6_0_, user0_.number as number4_6_0_ from user user0_ where user0_.wechat_id=?
+Hibernate: select user0_.wechat_id as wechat_i1_6_0_, user0_.is_authened as is_authe2_6_0_, user0_.is_student as is_stude3_6_0_, user0_.number as number4_6_0_ from user user0_ where user0_.wechat_id=?
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.0</a> at 2018-3-26 21:10:09</p>
+</div>
+</div>
+</body>
+</html>

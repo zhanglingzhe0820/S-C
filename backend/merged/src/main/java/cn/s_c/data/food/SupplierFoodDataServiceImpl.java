@@ -1,10 +1,10 @@
 package cn.s_c.data.food;
 
-import cn.s_c.MainApplication;
 import cn.s_c.data.dao.food.SupplierFoodDao;
 import cn.s_c.data.dao.supplier.SupplierDao;
 import cn.s_c.dataservice.food.SupplierFoodDataService;
 import cn.s_c.entity.food.SupplierFood;
+import cn.s_c.util.PathUtil;
 import cn.s_c.vo.ResultMessage;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -30,7 +30,7 @@ public class SupplierFoodDataServiceImpl implements SupplierFoodDataService {
     private static final String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
     private static final long EXPIRATION =
             new Date().getTime() + 1000 * 60 * 60 * 24 * 100;
-    private static final String FILE_PATH = (MainApplication.class.getResource("") + "/temp/temp.jpeg").substring(5);
+    private static final String FILE_PATH = PathUtil.getTmpPath();
 
     @Autowired
     private SupplierFoodDao supplierFoodDao;
