@@ -12,7 +12,9 @@ Page({
     hour: 11,
     minute: 20,
     comment: "",
-    nowTime: ""
+    nowTime: "",
+
+    dialogIsHiden: true
   },
 
   /**
@@ -56,17 +58,29 @@ Page({
     //获得openid
     wx.login({
       success: function (res) {
-        var appId = app.globalData.appID;
-        var appSecret = app.globalData.appSecret;
         var js_code = res.code;
         wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + js_code + '&grant_type=authorization_code',
-          data: {},
-          method: 'GET',
+          url: app.globalData.backendUrl + "getOpenId",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            "jsCode": js_code
+          },
+          method: 'POST',
           success: function (res) {
-            that.setData({
-              openId: res.data.openid
-            })
+            //获得从后端获取认证信息
+            if (res.data.length != 0) {
+              that.setData({
+                openId: res.data.openid
+              })
+            } else {
+              wx.showToast({
+                title: '系统繁忙',
+                icon: 'warn',
+                duration: 1000
+              });
+            }
           }
         })
       }
@@ -135,6 +149,15 @@ Page({
   },
 
   /**
+   * 点击提交
+   */
+  onSubmitClicked: function (e) {
+    this.setData({
+      dialogIsHiden: false
+    })
+  },
+
+  /**
    * 提交订单
    */
   submitOrder: function (e) {
@@ -191,14 +214,14 @@ Page({
             else if (res.data == "DataError") {
               wx.showToast({
                 title: '取餐时间过晚',
-                icon: 'cancel',
+                icon: 'warn',
                 duration: 1000
               });
             }
             else {
               wx.showToast({
-                title: '系统繁忙',
-                icon: 'cancel',
+                title: '您选择的菜品未上架',
+                icon: 'warn',
                 duration: 1000
               });
             }
@@ -238,6 +261,20 @@ Page({
   onCommentInput: function (e) {
     this.setData({
       comment: e.detail.value
+    })
+  },
+
+  closeDialog: function (e) {
+    this.setData({
+      dialogIsHiden: true
+    });
+    this.submitOrder(e);
+  },
+
+  previewImage: function (e) {
+    wx.previewImage({
+      urls: 'http://oos-bj2.ctyunapi.cn/s-cimages/forMoney.png?Signature=oEZnc4NOFGu3dvW7ZSUgYEwQDWA%3D&AWSAccessKeyId=c4582dec5d0809103126&Expires=2386248113'.split(',')
+      // 需要预览的图片http链接  使用split把字符串转数组。不然会报错  
     })
   }
 })

@@ -32,34 +32,46 @@ Page({
     //获得openid
     wx.login({
       success: function (res) {
-        var appId = app.globalData.appID;
-        var appSecret = app.globalData.appSecret;
         var js_code = res.code;
         wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + js_code + '&grant_type=authorization_code',
-          data: {},
-          method: 'GET',
+          url: app.globalData.backendUrl + "getOpenId",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            "jsCode": js_code
+          },
+          method: 'POST',
           success: function (res) {
             //获得从后端获取认证信息
-            wx.request({
-              url: app.globalData.backendUrl + "confirmState",
-              method: "POST",
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              data: {
-                wechatId: res.data.openid
-              },
-              success: function (res) {
-                that.setData({
-                  isAuthened: res.data.authened,
-                  isStudent: res.data.student
-                })
-              }
-            })
-            that.setData({
-              openId: res.data.openid
-            })
+            if (res.data.length != 0) {
+              wx.request({
+                url: app.globalData.backendUrl + "confirmState",
+                method: "POST",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                data: {
+                  wechatId: res.data.openid
+                },
+                success: function (res) {
+                  that.setData({
+                    isAuthened: res.data.authened,
+                    isStudent: res.data.student
+                  })
+                }
+              })
+              that.setData({
+                openId: res.data.openid
+              })
+            }
+            else {
+              wx.showToast({
+                title: '系统繁忙',
+                icon: 'warn',
+                duration: 1000
+              });
+            }
           }
         })
       }
@@ -174,13 +186,13 @@ Page({
         } else if (res.data == "DataError") {
           wx.showToast({
             title: '学号已被认证',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }

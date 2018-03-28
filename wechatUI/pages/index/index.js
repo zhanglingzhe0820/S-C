@@ -137,13 +137,13 @@ Page({
         } else if (res.data == "DataError") {
           wx.showToast({
             title: '错误的用户名或密码',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }

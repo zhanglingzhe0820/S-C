@@ -24,7 +24,9 @@ public class SupplierBlServiceImpl implements SupplierBlService {
     @Override
     public ResultMessage login(SupplierLoginVo supplierLoginVo) {
         String password = supplierDataService.getPasswordByUsername(supplierLoginVo.getUsername());
-        if (password.equals(supplierLoginVo.getPassword())) {
+        if (password == null) {
+            return ResultMessage.DataError;
+        } else if (password.equals(supplierLoginVo.getPassword())) {
             return ResultMessage.Success;
         } else {
             return ResultMessage.DataError;

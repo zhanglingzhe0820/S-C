@@ -19,7 +19,7 @@ public class Restaurant implements Serializable {
     @Column(name = "time")
     private String time;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Food> foods;
 
     public Restaurant() {

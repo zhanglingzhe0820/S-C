@@ -207,7 +207,7 @@ Page({
           } else {
             wx.showToast({
               title: '系统繁忙，请稍后再试',
-              icon: 'cancel',
+              icon: 'warn',
               duration: 1000
             });
           }
@@ -224,7 +224,7 @@ Page({
           if (data.length == 0) {
             wx.showToast({
               title: '图片上传失败',
-              icon: 'cancel',
+              icon: 'warn',
               duration: 1000
             });
           }
@@ -261,7 +261,7 @@ Page({
                 } else {
                   wx.showToast({
                     title: '系统繁忙，请稍后再试',
-                    icon: 'cancel',
+                    icon: 'warn',
                     duration: 1000
                   });
                 }

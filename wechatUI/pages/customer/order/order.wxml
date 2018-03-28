@@ -47,9 +47,12 @@
     <view class="page__bd">
     </view>
     <view class="page__bd page__bd_spacing">
-      <button bindtap="submitOrder" type="primary">提交订单</button>
+      <button bindtap="onSubmitClicked" type="primary">提交订单</button>
       <view class="page__bd page__bd_spacing"></view>
       <button bindtap="backToCart" type="primary" plain="true">返回餐盘</button>
     </view>
   </view>
+  <modal hidden="{{dialogIsHiden}}" title="支持一下？（虽然不支持也不影响功能" confirm-text="已支持" cancel-text="残忍拒绝" bindcancel="closeDialog" bindconfirm="closeDialog">
+      <image src='http://oos-bj2.ctyunapi.cn/s-cimages/forMoney.png?Signature=oEZnc4NOFGu3dvW7ZSUgYEwQDWA%3D&AWSAccessKeyId=c4582dec5d0809103126&Expires=2386248113' mode='aspectFit' bindtap='previewImage'></image>
+    </modal>
 </view>

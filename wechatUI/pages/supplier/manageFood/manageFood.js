@@ -111,7 +111,7 @@ Page({
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }

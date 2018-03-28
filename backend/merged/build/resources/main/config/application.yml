@@ -18,3 +18,7 @@ spring:
     url: jdbc:mysql://localhost:3306/s_c?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: zhanglingzhe0820
+wechat:
+  url: https://api.weixin.qq.com/sns/jscode2session?appid=
+  id: wx85dcce057baa45b8
+  secret: e3dfe65496ca25ece4429585350b309d

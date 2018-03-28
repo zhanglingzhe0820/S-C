@@ -14,51 +14,57 @@ Page({
     //获得openid
     wx.login({
       success: function (res) {
-        var appId = app.globalData.appID;
-        var appSecret = app.globalData.appSecret;
         var js_code = res.code;
         wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + js_code + '&grant_type=authorization_code',
-          data: {},
-          method: 'GET',
+          url: app.globalData.backendUrl + "getOpenId",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            "jsCode": js_code
+          },
+          method: 'POST',
           success: function (res) {
-            that.setData({
-              openId: res.data.openid
-            })
-            //从数据库获得所有订单
-            wx.request({
-              url: app.globalData.backendUrl + "getOrderByUser",
-              method: "POST",
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              data: {
-                wechatId: that.data.openId
-              },
-              success: function (res) {
-                var completeOrder = [];
-                var uncompleteOrder = [];
-                for (var i = 0; i < res.data.length; i++) {
-                  var order = {
-                    id: res.data[i].id,
-                    hour: res.data[i].pickHour,
-                    minute: res.data[i].pickMinute,
-                    total: res.data[i].commodityTotal,
-                    comment: res.data[i].comment,
-                    food: res.data[i].foodList
-                  };
-                  if (res.data[i].confirmed == false) {
-                    uncompleteOrder.push(order);
-                  } else {
-                    completeOrder.push(order);
+            //获得从后端获取认证信息
+            if (res.data.length != 0) {
+              that.setData({
+                openId: res.data.openid
+              })
+              //从数据库获得所有订单
+              wx.request({
+                url: app.globalData.backendUrl + "getOrderByUser",
+                method: "POST",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                data: {
+                  wechatId: that.data.openId
+                },
+                success: function (res) {
+                  var completeOrder = [];
+                  var uncompleteOrder = [];
+                  for (var i = 0; i < res.data.length; i++) {
+                    var order = {
+                      id: res.data[i].id,
+                      hour: res.data[i].pickHour,
+                      minute: res.data[i].pickMinute,
+                      total: res.data[i].commodityTotal,
+                      comment: res.data[i].comment,
+                      food: res.data[i].foodList
+                    };
+                    if (res.data[i].confirmed == false) {
+                      uncompleteOrder.push(order);
+                    } else {
+                      completeOrder.push(order);
+                    }
                   }
+                  that.setData({
+                    uncompleteOrder: uncompleteOrder,
+                    completeOrder: completeOrder
+                  });
                 }
-                that.setData({
-                  uncompleteOrder: uncompleteOrder,
-                  completeOrder: completeOrder
-                });
-              }
-            })
+              })
+            }
           }
         })
       }
@@ -136,7 +142,7 @@ Page({
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }
@@ -166,7 +172,7 @@ Page({
         } else {
           wx.showToast({
             title: '系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }

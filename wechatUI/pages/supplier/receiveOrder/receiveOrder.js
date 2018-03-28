@@ -101,7 +101,7 @@ Page({
         } else {
           wx.showToast({
             title: '停止接单失败，系统繁忙',
-            icon: 'cancel',
+            icon: 'warn',
             duration: 1000
           });
         }

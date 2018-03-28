@@ -1,4 +1,4 @@
-<view class="page" style="background:url('../../images/menuBackground.jpg')">
+<view class="page" style="background:url('http://oos-bj2.ctyunapi.cn/s-cimages/menuBackground.jpg?Signature=u67qIBJdC03Wv/%2BQrPs36bxEPYM%3D&AWSAccessKeyId=c4582dec5d0809103126&Expires=10162152245')">
   <view class="page__bd">
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">

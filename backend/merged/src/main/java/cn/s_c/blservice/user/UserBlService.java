@@ -23,4 +23,11 @@ public interface UserBlService {
      */
     UserConfirmVo confirmState(String wechatId);
 
+    /**
+     * get user openid
+     *
+     * @param jsCode wechat js code
+     * @return whether the operation is success or not
+     */
+    String getOpenId(String jsCode);
 }

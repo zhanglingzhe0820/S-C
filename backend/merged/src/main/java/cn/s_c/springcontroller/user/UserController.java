@@ -23,4 +23,10 @@ public class UserController {
     public UserConfirmVo confirmState(@RequestParam("wechatId") String wechatId) {
         return userBlService.confirmState(wechatId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/getOpenId", produces = "application/json")
+    @ResponseBody
+    public String getOpenId(@RequestParam("jsCode") String jsCode) {
+        return userBlService.getOpenId(jsCode);
+    }
 }
