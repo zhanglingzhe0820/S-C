@@ -4,16 +4,16 @@
     <view class="page__hd">
     </view>
     <view style="text-align:center">
-      <text>这是一个大学生的创业项目</text>
+      <text>这是一个天健社的公益试点</text>
     </view>
   </view>
   <view class="page_bd" style="text-align:center">
     <view>联系方式：</view>
     <view>qq:445073309（张同学）</view>
-    <view>微信:Yuanxi_sun_301179（孙同学）</view>
+    <view>(技术方面，单人开发精力有限，会有不完善的地方，如有问题请联系我)</view>
   </view>
   <view class="footer">
-    <view>Version:0.9.0</view>
-    <view>@ Powered By Surevil</view>
+    <view>Version:0.9.5</view>
+    <view>@2018 Powered By Surevil</view>
   </view>
 </view>

@@ -9,7 +9,30 @@ class FunctionMenu extends Component {
         this.handleClick = this.handleClick.bind(this);
     };
     handleClick(event) {
-        this.props.transferMsg(event.key);
+        if(event.key!=3){
+            this.props.transferMsg(event.key);
+        }else{
+            fetch(config.backendUrl + "confirmUserFaith")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    if (result == "Success") {
+                        notification.open({
+                            message: '添加成功',
+                        });
+                    } else {
+                        notification.open({
+                            message: '系统繁忙，稍后再试',
+                        });
+                    }
+                },
+                (error) => {
+                    notification.open({
+                        message: '服务器错误，请检查网络',
+                    });
+                }
+            )
+        }
     };
     render() {
         return (
@@ -25,6 +48,10 @@ class FunctionMenu extends Component {
                 <Menu.Item key="2">
                     <Icon type="desktop" />
                     <span>商户入驻</span>
+                </Menu.Item>
+                <Menu.Item key="3">
+                    <Icon type="retweet" />
+                    <span>更新用户信用度</span>
                 </Menu.Item>
             </Menu>
         );

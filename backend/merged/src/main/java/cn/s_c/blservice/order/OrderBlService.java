@@ -1,5 +1,6 @@
 package cn.s_c.blservice.order;
 
+import cn.s_c.exception.UserDoesNotFaithException;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.order.OrderList;
 import cn.s_c.vo.order.OrderReturnVo;
@@ -17,7 +18,7 @@ public interface OrderBlService {
      * @param orderSaveVo the order to be saved
      * @return whether the operation is success or not
      */
-    ResultMessage saveOrder(OrderSaveVo orderSaveVo);
+    ResultMessage saveOrder(OrderSaveVo orderSaveVo) throws UserDoesNotFaithException;
 
     /**
      * confirm whether the user has orders to be confirmed

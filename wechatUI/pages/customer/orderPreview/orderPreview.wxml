@@ -9,7 +9,6 @@
           <view class="weui-form-preview__item">
             <view class="weui-form-preview__label">订单金额</view>
             <view class="weui-form-preview__value_in-hd">¥{{item.total}}</view>
-
             <view class="weui-form-preview__label">订单状态</view>
             <view class="weui-form-preview__value">待取餐</view>
           </view>

@@ -1,6 +1,7 @@
 package cn.s_c.springcontroller.order;
 
 import cn.s_c.blservice.order.OrderBlService;
+import cn.s_c.exception.UserDoesNotFaithException;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.order.OrderListResponse;
@@ -19,7 +20,12 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.POST, path = "/saveOrder", produces = "application/json")
     @ResponseBody
     public ResultMessage saveOrder(@RequestBody OrderSaveVo orderSaveVo) {
-        return orderBlService.saveOrder(orderSaveVo);
+        try {
+            return orderBlService.saveOrder(orderSaveVo);
+        } catch (UserDoesNotFaithException e) {
+            e.printStackTrace();
+            return ResultMessage.UserError;
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/hasUnconfirmedOrder", produces = "application/json")

@@ -1,14 +1,17 @@
 package cn.s_c.bl.order;
 
+import cn.s_c.blservice.admin.AdminBlService;
 import cn.s_c.blservice.order.OrderBlService;
 import cn.s_c.dataservice.food.FoodDataService;
 import cn.s_c.dataservice.order.OrderDataService;
 import cn.s_c.dataservice.restaurant.RestaurantDataService;
 import cn.s_c.dataservice.suppiler.SupplierDataService;
+import cn.s_c.dataservice.user.UserDataService;
 import cn.s_c.entity.food.Food;
 import cn.s_c.entity.order.FoodOrder;
 import cn.s_c.entity.order.Order;
 import cn.s_c.entity.supplier.Supplier;
+import cn.s_c.exception.UserDoesNotFaithException;
 import cn.s_c.util.Convertor;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.order.OrderFood;
@@ -31,6 +34,10 @@ public class OrderBlServiceImpl implements OrderBlService {
     private SupplierDataService supplierDataService;
     @Autowired
     private RestaurantDataService restaurantDataService;
+    @Autowired
+    private UserDataService userDataService;
+    @Autowired
+    private AdminBlService adminBlService;
 
     /**
      * get the orders by username
@@ -119,11 +126,14 @@ public class OrderBlServiceImpl implements OrderBlService {
      * @return whether the operation is success or not
      */
     @Override
-    public ResultMessage saveOrder(OrderSaveVo orderSaveVo) {
+    public ResultMessage saveOrder(OrderSaveVo orderSaveVo) throws UserDoesNotFaithException {
+        adminBlService.confirmFaith();
         for (FoodOrder foodOrder : orderSaveVo.getFoodList()) {
             Food food = foodDataService.getFoodById(foodOrder.getId());
             if (food.getEndHour() * 60 + food.getEndMinute() < orderSaveVo.getPickHour() * 60 + orderSaveVo.getPickMinute()) {
                 return ResultMessage.DataError;
+            } else if (userDataService.getUserByWechatId(orderSaveVo.getWechatId()).getFaithlessTime() > 3) {
+                throw new UserDoesNotFaithException();
             }
         }
         return orderDataService.saveOrder(Convertor.orderSaveVoToOrder(orderSaveVo));

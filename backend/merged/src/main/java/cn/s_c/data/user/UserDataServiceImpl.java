@@ -8,6 +8,7 @@ import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserDataServiceImpl implements UserDataService {
@@ -35,7 +36,7 @@ public class UserDataServiceImpl implements UserDataService {
      */
     @Override
     public ResultMessage bindWechatIdAndNumber(String wechatId, String number, boolean isStudent) {
-        User user = new User(wechatId, true, isStudent, number);
+        User user = new User(wechatId, true, isStudent, number, 0);
         if (userDao.save(user) != null) {
             return ResultMessage.Success;
         } else {
@@ -57,5 +58,26 @@ public class UserDataServiceImpl implements UserDataService {
         } else {
             return new UserConfirmVo(user.isAuthened(), user.isStudent());
         }
+    }
+
+    /**
+     * get the user's state by its wechat id
+     *
+     * @return the user's state
+     */
+    @Override
+    public List<User> getUsers() {
+        return userDao.findAll();
+    }
+
+    /**
+     * get user by wechat id
+     *
+     * @param wechatId wechat id
+     * @return the user object
+     */
+    @Override
+    public User getUserByWechatId(String wechatId) {
+        return userDao.findOne(wechatId);
     }
 }

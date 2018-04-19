@@ -55,4 +55,11 @@ public interface OrderDataService {
      * @return the order list
      */
     List<Order> getAllOrders();
+
+    /**
+     * get all confirmed orders
+     *
+     * @return the order list
+     */
+    List<Order> getUnconfirmedOrders();
 }

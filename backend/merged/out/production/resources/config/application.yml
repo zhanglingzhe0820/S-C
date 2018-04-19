@@ -1,10 +1,9 @@
 server:
-  port: 8080
-#  port: 443
-#  ssl:
-#    key-store: config/www.sandc.xyz.jks
-#    key-store-password: 5869095jm29
-#    key-store-type: JKS
+  port: 443
+  ssl:
+    key-store: config/www.sandc.xyz.jks
+    key-store-password: 5869095jm29
+    key-store-type: JKS
 spring:
   jpa:
     database: mysql

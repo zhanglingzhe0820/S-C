@@ -89,4 +89,14 @@ public class OrderDataServiceImpl implements OrderDataService {
     public List<Order> getAllOrders() {
         return orderDao.findAll();
     }
+
+    /**
+     * get all confirmed orders
+     *
+     * @return the order list
+     */
+    @Override
+    public List<Order> getUnconfirmedOrders() {
+        return orderDao.findOrdersByIsConfirmed(false);
+    }
 }

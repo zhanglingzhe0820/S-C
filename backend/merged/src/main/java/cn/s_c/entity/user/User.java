@@ -21,15 +21,18 @@ public class User {
     private boolean isStudent;
     @Column(name = "number")
     private String number;
+    @Column(name = "faithlessTime")
+    private int faithlessTime;
 
     public User() {
     }
 
-    public User(String wechatId, boolean isAuthened, boolean isStudent, String number) {
+    public User(String wechatId, boolean isAuthened, boolean isStudent, String number, int faithlessTime) {
         this.wechatId = wechatId;
         this.isAuthened = isAuthened;
         this.isStudent = isStudent;
         this.number = number;
+        this.faithlessTime = faithlessTime;
     }
 
     public String getWechatId() {
@@ -62,5 +65,13 @@ public class User {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public int getFaithlessTime() {
+        return faithlessTime;
+    }
+
+    public void setFaithlessTime(int faithlessTime) {
+        this.faithlessTime = faithlessTime;
     }
 }

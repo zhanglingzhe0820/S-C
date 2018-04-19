@@ -152,9 +152,10 @@ Page({
    * 点击提交
    */
   onSubmitClicked: function (e) {
-    this.setData({
-      dialogIsHiden: false
-    })
+    // this.setData({
+    //   dialogIsHiden: false
+    // })
+    this.submitOrder(null);
   },
 
   /**
@@ -214,6 +215,12 @@ Page({
             else if (res.data == "DataError") {
               wx.showToast({
                 title: '取餐时间过晚',
+                icon: 'warn',
+                duration: 1000
+              });
+            } else if (res.data == "UserError") {
+              wx.showToast({
+                title: '您的不信用次数已超过三次，请联系管理员确认',
                 icon: 'warn',
                 duration: 1000
               });

@@ -1,10 +1,12 @@
 package cn.s_c.dataservice.user;
 
+import cn.s_c.entity.user.User;
 import cn.s_c.vo.ResultMessage;
 import cn.s_c.vo.user.UserConfirmVo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public interface UserDataService {
@@ -36,4 +38,21 @@ public interface UserDataService {
      */
     @Transactional
     UserConfirmVo getUserStateByWechat(String wechatId);
+
+    /**
+     * get all users
+     *
+     * @return
+     */
+    @Transactional
+    List<User> getUsers();
+
+    /**
+     * get user by wechat id
+     *
+     * @param wechatId wechat id
+     * @return the user object
+     */
+    @Transactional
+    User getUserByWechatId(String wechatId);
 }
